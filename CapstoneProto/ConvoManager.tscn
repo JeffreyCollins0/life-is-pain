@@ -1,0 +1,477 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Scripts/ConvoManager.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/HandDebug.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/TopicList.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/sampleFontSetter.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/FileReader.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/MessageWindow.gd" type="Script" id=6]
+[ext_resource path="res://DinoCrush.tres" type="DynamicFont" id=7]
+[ext_resource path="res://Sprites/CardBacker.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/BoxNormal.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/DeckManager.gd" type="Script" id=10]
+[ext_resource path="res://BitCrush.tres" type="DynamicFont" id=11]
+[ext_resource path="res://Scripts/TextboxTypeWriter.gd" type="Script" id=12]
+[ext_resource path="res://Sprites/ShadyMug_Demo.png" type="Texture" id=13]
+[ext_resource path="res://Sounds/CardHover.wav" type="AudioStream" id=14]
+[ext_resource path="res://Sounds/CardSelect2.wav" type="AudioStream" id=15]
+[ext_resource path="res://Sounds/ShadyTalk.wav" type="AudioStream" id=16]
+[ext_resource path="res://Sounds/PositiveResponse.wav" type="AudioStream" id=17]
+[ext_resource path="res://Prefabs/TopicChip.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scripts/TopicList_Custom.gd" type="Script" id=19]
+[ext_resource path="res://Scripts/ModifierTally.gd" type="Script" id=20]
+[ext_resource path="res://Scripts/DeckList.gd" type="Script" id=21]
+[ext_resource path="res://Prefabs/CardChip.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scripts/DemoCard.gd" type="Script" id=23]
+[ext_resource path="res://Scripts/UIManager.gd" type="Script" id=24]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 24 )
+
+[node name="DeckManager" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 10 )
+
+[node name="Control" type="Control" parent="DeckManager"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 240.0
+margin_bottom = 160.0
+
+[node name="ColorRect" type="ColorRect" parent="DeckManager/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.211765, 0.207843, 0.270588, 1 )
+
+[node name="DebugSaveButton" type="Button" parent="DeckManager/Control"]
+margin_left = 96.0
+margin_top = 73.0
+margin_right = 144.0
+margin_bottom = 93.0
+custom_fonts/font = ExtResource( 7 )
+text = "Save"
+
+[node name="DebugLoadButton" type="Button" parent="DeckManager/Control"]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 144.0
+margin_bottom = 116.0
+custom_fonts/font = ExtResource( 7 )
+text = "Load"
+
+[node name="DeckList" type="Node2D" parent="DeckManager/Control"]
+position = Vector2( -3, 0 )
+script = ExtResource( 21 )
+
+[node name="ColorRect2" type="ColorRect" parent="DeckManager/Control/DeckList"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 95.0
+margin_bottom = 154.0
+color = Color( 0.0431373, 0.0392157, 0.294118, 1 )
+
+[node name="Label" type="Label" parent="DeckManager/Control/DeckList"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 50.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 7 )
+text = "Deck"
+
+[node name="CardChipTray" type="Node2D" parent="DeckManager/Control/DeckList"]
+position = Vector2( 10, 20 )
+
+[node name="CardChip" parent="DeckManager/Control/DeckList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 10 )
+
+[node name="CardChip2" parent="DeckManager/Control/DeckList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 28 )
+
+[node name="CardChip3" parent="DeckManager/Control/DeckList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 46 )
+
+[node name="CardChip4" parent="DeckManager/Control/DeckList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 64 )
+
+[node name="CardChip5" parent="DeckManager/Control/DeckList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 82 )
+
+[node name="CardChip6" parent="DeckManager/Control/DeckList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 100 )
+
+[node name="ScrollUpButton" type="Button" parent="DeckManager/Control/DeckList"]
+visible = false
+margin_left = 10.0
+margin_top = 19.0
+margin_right = 76.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 11 )
+text = "^"
+
+[node name="ScrollDownButton" type="Button" parent="DeckManager/Control/DeckList"]
+visible = false
+margin_left = 10.0
+margin_top = 138.0
+margin_right = 76.0
+margin_bottom = 148.0
+custom_fonts/font = ExtResource( 11 )
+text = "v"
+
+[node name="LibList" type="Node2D" parent="DeckManager/Control"]
+position = Vector2( 142, 0 )
+script = ExtResource( 21 )
+
+[node name="ColorRect2" type="ColorRect" parent="DeckManager/Control/LibList"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 95.0
+margin_bottom = 154.0
+color = Color( 0.0431373, 0.0392157, 0.294118, 1 )
+
+[node name="Label" type="Label" parent="DeckManager/Control/LibList"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 50.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 7 )
+text = "Library"
+
+[node name="CardChipTray" type="Node2D" parent="DeckManager/Control/LibList"]
+position = Vector2( 10, 20 )
+
+[node name="CardChip" parent="DeckManager/Control/LibList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 10 )
+
+[node name="CardChip2" parent="DeckManager/Control/LibList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 28 )
+
+[node name="CardChip3" parent="DeckManager/Control/LibList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 46 )
+
+[node name="CardChip4" parent="DeckManager/Control/LibList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 64 )
+
+[node name="CardChip5" parent="DeckManager/Control/LibList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 82 )
+
+[node name="CardChip6" parent="DeckManager/Control/LibList/CardChipTray" instance=ExtResource( 22 )]
+position = Vector2( 0, 100 )
+
+[node name="ScrollUpButton" type="Button" parent="DeckManager/Control/LibList"]
+visible = false
+margin_left = 10.0
+margin_top = 19.0
+margin_right = 76.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 11 )
+text = "^"
+
+[node name="ScrollDownButton" type="Button" parent="DeckManager/Control/LibList"]
+visible = false
+margin_left = 10.0
+margin_top = 138.0
+margin_right = 76.0
+margin_bottom = 148.0
+custom_fonts/font = ExtResource( 11 )
+text = "v"
+
+[node name="DemoCard" type="Node2D" parent="DeckManager/Control"]
+position = Vector2( 92, 6 )
+script = ExtResource( 23 )
+
+[node name="Backer" type="Sprite" parent="DeckManager/Control/DemoCard"]
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Title" type="Label" parent="DeckManager/Control/DemoCard"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 64.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 7 )
+text = "Card Title"
+
+[node name="Description" type="Label" parent="DeckManager/Control/DemoCard"]
+margin_left = 4.0
+margin_top = 16.0
+margin_right = 52.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 11 )
+text = "Card Title"
+autowrap = true
+
+[node name="BackButton" type="Button" parent="DeckManager/Control"]
+margin_left = 201.0
+margin_top = 3.0
+margin_right = 237.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 7 )
+text = "Back"
+
+[node name="ConvoManager" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 1 )
+
+[node name="Control" type="Control" parent="ConvoManager"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 240.0
+margin_bottom = 160.0
+
+[node name="ColorRect" type="ColorRect" parent="ConvoManager/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.211765, 0.207843, 0.270588, 1 )
+
+[node name="PanelContainer" type="PanelContainer" parent="ConvoManager/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Sprite" type="Sprite" parent="ConvoManager/Control"]
+position = Vector2( 191, 84 )
+texture = ExtResource( 13 )
+
+[node name="Textbox" type="Control" parent="ConvoManager/Control"]
+margin_left = 60.0
+margin_top = 8.0
+margin_right = 172.0
+margin_bottom = 56.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ConvoManager/Control/Textbox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 9 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 16
+patch_margin_bottom = 15
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ConvoManager/Control/Textbox"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -8.0
+margin_bottom = -16.0
+
+[node name="Label" type="Label" parent="ConvoManager/Control/Textbox/MarginContainer"]
+margin_top = 5.0
+margin_right = 96.0
+margin_bottom = 26.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "Pick a topic and card to get a response!"
+autowrap = true
+script = ExtResource( 12 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ConvoManager/Control"]
+visible = false
+margin_right = 226.0
+margin_bottom = 146.0
+bbcode_text = "Sample Text"
+text = "Sample Text"
+script = ExtResource( 4 )
+
+[node name="Hand" type="Node2D" parent="ConvoManager"]
+position = Vector2( 0, 128 )
+script = ExtResource( 2 )
+
+[node name="TopicList" type="Node2D" parent="ConvoManager"]
+visible = false
+position = Vector2( 0, 4 )
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="ConvoManager/TopicList"]
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Label" type="Label" parent="ConvoManager/TopicList"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 44.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 7 )
+text = "Topics"
+
+[node name="ItemList" type="ItemList" parent="ConvoManager/TopicList"]
+margin_left = 1.0
+margin_top = 16.0
+margin_right = 55.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 11 )
+items = [ "Hats", null, false, "Boxes", null, false, "Weather", null, false, "Sunglasses", null, false, "Gifts", null, false, "Plushies", null, false ]
+
+[node name="TopicList_Custom" type="Node2D" parent="ConvoManager"]
+position = Vector2( 0, 4 )
+script = ExtResource( 19 )
+
+[node name="ColorRect" type="ColorRect" parent="ConvoManager/TopicList_Custom"]
+margin_right = 56.0
+margin_bottom = 68.0
+color = Color( 0.0431373, 0.0392157, 0.294118, 1 )
+
+[node name="Label" type="Label" parent="ConvoManager/TopicList_Custom"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 44.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 7 )
+text = "Topics"
+
+[node name="TopicChipTray" type="Node2D" parent="ConvoManager/TopicList_Custom"]
+position = Vector2( 4, 14 )
+
+[node name="TopicChip" parent="ConvoManager/TopicList_Custom/TopicChipTray" instance=ExtResource( 18 )]
+position = Vector2( 0, 7 )
+
+[node name="TopicChip2" parent="ConvoManager/TopicList_Custom/TopicChipTray" instance=ExtResource( 18 )]
+position = Vector2( 0, 14 )
+
+[node name="TopicChip3" parent="ConvoManager/TopicList_Custom/TopicChipTray" instance=ExtResource( 18 )]
+position = Vector2( 0, 21 )
+
+[node name="TopicChip4" parent="ConvoManager/TopicList_Custom/TopicChipTray" instance=ExtResource( 18 )]
+position = Vector2( 0, 28 )
+
+[node name="TopicChip5" parent="ConvoManager/TopicList_Custom/TopicChipTray" instance=ExtResource( 18 )]
+position = Vector2( 0, 35 )
+
+[node name="TopicChip6" parent="ConvoManager/TopicList_Custom/TopicChipTray" instance=ExtResource( 18 )]
+position = Vector2( 0, 42 )
+
+[node name="ScrollUpButton" type="Button" parent="ConvoManager/TopicList_Custom"]
+visible = false
+margin_left = 2.0
+margin_top = 13.0
+margin_right = 54.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 11 )
+text = "^"
+
+[node name="ScrollDownButton" type="Button" parent="ConvoManager/TopicList_Custom"]
+visible = false
+margin_left = 2.0
+margin_top = 56.0
+margin_right = 54.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 11 )
+text = "v"
+
+[node name="StressCounter" type="Node2D" parent="ConvoManager"]
+position = Vector2( 0, 72 )
+
+[node name="Title" type="Label" parent="ConvoManager/StressCounter"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 44.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 7 )
+text = "Stress"
+
+[node name="Value" type="Label" parent="ConvoManager/StressCounter"]
+margin_left = 4.0
+margin_top = 13.0
+margin_right = 44.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 7 )
+text = "0%"
+
+[node name="MoodCounter" type="Node2D" parent="ConvoManager"]
+position = Vector2( 172, 0 )
+
+[node name="Title" type="Label" parent="ConvoManager/MoodCounter"]
+margin_left = 3.0
+margin_top = 4.0
+margin_right = 65.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 7 )
+text = "Shady's
+Mood:"
+align = 2
+
+[node name="Value" type="Label" parent="ConvoManager/MoodCounter"]
+margin_left = 24.0
+margin_top = 21.0
+margin_right = 64.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 7 )
+text = "40%"
+align = 2
+
+[node name="BonusTextSpawn" type="Position2D" parent="ConvoManager"]
+position = Vector2( 177, 97 )
+
+[node name="ModifierTally" type="Node2D" parent="ConvoManager"]
+script = ExtResource( 20 )
+
+[node name="MessageRollout" type="Node2D" parent="ConvoManager"]
+position = Vector2( 60, 56 )
+script = ExtResource( 6 )
+
+[node name="Content" type="Label" parent="ConvoManager/MessageRollout"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 108.0
+margin_bottom = 44.0
+custom_colors/font_color = Color( 0.517647, 0.717647, 0.835294, 1 )
+custom_fonts/font = ExtResource( 11 )
+autowrap = true
+
+[node name="BackButton" type="Button" parent="ConvoManager"]
+margin_left = 4.0
+margin_top = 95.0
+margin_right = 40.0
+margin_bottom = 107.0
+custom_fonts/font = ExtResource( 7 )
+text = "End"
+
+[node name="CancelableAudioPlayer" type="AudioStreamPlayer" parent="ConvoManager"]
+stream = ExtResource( 14 )
+bus = "Cancelable"
+
+[node name="ResponseAudioPlayer" type="AudioStreamPlayer" parent="ConvoManager"]
+stream = ExtResource( 17 )
+bus = "Response"
+
+[node name="SelectAudioPlayer" type="AudioStreamPlayer" parent="ConvoManager"]
+stream = ExtResource( 15 )
+
+[node name="TalkAudioPlayer" type="AudioStreamPlayer" parent="ConvoManager"]
+stream = ExtResource( 16 )
+
+[node name="FileReader" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="DebugConvoButton" type="Button" parent="."]
+margin_left = 87.0
+margin_top = 57.0
+margin_right = 147.0
+margin_bottom = 77.0
+custom_fonts/font = ExtResource( 7 )
+text = "Converse"
+
+[node name="DebugCustButton" type="Button" parent="."]
+margin_left = 85.0
+margin_top = 82.0
+margin_right = 149.0
+margin_bottom = 102.0
+custom_fonts/font = ExtResource( 7 )
+text = "Customize"
+
+[connection signal="cust_ended" from="DeckManager" to="." method="_on_DeckManager_cust_ended"]
+[connection signal="pressed" from="DeckManager/Control/DebugSaveButton" to="DeckManager" method="_on_DebugSaveButton_pressed"]
+[connection signal="pressed" from="DeckManager/Control/DebugLoadButton" to="DeckManager" method="_on_DebugLoadButton_pressed"]
+[connection signal="pressed" from="DeckManager/Control/DeckList/ScrollUpButton" to="DeckManager/Control/DeckList" method="_on_ScrollUpButton_pressed"]
+[connection signal="pressed" from="DeckManager/Control/DeckList/ScrollDownButton" to="DeckManager/Control/DeckList" method="_on_ScrollDownButton_pressed"]
+[connection signal="pressed" from="DeckManager/Control/LibList/ScrollUpButton" to="DeckManager/Control/LibList" method="_on_ScrollUpButton_pressed"]
+[connection signal="pressed" from="DeckManager/Control/LibList/ScrollDownButton" to="DeckManager/Control/LibList" method="_on_ScrollDownButton_pressed"]
+[connection signal="pressed" from="DeckManager/Control/BackButton" to="DeckManager" method="_on_BackButton_pressed"]
+[connection signal="convo_ended" from="ConvoManager" to="." method="_on_ConvoManager_convo_ended"]
+[connection signal="item_selected" from="ConvoManager/TopicList/ItemList" to="ConvoManager/TopicList" method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollUpButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollUpButton_pressed"]
+[connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollDownButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollDownButton_pressed"]
+[connection signal="pressed" from="ConvoManager/BackButton" to="ConvoManager" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="DebugConvoButton" to="." method="_on_DebugConvoButton_pressed"]
+[connection signal="pressed" from="DebugCustButton" to="." method="_on_DebugCustButton_pressed"]

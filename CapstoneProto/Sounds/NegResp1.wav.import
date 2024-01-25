@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/NegResp1.wav-57163337c7ff03b2416a478ada72b04e.sample"
+
+[deps]
+
+source_file="res://Sounds/NegResp1.wav"
+dest_files=[ "res://.import/NegResp1.wav-57163337c7ff03b2416a478ada72b04e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=1
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

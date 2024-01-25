@@ -1,0 +1,61 @@
+default
+
+[MISC/BAD/01]
+Just... No.
+[MISC/MID/01]
+Eh, it was alright.
+[MISC/GUD/01]
+That's a good one!
+
+
+[HATS/BAD/02]
+Yeah... I can't pull off hats.
+Wow, okay. I like hats.
+[HATS/MID/02]
+Hats ARE kind of weird. How and when did we decide to start wearing them?
+Well, they keep the rain off. Like we need more rain...
+[HATS/GUD/01]
+Hats are always funny.
+
+
+[BOXES/BAD/01]
+Everything here looks like a box, doesn't it. A dim, grey box.
+[BOXES/MID/01]
+...Boxes? What about them?
+[BOXES/GUD/01]
+I love it! "Welcome to the future, live inside a world of cardboard!"
+
+
+[WEATHER/BAD/01]
+Ugh... The weather here is always terrible...
+[WEATHER/MID/01]
+Yep, the weather is the weather.
+[WEATHER/GUD/01]
+Ha! How long did you brainSTORM that one?
+
+
+[SUNGLASSES/BAD/01]
+You see those a lot these days, as if what little light remains is too bright.
+[SUNGLASSES/MID/01]
+Right, sunglasses. Because we see the sun so often...
+[SUNGLASSES/GUD/01]
+Can't go wrong with sunglasses!
+
+
+[GIFTS/BAD/01]
+...Remind me to never get you anything.
+[GIFTS/MID/01]
+I mean, I like giving gifts...
+[GIFTS/GUD/01]
+That joke was the real gift here.
+
+
+[PLUSHIES/BAD/01]
+C'mon, things are bad enough. Don't go bashing plushies...
+[PLUSHIES/MID/01]
+Plushies are alright... I guess.
+[PLUSHIES/GUD/01]
+Nice one! We all need some cuteness in life, right?
+
+[OVERUSE/BAD/01]
+This conversation is getting stale...

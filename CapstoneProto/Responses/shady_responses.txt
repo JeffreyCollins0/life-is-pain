@@ -1,0 +1,58 @@
+Shady
+
+[_BIO_]
+Shady
+They/Them/Their
+
+[_EVAL_]
+1, 0, 0.5, 0, 0.5, 1, 0, -1, 0, 0, -1
+1, -1, 0.5, -1, 1, 0
+
+[HATS/BAD/01]
+Hey, don't go bashing this hat of mine. It's a classic.
+[HATS/MID/01]
+Hmm... Not a fan of hats, then.
+[HATS/GUD/03]
+Good eye. This hat's my favorite!
+I see you've got taste. I like that!
+Heh, the hat really makes the person, doesn't it?
+
+[SUNGLASSES/BAD/01/UNL T04]
+So what if I wear shades? These were a gift from a friend.
+[SUNGLASSES/MID/01]
+Is it the shades, or was the punchline THAT hard to see?
+[SUNGLASSES/GUD/01]
+Nice one. I like the cut of your jib, pal.
+
+[GIFTS/GUD/01]
+HA! Didn't think I'd like joking about those, but that made me feel a lot better. Thanks, pal.
+[BAD PUN/GUD/01/UNL S05]
+There's an honesty in a good pun. I respect that.
+[DEAD PAN/GUD/01]
+Heh, almost didn't catch that one. When it works, the no-sell REALLY works.
+[SLAPSTICK/GUD/01]
+Going all in like that takes guts, pal. I really appreciate that.
+[HARD TRUTH/GUD/01]
+Yeah, call 'em like you see 'em! Really cuts to the heart of things.
+
+[WORDPLAY/BAD/01]
+Was that a play on words? I can't make sense of that stuff...
+[DUAL-SPEAK/BAD/01]
+I didn't catch that one. Just say what you mean.
+[BOXES/BAD/01]
+Boxes? Pull out all the creative stops, why don't you. Ugh...
+[WEATHER/BAD/01]
+Yeah, the weather sucks. We all KNOW it sucks. Don't gotta point it out.
+
+[BASE/BAD/01]
+Hate to say it, but that one wasn't good on a basic level.
+[BASE/GUD/01]
+Didn't even need the bells and whistles. That's just a good joke.
+
+[MODIFIER/BAD/01]
+That would've been better, but the embellishment killed it.
+[MODIFIER/GUD/01]
+Nice one, that last bit of embellishment REALLY sold it.
+
+[OVERUSE/BAD/01]
+Oh yeah, just keep making the same joke over and over. Great.

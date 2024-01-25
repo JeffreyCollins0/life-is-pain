@@ -1,0 +1,28 @@
+Card Data
+
+[STRAT 00]
+Bad Pun | If it works, it works.
+[STRAT 01]
+Minimize | It's just a flesh wound!
+[STRAT 02]
+Dead Pan | One Pico Pepper Paprikache Parfait, please.
+[STRAT 03]
+Talk Funny | Talk Like a Pirate Day came early this year
+[STRAT 04]
+Slapstick | Laugh at my pain! LAUGH AT IT!
+[STRAT 05]
+Hard Truth | Tell it like it is
+[STRAT 06]
+Satirize | That was a PLANET, not a pebble.
+[STRAT 07]
+Wordplay | What ABOUT the seagulls?
+[STRAT 08]
+Sharp Turn | Left, right, banana
+[STRAT 09]
+Euphemism | He's my sweet cheese, my fun time boy
+[STRAT 10]
+Dual-Speak | It's funny on TWO levels.
+
+[MODIF 0]
+Think Fast | Draw 2 new cards
+0

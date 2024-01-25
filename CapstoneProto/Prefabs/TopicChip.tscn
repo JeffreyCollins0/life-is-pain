@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://BitCrush.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/TopicChip.gd" type="Script" id=2]
+
+[node name="TopicChip" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 48.0
+margin_bottom = 5.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Topic" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 6.0
+custom_fonts/font = ExtResource( 1 )
+text = "Sunglasses"
+
+[node name="Uses" type="Label" parent="."]
+visible = false
+margin_left = 41.0
+margin_right = 49.0
+margin_bottom = 6.0
+custom_fonts/font = ExtResource( 1 )
+text = "x3"
+
+[connection signal="mouse_entered" from="Background" to="." method="_on_Background_mouse_entered"]
+[connection signal="mouse_exited" from="Background" to="." method="_on_Background_mouse_exited"]

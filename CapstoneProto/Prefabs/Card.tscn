@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/CardBacker.png" type="Texture" id=1]
+[ext_resource path="res://DinoCrush.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scripts/Card.gd" type="Script" id=3]
+[ext_resource path="res://BitCrush.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Sprites/EffDownIcon.png" type="Texture" id=5]
+
+[node name="Card" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -28, 0 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="CardName" type="Label" parent="."]
+margin_left = -24.0
+margin_top = 4.0
+margin_right = 25.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 2 )
+text = "Euphemis."
+
+[node name="CardDesc" type="Label" parent="."]
+margin_left = -24.0
+margin_top = 16.0
+margin_right = 24.0
+margin_bottom = 63.0
+custom_fonts/font = ExtResource( 4 )
+text = "He's my sweet cheese, my fun time boy"
+autowrap = true
+
+[node name="BaseModIndicator" type="Sprite" parent="."]
+visible = false
+position = Vector2( 23, 17 )
+texture = ExtResource( 5 )
