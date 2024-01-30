@@ -8,7 +8,7 @@ var saved_mouse_pos = Vector2.ZERO
 var saved_selection = -1
 
 # can we draw this card from the deck?
-var is_card_usable = []
+#var is_card_usable = []
 
 var eff_up_icon = null
 var eff_down_icon = null
@@ -22,6 +22,7 @@ var card_prefab
 var cancelable_player
 var select_player
 var messagewindow_debug
+var mod_manager
 
 func _ready():
 	control = get_parent()
@@ -30,6 +31,7 @@ func _ready():
 	messagewindow_debug = get_node('../MessageRollout')
 	cancelable_player = get_node('../CancelableAudioPlayer')
 	select_player = get_node('../SelectAudioPlayer')
+	mod_manager = get_node('../ModCardManager')
 	
 	eff_up_icon = load('res://Sprites/EffUpIcon.png')
 	eff_down_icon = load('res://Sprites/EffDownIcon.png')
@@ -38,11 +40,17 @@ func _ready():
 	card_swap_track = load('res://Sounds/CardHover.wav')
 
 func _process(delta):
-	if(get_child_count() < 5):
+	if(get_child_count() < 5 && deck.get_available_cards() > 0):
+		#print('drawing a new card to make 5...')
 		deal_random_card()
 		reset_card_positions()
 	
 	# mouse movement
+	if(get_child_count() <= 0):
+		print('You have run out of cards.')
+		control.end_convo()
+		return
+	
 	var mouse_pos = get_viewport().get_mouse_position()
 	if((mouse_pos - saved_mouse_pos).length() >= mouse_move_deadzone):
 		if(mouse_pos.y >= position.y):
@@ -90,7 +98,17 @@ func _process(delta):
 				selected_card = get_child(saved_selection)
 				actual_selection = selected_card.get_card_id()
 			
-			control.select_strat(actual_selection)
+			var card_mod_id = selected_card.get_mod_id()
+			if(card_mod_id != -1):
+				# play modifier card
+				#print('Playing mod card '+str(card_mod_id))
+				get_node('../ModCardManager').play_modifier(card_mod_id)
+			else:
+				# play strategy card
+				print('Playing strategy card '+str(actual_selection)+' with mod id '+str(card_mod_id))
+				control.select_strat(actual_selection)
+			
+			deck.mark_last_used(actual_selection)
 			selected_card.queue_free()
 			reset_card_positions()
 			
@@ -108,28 +126,42 @@ func reset_card_positions():
 func update_cards(topic_index):
 	var cards = get_children()
 	for card in cards:
-		if( abs(control.get_mod(card.get_card_id(), topic_index)) > 1 ):
-			# extended update with dual-arrow icons
-			card.update_topic(topic_index, eff_up2_icon, eff_down2_icon)
-		else:
-			card.update_topic(topic_index, eff_up_icon, eff_down_icon)
+		if(card.get_mod_id() == -1):
+			# only apply arrows to strategy cards
+			if( abs(control.get_mod(card.get_card_id(), topic_index)) > 1 ):
+				# extended update with dual-arrow icons
+				card.update_topic(topic_index, eff_up2_icon, eff_down2_icon)
+			else:
+				card.update_topic(topic_index, eff_up_icon, eff_down_icon)
 
 func deal_random_card():
-	# 11 max strat cards right now
-	#var card_id = random_gen.randi_range(0, 10)
-	#while(!is_card_usable[card_id]):
-	#	card_id = random_gen.randi_range(0, 10)
-	#var card_data = control.file_read.read_card_data('res://Responses/card_data.txt', card_id, false)
-	
 	var card_data = deck.deal_random_card()
 	if(card_data == null):
 		return
 	
 	var new_card = card_prefab.instance()
-	new_card.init(card_data[0], card_data[1])
+	new_card.init(card_data)
 	add_child(new_card)
+	
+	#print('dealt card with id '+str(card_data[0])+' and mod id '+str(card_data[3]))
+	if(card_data[3] != -1):
+		# instance a modifier onto the mod card manager
+		mod_manager.new_modifier(card_data[3])
+
+func deal_last_used_card():
+	var card_data = deck.deal_last_used_card()
+	if(card_data == null):
+		return
+	
+	var new_card = card_prefab.instance()
+	new_card.init(card_data)
+	add_child(new_card)
+	
+	if(card_data[3] != -1):
+		# instance a modifier onto the mod card manager
+		mod_manager.new_modifier(card_data[3])
 
 func unlock_strategy(strat_index):
-	is_card_usable[strat_index] = true
+	deck.is_card_usable[strat_index] = true
 	print('Unlocked strategy '+control.strategies[strat_index])
 	messagewindow_debug.add_message('You can now use \"'+control.strategies[strat_index]+'\"!')

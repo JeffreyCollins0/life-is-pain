@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/ConvoManager.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/HandDebug.gd" type="Script" id=2]
-[ext_resource path="res://Scripts/TopicList.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/ModCardManager.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/sampleFontSetter.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/FileReader.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/MessageWindow.gd" type="Script" id=6]
@@ -25,7 +25,7 @@
 [ext_resource path="res://Scripts/DemoCard.gd" type="Script" id=23]
 [ext_resource path="res://Scripts/UIManager.gd" type="Script" id=24]
 
-[node name="Node2D" type="Node2D"]
+[node name="UIManager" type="Node2D"]
 script = ExtResource( 24 )
 
 [node name="DeckManager" type="Node2D" parent="."]
@@ -278,31 +278,6 @@ script = ExtResource( 4 )
 position = Vector2( 0, 128 )
 script = ExtResource( 2 )
 
-[node name="TopicList" type="Node2D" parent="ConvoManager"]
-visible = false
-position = Vector2( 0, 4 )
-script = ExtResource( 3 )
-
-[node name="Sprite" type="Sprite" parent="ConvoManager/TopicList"]
-texture = ExtResource( 8 )
-centered = false
-
-[node name="Label" type="Label" parent="ConvoManager/TopicList"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 44.0
-margin_bottom = 18.0
-custom_fonts/font = ExtResource( 7 )
-text = "Topics"
-
-[node name="ItemList" type="ItemList" parent="ConvoManager/TopicList"]
-margin_left = 1.0
-margin_top = 16.0
-margin_right = 55.0
-margin_bottom = 68.0
-custom_fonts/font = ExtResource( 11 )
-items = [ "Hats", null, false, "Boxes", null, false, "Weather", null, false, "Sunglasses", null, false, "Gifts", null, false, "Plushies", null, false ]
-
 [node name="TopicList_Custom" type="Node2D" parent="ConvoManager"]
 position = Vector2( 0, 4 )
 script = ExtResource( 19 )
@@ -358,6 +333,9 @@ margin_right = 54.0
 margin_bottom = 68.0
 custom_fonts/font = ExtResource( 11 )
 text = "v"
+
+[node name="ModCardManager" type="Node2D" parent="ConvoManager"]
+script = ExtResource( 3 )
 
 [node name="StressCounter" type="Node2D" parent="ConvoManager"]
 position = Vector2( 0, 72 )
@@ -469,7 +447,9 @@ text = "Customize"
 [connection signal="pressed" from="DeckManager/Control/LibList/ScrollDownButton" to="DeckManager/Control/LibList" method="_on_ScrollDownButton_pressed"]
 [connection signal="pressed" from="DeckManager/Control/BackButton" to="DeckManager" method="_on_BackButton_pressed"]
 [connection signal="convo_ended" from="ConvoManager" to="." method="_on_ConvoManager_convo_ended"]
-[connection signal="item_selected" from="ConvoManager/TopicList/ItemList" to="ConvoManager/TopicList" method="_on_ItemList_item_selected"]
+[connection signal="convo_ended" from="ConvoManager" to="ConvoManager/Control/Textbox/MarginContainer/Label" method="_on_ConvoManager_convo_ended"]
+[connection signal="convo_started" from="ConvoManager" to="DeckManager" method="_on_ConvoManager_convo_started"]
+[connection signal="convo_started" from="ConvoManager" to="ConvoManager/Control/Textbox/MarginContainer/Label" method="_on_ConvoManager_convo_started"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollUpButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollUpButton_pressed"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollDownButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollDownButton_pressed"]
 [connection signal="pressed" from="ConvoManager/BackButton" to="ConvoManager" method="_on_BackButton_pressed"]

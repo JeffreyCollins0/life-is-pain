@@ -38,6 +38,7 @@ var npc_eval_percent = 0.6
 var test_tile_txt
 var saved_topic = 0
 var cached_char_eval = null
+var prev_joke_result = 1.0
 
 var stress_debug = 0
 var mood_debug = 40
@@ -57,6 +58,7 @@ var increment_prefab
 var response_player
 
 signal convo_ended
+signal convo_started
 
 func _ready():
 	file_read = get_node('../FileReader');
@@ -117,6 +119,9 @@ func determine_response(topic_index, strat_index):
 	# tick down the modifiers post-evaluation
 	$ModifierTally.modifier_tick()
 	
+	# notify any active modifier cards
+	$ModCardManager.update_modifiers(saved_topic, (final_score > effect_bands[0][0]))
+	
 	# get initial response (override if a callout applies)
 	var char_response = file_read.get_response(char_fpath, keywords[topic_index], rating_band)
 	if(char_response == 'MissingNo.'):
@@ -143,53 +148,58 @@ func determine_response(topic_index, strat_index):
 	
 	# modify stress / mood (DEBUG)
 	if(rating_band == 'GUD'):
-		mood_debug += 10
-		stress_debug -= 2
+#		mood_debug += 10
+#		stress_debug -= 2
+		add_mood(10)
+		add_stress(-2)
 		
 		# make increment text
-		var mood_text = increment_prefab.instance()
-		mood_text.position = $BonusTextSpawn.position
-		mood_text.init(10)
-		self.add_child(mood_text)
-		
-		var stress_text = increment_prefab.instance()
-		stress_text.position = $StressCounter.position + Vector2(2.0, 16.0)
-		stress_text.init(2)
-		self.add_child(stress_text)
+#		var mood_text = increment_prefab.instance()
+#		mood_text.position = $BonusTextSpawn.position
+#		mood_text.init(10)
+#		self.add_child(mood_text)
+#		var stress_text = increment_prefab.instance()
+#		stress_text.position = $StressCounter.position + Vector2(2.0, 16.0)
+#		stress_text.init(2)
+#		self.add_child(stress_text)
 		
 		# play sound
 		response_player.stream = pos_resp_track
 		response_player.playing = true
 		
 	elif(rating_band == 'BAD'):
-		mood_debug -= 5
-		stress_debug += 10
+#		mood_debug -= 5
+#		stress_debug += 10
+		add_mood(-5)
+		add_stress(10)
 		
 		# make increment text
-		var mood_text = increment_prefab.instance()
-		mood_text.position = $MoodCounter.position + Vector2(0, 32.0)
-		mood_text.init(-5)
-		self.add_child(mood_text)
-		var stress_text = increment_prefab.instance()
-		stress_text.position = $StressCounter.position + Vector2(0, 32.0)
-		stress_text.init(-10)
-		self.add_child(stress_text)
+#		var mood_text = increment_prefab.instance()
+#		mood_text.position = $MoodCounter.position + Vector2(0, 32.0)
+#		mood_text.init(-5)
+#		self.add_child(mood_text)
+#		var stress_text = increment_prefab.instance()
+#		stress_text.position = $StressCounter.position + Vector2(0, 32.0)
+#		stress_text.init(-10)
+#		self.add_child(stress_text)
 		
 		# play sound
 		response_player.stream = neg_resp_track
 		response_player.playing = true
 	
-	if(mood_debug >= 100):
-		messagewindow_debug.add_message("The conversant's spirits have recovered!")
-	if(stress_debug >= 100):
-		messagewindow_debug.add_message("You're too stressed and can't think...")
-		stress_debug = 0
-		end_convo() # wait a bit for this one
+#	if(mood_debug >= 100):
+#		messagewindow_debug.add_message("The conversant's spirits have recovered!")
+#	if(stress_debug >= 100):
+#		messagewindow_debug.add_message("You're too stressed and can't think...")
+#		stress_debug = 0
+#		end_convo() # wait a bit for this one
 	
-	stress_debug = max(min(stress_debug, 100), 0)
-	mood_debug = max(min(mood_debug, 100), 0)
-	stresscounter_debug.text = (str(stress_debug)+'%')
-	moodcounter_debug.text = (str(mood_debug)+'%')
+#	stress_debug = max(min(stress_debug, 100), 0)
+#	mood_debug = max(min(mood_debug, 100), 0)
+#	stresscounter_debug.text = (str(stress_debug)+'%')
+#	moodcounter_debug.text = (str(mood_debug)+'%')
+	
+	prev_joke_result = final_score
 
 func get_effect_band(raw_score):
 	var aggreg_score_band = -1
@@ -198,6 +208,40 @@ func get_effect_band(raw_score):
 		if(raw_score <= aggreg_score_band):
 			return band[1]
 	return "MissingNo."
+
+func last_joke_successful():
+	return (prev_joke_result > effect_bands[0][0])
+
+func add_stress(amount):
+	#control.add_stress(amount)
+	stress_debug += amount
+	stress_debug = min(max(stress_debug, 0), 100)
+	
+	var stress_text = increment_prefab.instance()
+	stress_text.position = $StressCounter.position + Vector2(0, 32.0)
+	stress_text.init(-amount)
+	self.add_child(stress_text)
+	
+	stresscounter_debug.text = (str(stress_debug)+'%')
+	
+	if(stress_debug >= 100):
+		messagewindow_debug.add_message("You're too stressed and can't think...")
+		end_convo() # wait a bit for this one
+
+func add_mood(amount):
+	#control.add_mood(amount)
+	mood_debug += amount
+	mood_debug = min(max(mood_debug, 0), 100)
+	
+	var mood_text = increment_prefab.instance()
+	mood_text.position = $MoodCounter.position + Vector2(0, 32.0)
+	mood_text.init(amount)
+	self.add_child(mood_text)
+	
+	moodcounter_debug.text = (str(mood_debug)+'%')
+	
+	if(mood_debug >= 100):
+		messagewindow_debug.add_message("The conversant's spirits have recovered!")
 
 func get_response_band(raw_score):
 	var aggreg_score_band = -1
@@ -253,7 +297,7 @@ func process_unlocks(unlocks):
 	for unlock in unlocks:
 		if(unlock[0] == 1 && !is_topic_usable[unlock[1]]):
 			unlock_topic(unlock[1])
-		elif(unlock[0] == 0 && !($Hand.is_card_usable[unlock[1]])):
+		elif(unlock[0] == 0 && !(get_node('../DeckManager').is_card_usable[unlock[1]])):
 			$Hand.unlock_strategy(unlock[1])
 
 func unlock_topic(topic_index):
@@ -273,6 +317,7 @@ func start_convo():
 	var sub_nodes = get_children()
 	for node in sub_nodes:
 		node.set_process(true)
+	emit_signal("convo_started")
 
 func end_convo():
 	# delete all cards

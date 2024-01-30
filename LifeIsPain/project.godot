@@ -8,10 +8,20 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "ModCard",
+"language": "GDScript",
+"path": "res://Scripts/Modifier Cards/ModCard.gd"
+} ]
+_global_script_class_icons={
+"ModCard": ""
+}
+
 [application]
 
-config/name="Capstone Proto"
-run/main_scene="res://ConvoManager.tscn"
+config/name="Life is Pain"
+run/main_scene="res://UIManager.tscn"
 config/icon="res://icon.png"
 
 [display]

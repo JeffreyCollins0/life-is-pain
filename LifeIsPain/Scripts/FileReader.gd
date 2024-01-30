@@ -166,7 +166,7 @@ func read_unlock(filename, subject, rating_band):
 	file.close()
 	return []
 
-func read_card_data(filename, card_id, is_mod_card):
+func read_card_data(filename, card_id):
 	var file = File.new()
 	if(!file.file_exists(filename)):
 		print("File "+filename+" not found.")
@@ -176,17 +176,21 @@ func read_card_data(filename, card_id, is_mod_card):
 	while(!file.eof_reached()):
 		var line = file.get_line()
 		
-		if((line.substr(0,7) == "[STRAT " && !is_mod_card) || (line.substr(0,7) == "[MODIF " && is_mod_card)):
+		if(line.substr(0,7) == "[STRAT " || line.substr(0,7) == "[MODIF "):
 			if(int(line.substr(7,2)) == card_id):
-				var card_data = ['', '', []]
+				var card_data = ['', '', -1]
+				
+				if(line.substr(9,2) == ' |'):
+					# read the modifier id
+					card_data[2] = int(line.substr(12,2))
+					
+					#card_data_raw = file.get_line().split(', ')
+					#for element in card_data_raw:
+					#	card_data[2].append(float(element))
+				
 				var card_data_raw = file.get_line().split(' | ')
 				card_data[0] = card_data_raw[0]
 				card_data[1] = card_data_raw[1]
-				
-				if(is_mod_card):
-					card_data_raw = file.get_line().split(', ')
-					for element in card_data_raw:
-						card_data[2].append(float(element))
 				
 				file.close()
 				return card_data.duplicate(true)

@@ -23,6 +23,20 @@ Euphemism | He's my sweet cheese, my fun time boy
 [STRAT 10]
 Dual-Speak | It's funny on TWO levels.
 
-[MODIF 0]
+[MODIF 11 | 00]
+Hide Punchline | +3 mood if the next joke works, else +3 stress
+[MODIF 12 | 01]
+Beat, Offbeat | +4 mood if the last joke failed and the next doesn't
+[MODIF 13 | 02]
+Hang Too Long | -2 stress if the next joke works, else +2 stress
+[MODIF 14 | 03]
+Improvise | +2 mood if the last joke failed
+[MODIF 15 | 04]
+Set 'Em Up | +1 mood
+[MODIF 16 | 05]
+Self-Roast | +2 mood, +2 stress
+[MODIF 17 | 06]
 Think Fast | Draw 2 new cards
-0
+[MODIF 18 | 07]
+Boomerang | Re-draw the last card you played
+

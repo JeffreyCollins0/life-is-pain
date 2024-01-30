@@ -29,7 +29,7 @@ func update_entries():
 			if(!entries[i].visible):
 				entries[i].visible = true
 			var card_data = control.get_card_data(working_deck[current_item + i])
-			entries[i].set_display(card_data[1])
+			entries[i].set_display(card_data[1], (card_data[3] != -1))
 		else:
 			entries[i].visible = false
 	

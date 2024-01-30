@@ -1,13 +1,17 @@
 extends Node2D
 
 const unselected_BG_color = Color(0.46, 0.55, 0.68)
+const unselected_FG_color = Color(0.33, 0.4, 0.52)
 const hovered_BG_color = Color(0.2, 0.6, 0.6)
+const unselected_BG_color_mod = Color(0.46, 0.68, 0.54)
+const unselected_FG_color_mod = Color(0.33, 0.52, 0.45)
 const move_rate = 0.2
 const move_threshold = 0.05
 export (bool) var debug_nolerp = false # testing only
 
 var focused = false
 var selected = false
+var is_mod = false
 var chip_id = 0
 var control = null
 
@@ -36,8 +40,17 @@ func init(chip_index, parent):
 	target_pos = position
 	control = parent
 
-func set_display(topic_text):
+func set_display(topic_text, is_mod_card):
 	$VBoxContainer/Label.text = topic_text
+	is_mod = is_mod_card
+	
+	# configure card color
+	if(is_mod):
+		$Background.color = unselected_BG_color_mod
+		$TextBacker.color = unselected_FG_color_mod
+	else:
+		$Background.color = unselected_BG_color
+		$TextBacker.color = unselected_FG_color
 
 func set_is_selected(is_selected):
 	selected = is_selected
@@ -45,7 +58,10 @@ func set_is_selected(is_selected):
 		target_offset = selected_offset
 		pass
 	else:
-		$Background.color = unselected_BG_color
+		if(is_mod):
+			$Background.color = unselected_BG_color_mod
+		else:
+			$Background.color = unselected_BG_color
 		target_offset = Vector2.ZERO
 
 func _on_Background_mouse_entered():
@@ -56,4 +72,7 @@ func _on_Background_mouse_entered():
 
 func _on_Background_mouse_exited():
 	focused = false
-	$Background.color = unselected_BG_color
+	if(is_mod):
+		$Background.color = unselected_BG_color_mod
+	else:
+		$Background.color = unselected_BG_color
