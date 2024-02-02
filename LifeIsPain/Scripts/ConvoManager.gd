@@ -71,8 +71,6 @@ func _ready():
 	neg_resp_track = load('res://Sounds/NegResp1.wav')
 	
 	response_player = $ResponseAudioPlayer
-	
-	end_convo() # for setup / testing card custom thingy
 
 func select_topic(index):
 	if(!is_topic_usable[index]):

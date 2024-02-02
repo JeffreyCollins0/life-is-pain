@@ -43,18 +43,10 @@ func _ready():
 	print("got stored deck "+str(deck[0]))
 	reset_card_uses()
 	
-	# initialize deck lists (on start of customization?)
+	# initialize deck lists
 	$Control/DeckList.init_deck(deck[0])
 	$Control/LibList.init_deck(library_unlocked)
 	$Control/DemoCard.set_card_id(deck[0][0])
-	
-	#print("-- player deck --")
-	#for card_id in range(11):
-	#	var card_data = file_reader.read_card_data('res://Responses/card_data.txt', deck[card_id], false)
-	#	print(str(card_id)+' '+card_data[0])
-	#print('-- --')
-	
-	end_cust()
 
 func get_available_cards():
 	return avail_cards
@@ -67,7 +59,6 @@ func deal_random_card():
 	
 	var usable_cards = get_avail_cards()
 	avail_cards = min(avail_cards, len(usable_cards))
-	#print('got avail cards '+str(usable_cards))
 	var rerolls = 0
 	var card_id = usable_cards[random_gen.randi_range(0, len(usable_cards)-1)][1]
 	while( !(is_card_usable[card_id] && deck[1][card_id] > 0) && rerolls < 20):
@@ -82,7 +73,6 @@ func deal_random_card():
 	deck[1][card_id] -= 1
 	if(deck[1][card_id] <= 0):
 		avail_cards -= 1
-		#print('card '+str(card_id)+' dealt all variants, '+str(avail_cards)+' total cards left')
 	
 	return card_data
 

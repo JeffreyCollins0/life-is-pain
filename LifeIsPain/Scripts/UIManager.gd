@@ -1,13 +1,18 @@
 extends Node2D
 
 #var UI_state = 'walk' # walk/talk/cust/fail/win/title
-var current_UI = null
+#var current_UI = null
+var setup_done = false
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
-#func _process(delta):
-#	pass
+func _process(delta):
+	if(!setup_done):
+		$ConvoManager.end_convo()
+		$DeckManager.end_cust()
+		$DebugConvoButton.visible = false
+		setup_done = true
 
 func change_state(new_state):
 	#UI_state = new_state # add in checks later
@@ -37,3 +42,10 @@ func _on_ConvoManager_convo_ended():
 	change_state('walk')
 	$DebugConvoButton.visible = true
 	$DebugCustButton.visible = true
+
+
+func _on_Player_convo_available(conversant):
+	$DebugConvoButton.visible = true
+
+func _on_Player_convo_unavailable():
+	$DebugConvoButton.visible = false

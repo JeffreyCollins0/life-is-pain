@@ -10,7 +10,7 @@ var talk_player
 var talk_loop_track = null
 
 func _ready():
-	talk_player = get_tree().get_current_scene().get_node('ConvoManager/TalkAudioPlayer')
+	talk_player = get_node('../../../../../ConvoManager/TalkAudioPlayer')
 	typewriter_time = (default_typewriter_duration / typewriter_speed)
 	
 	talk_loop_track = load('res://Sounds/ShadyTalk.wav')
