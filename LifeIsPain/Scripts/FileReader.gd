@@ -61,19 +61,19 @@ func get_response(filename, subject, rating_band):
 				var response = file.get_line()
 				
 				# detect unlocks
-				if(line.substr(endofsubject_index+6, 1) != ']'):
-					var unlocks_length = (line.length() - (endofsubject_index + 11 + 1))
-					var unlocks_str = line.substr(endofsubject_index+11, unlocks_length)
-					var raw_unlocks
-					raw_unlocks = unlocks_str.split(' ')
-					
-					var unlocks = []
-					for raw in raw_unlocks:
-						unlocks.append([
-							int(raw.substr(0,1) == 'T'), # type designator (T('topic') or S('strategy'))
-							int(raw.substr(1)) # unlock index
-						])
-					control.process_unlocks(unlocks)
+#				if(line.substr(endofsubject_index+6, 1) != ']'):
+#					var unlocks_length = (line.length() - (endofsubject_index + 11 + 1))
+#					var unlocks_str = line.substr(endofsubject_index+11, unlocks_length)
+#					var raw_unlocks
+#					raw_unlocks = unlocks_str.split(' ')
+#
+#					var unlocks = []
+#					for raw in raw_unlocks:
+#						unlocks.append([
+#							int(raw.substr(0,1) == 'T'), # type designator (T('topic') or S('strategy'))
+#							int(raw.substr(1)) # unlock index
+#						])
+#					control.process_unlocks(unlocks)
 				
 				file.close()
 				return response
@@ -123,7 +123,23 @@ func read_eval(filename):
 			file.close()
 			return eval_data
 
-func read_unlock(filename, subject, rating_band):
+func read_mood(filename):
+	var file = File.new()
+	if(!file.file_exists(filename)):
+		print("File "+filename+" not found.")
+		return null
+	file.open(filename, File.READ)
+	
+	while(!file.eof_reached()):
+		var line = file.get_line()
+		
+		if(line.substr(0,8) == "[_MOOD_]"):
+			var mood_val = int(file.get_line())
+			
+			file.close()
+			return mood_val
+
+func read_unlock_old(filename, subject, rating_band):
 	var file = File.new()
 	if(!file.file_exists(filename)):
 		print("File "+filename+" not found.")
@@ -165,6 +181,32 @@ func read_unlock(filename, subject, rating_band):
 				return unlocks
 	file.close()
 	return []
+
+func read_unlock(filename, mood):
+	var file = File.new()
+	if(!file.file_exists(filename)):
+		print("File "+filename+" not found.")
+		return null
+	file.open(filename, File.READ)
+	
+	var unlocks = []
+	while(!file.eof_reached()):
+		var line = file.get_line()
+		
+		if(line.substr(0,10) == "[_UNLOCK_]"):
+			var unlock_line = 'Sample Text'
+			while(unlock_line.length() > 3):
+				# read unlock data
+				unlock_line = file.get_line()
+				if(int(unlock_line.substr(0,3)) <= mood):
+					unlocks.append([
+						int(unlock_line.substr(6,1) == 'T'), # type designator (T('topic') or S('strategy'))
+						int(unlock_line.substr(7)) # unlock index
+					])
+			break
+			
+	file.close()
+	return unlocks
 
 func read_card_data(filename, card_id):
 	var file = File.new()
@@ -225,6 +267,30 @@ func save_deck(filename, deck):
 	for entry in deck:
 		var padded_entry = pad_to_length(entry, 2)
 		file.store_line(padded_entry)
+	file.close()
+
+func write_mood(filename, mood):
+	var file = File.new()
+	if(!file.file_exists(filename)):
+		print("File "+filename+" not found.")
+		return null
+	file.open(filename, File.READ_WRITE)
+	
+	# locate the mood field
+	var mood_position = -1
+	while(!file.eof_reached()):
+		var line = file.get_line()
+		
+		if(line.substr(0,8) == "[_MOOD_]"):
+			var pre_line_pos = file.get_position()
+			var mood_val = int(file.get_line())
+			mood_position = pre_line_pos
+			break
+	
+	# write the new mood value
+	if(mood_position != -1):
+		file.seek(mood_position)
+		file.store_string(str(mood))
 	file.close()
 
 func read_library(filename):

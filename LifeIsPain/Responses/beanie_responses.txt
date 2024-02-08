@@ -1,0 +1,75 @@
+Beanie
+
+[_BIO_]
+Beanie
+They/Them/Their
+
+[_EVAL_]
+0, -1, 0, 0.5, -1, 0, 0, 1, 0, 0.5, 1
+-1, 0.5, -1, 1, 0, 1
+
+[_UNLOCK_]
+050 | T05
+100 | S09
+
+[_MOOD_]
+15
+
+[HATS/BAD/01]
+Oh. I'm sorry... I know hats don't work on me...
+[HATS/MID/01]
+Hmm... Not a fan of hats, then.
+[HATS/GUD/03]
+Thanks... I like this hat.
+
+[SUNGLASSES/BAD/01]
+I guess? People in sunglasses scare me...
+[SUNGLASSES/MID/01]
+That was okay. I guess noir isn't really my thing...
+[SUNGLASSES/GUD/01]
+Normally I'm not a fan, but that made me feel a bit better.
+
+[PLUSHIES/BAD/01]
+Oh... I like plushies, but alright...
+[PLUSHIES/MID/01]
+That one was alright...
+[PLUSHIES/GUD/01]
+Haha, I LOVE plushies! They squish and don't have corners!
+
+[WORDPLAY/GUD/01]
+That's a good play on words. The mark of a good writer...
+[TALK FUNNY/GUD/01]
+*Wheeze* That sounds like my little brother! That's hilarious.
+[EUPHEMISM/GUD/01]
+Ha, I didn't know THAT was a euphemism for office work.
+[DUAL-SPEAK/GUD/01]
+Ooh, clever... Those are always hard to pull off, so... props.
+
+[MINIMIZE/BAD/01]
+That one hurt a bit... People look down on me 'cause I'm a cube...
+[SLAPSTICK/BAD/01]
+Wait, are you hurt!? What do I do? Amputation? Bandages? CPR?
+[BOXES/GUD/01]
+Haha! See, you get it. Cubes all the way.
+[WEATHER/GUD/01]
+I love weather like this. It's perfect for reading comic books...
+
+[BASE/BAD/01]
+That one... might not be the best idea, just, in general...
+[BASE/GUD/01]
+That's a good one. Simple jokes can work wonders sometimes...
+
+[MODIFIER/BAD/01]
+Did you... really need to add that last bit?
+[MODIFIER/GUD/01]
+Yeah, that extra spin on it really sold the joke.
+
+[OVERUSE/BAD/01]
+Oh, is this all the same kind of joke? I'm a little bored now...
+
+[UNLOCK/050]
+...Do you like plushies, too? I love how comforting they are...
+
+[UNLOCK/100]
+I know I should be more straightforward, but... It's so hard...
+

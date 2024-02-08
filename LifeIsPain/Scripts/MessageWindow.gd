@@ -11,3 +11,7 @@ func add_message(message):
 	for message in messages:
 		final_readout = message+'\n' + final_readout
 	$Content.text = final_readout
+
+func clear():
+	messages.clear()
+	$Content.text = ''

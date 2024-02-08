@@ -3,6 +3,7 @@ extends Node2D
 #var UI_state = 'walk' # walk/talk/cust/fail/win/title
 #var current_UI = null
 var setup_done = false
+var saved_conversant = 'MissingNo.'
 
 func _ready():
 	pass
@@ -20,7 +21,7 @@ func change_state(new_state):
 
 func _on_DebugConvoButton_pressed():
 	change_state('talk')
-	$ConvoManager.start_convo()
+	$ConvoManager.start_convo(saved_conversant)
 	$DebugConvoButton.visible = false
 	$DebugCustButton.visible = false
 
@@ -46,6 +47,8 @@ func _on_ConvoManager_convo_ended():
 
 func _on_Player_convo_available(conversant):
 	$DebugConvoButton.visible = true
+	saved_conversant = conversant
 
 func _on_Player_convo_unavailable():
 	$DebugConvoButton.visible = false
+	saved_conversant = 'MissingNo.'

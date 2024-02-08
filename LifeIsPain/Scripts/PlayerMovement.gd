@@ -101,22 +101,24 @@ func update_nearest_npc():
 		return
 	
 	var nearest = -1
+	var nearest_name = 'MissingNo.'
 	var shortest_dist = INF
 	for npc in saved_conversants:
 		var npc_dist = transform.origin.distance_squared_to(npc[1])
 		if(npc_dist < shortest_dist):
 			shortest_dist = npc_dist
 			nearest = npc[0]
+			nearest_name = npc[2]
 	
 	if(nearest != -1 && nearest != saved_nearest):
 		saved_nearest = nearest
-		emit_signal("convo_available", nearest)
+		emit_signal("convo_available", nearest_name)
 
 func _on_TalkableArea_body_entered(body):
 	if(!body.is_in_group('NPC')):
 		return
 	
-	saved_conversants.append([body.get_npc_id(), body.transform.origin])
+	saved_conversants.append([body.get_npc_id(), body.transform.origin, body.get_npc_name()])
 	update_nearest_npc()
 
 func _on_TalkableArea_body_exited(body):

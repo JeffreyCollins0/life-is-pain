@@ -8,6 +8,13 @@ They/Them/Their
 1, 0, 0.5, 0, 0.5, 1, 0, -1, 0, 0, -1
 1, -1, 0.5, -1, 1, 0
 
+[_UNLOCK_]
+050 | T04
+100 | S05
+
+[_MOOD_]
+40
+
 [HATS/BAD/01]
 Hey, don't go bashing this hat of mine. It's a classic.
 [HATS/MID/01]
@@ -56,3 +63,9 @@ Nice one, that last bit of embellishment REALLY sold it.
 
 [OVERUSE/BAD/01]
 Oh yeah, just keep making the same joke over and over. Great.
+
+[UNLOCK/050]
+These shades were a gift from a friend of mine. So thoughtful...
+
+[UNLOCK/100]
+Sometimes you gotta tell it like it is. Sugarcoating won't help.

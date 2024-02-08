@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/ConvoManager.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/HandDebug.gd" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Prefabs/CardChip.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scripts/DemoCard.gd" type="Script" id=23]
 [ext_resource path="res://Scripts/UIManager.gd" type="Script" id=24]
+[ext_resource path="res://Scripts/NPCManager.gd" type="Script" id=25]
 
 [node name="UIManager" type="Node2D"]
 script = ExtResource( 24 )
@@ -209,7 +210,6 @@ custom_fonts/font = ExtResource( 7 )
 text = "Back"
 
 [node name="ConvoManager" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 1 )
 
 [node name="Control" type="Control" parent="ConvoManager"]
@@ -277,6 +277,9 @@ script = ExtResource( 4 )
 [node name="Hand" type="Node2D" parent="ConvoManager"]
 position = Vector2( 0, 128 )
 script = ExtResource( 2 )
+
+[node name="NPCManager" type="Node2D" parent="ConvoManager"]
+script = ExtResource( 25 )
 
 [node name="TopicList_Custom" type="Node2D" parent="ConvoManager"]
 position = Vector2( 0, 4 )
@@ -375,7 +378,7 @@ margin_top = 21.0
 margin_right = 64.0
 margin_bottom = 35.0
 custom_fonts/font = ExtResource( 7 )
-text = "40%"
+text = "Chef%"
 align = 2
 
 [node name="BonusTextSpawn" type="Position2D" parent="ConvoManager"]
@@ -449,6 +452,7 @@ text = "Customize"
 [connection signal="pressed" from="DeckManager/Control/BackButton" to="DeckManager" method="_on_BackButton_pressed"]
 [connection signal="convo_ended" from="ConvoManager" to="." method="_on_ConvoManager_convo_ended"]
 [connection signal="convo_ended" from="ConvoManager" to="ConvoManager/Control/Textbox/MarginContainer/Label" method="_on_ConvoManager_convo_ended"]
+[connection signal="convo_ended" from="ConvoManager" to="ConvoManager/NPCManager" method="_on_ConvoManager_convo_ended"]
 [connection signal="convo_started" from="ConvoManager" to="DeckManager" method="_on_ConvoManager_convo_started"]
 [connection signal="convo_started" from="ConvoManager" to="ConvoManager/Control/Textbox/MarginContainer/Label" method="_on_ConvoManager_convo_started"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollUpButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollUpButton_pressed"]

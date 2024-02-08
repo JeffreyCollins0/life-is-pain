@@ -34,9 +34,9 @@ func _ready():
 	convo_manager.strategies = packed_lib[2]
 	
 	# filter library list by unlocks
-	for i in range(len(packed_lib[0])):
-		if(packed_lib[1][i]):
-			library_unlocked.append(packed_lib[0][i])
+	for i in range(len(library)):
+		if(is_card_usable[i]):
+			library_unlocked.append(library[i])
 	
 	# read deck from file
 	deck[0] = file_reader.read_deck(deck_fpath, 11, packed_lib[1])
@@ -183,12 +183,24 @@ func start_cust():
 	var sub_nodes = get_children()
 	for node in sub_nodes:
 		node.set_process(true)
+	
+	# reload library to account for unlocks
+	library_unlocked.clear()
+	for i in range(len(library)):
+		if(is_card_usable[i]):
+			library_unlocked.append(library[i])
+	$Control/LibList.init_deck(library_unlocked)
 
 func end_cust():
+	$Control/DeckList.clear_selection()
+	$Control/LibList.clear_selection()
+	
 	var sub_nodes = get_children()
 	for node in sub_nodes:
 		node.set_process(false)
+	
 	visible = false
+	
 	print('customization has ended.')
 	emit_signal("cust_ended")
 

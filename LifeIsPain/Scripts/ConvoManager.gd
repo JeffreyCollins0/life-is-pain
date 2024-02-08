@@ -94,7 +94,7 @@ func determine_response(topic_index, strat_index):
 	var aux_mod = $ModifierTally.get_net_modifier()
 	
 	# initial message
-	messagewindow_debug.add_message("You told them a "+strategies[strat_index]+" about "+keywords[topic_index]+"...")
+	messagewindow_debug.add_message("You told "+$NPCManager.get_npc_name()+" a "+strategies[strat_index]+" about "+keywords[topic_index]+"...")
 	
 	# actual evaluation
 	var rating_band = 'MID'
@@ -134,7 +134,6 @@ func determine_response(topic_index, strat_index):
 		mod,
 		aux_mod
 	]
-	#var callout = callout_influence(mods, file_read, char_fpath, strategies[strat_index], keywords[topic_index])
 	var callout = callout_adapted(mods, file_read, char_fpath, strategies[strat_index], keywords[topic_index], rating_band)
 	if(callout != 'MissingNo.'):
 		char_response = callout
@@ -144,58 +143,29 @@ func determine_response(topic_index, strat_index):
 	
 	textbox_debug.new_message(char_response)
 	
-	# modify stress / mood (DEBUG)
+	var pre_mod_mood = mood_debug
+	
+	# modify stress / mood
 	if(rating_band == 'GUD'):
-#		mood_debug += 10
-#		stress_debug -= 2
-		add_mood(10)
+		add_mood(5)
 		add_stress(-2)
-		
-		# make increment text
-#		var mood_text = increment_prefab.instance()
-#		mood_text.position = $BonusTextSpawn.position
-#		mood_text.init(10)
-#		self.add_child(mood_text)
-#		var stress_text = increment_prefab.instance()
-#		stress_text.position = $StressCounter.position + Vector2(2.0, 16.0)
-#		stress_text.init(2)
-#		self.add_child(stress_text)
 		
 		# play sound
 		response_player.stream = pos_resp_track
 		response_player.playing = true
 		
 	elif(rating_band == 'BAD'):
-#		mood_debug -= 5
-#		stress_debug += 10
 		add_mood(-5)
 		add_stress(10)
-		
-		# make increment text
-#		var mood_text = increment_prefab.instance()
-#		mood_text.position = $MoodCounter.position + Vector2(0, 32.0)
-#		mood_text.init(-5)
-#		self.add_child(mood_text)
-#		var stress_text = increment_prefab.instance()
-#		stress_text.position = $StressCounter.position + Vector2(0, 32.0)
-#		stress_text.init(-10)
-#		self.add_child(stress_text)
 		
 		# play sound
 		response_player.stream = neg_resp_track
 		response_player.playing = true
 	
-#	if(mood_debug >= 100):
-#		messagewindow_debug.add_message("The conversant's spirits have recovered!")
-#	if(stress_debug >= 100):
-#		messagewindow_debug.add_message("You're too stressed and can't think...")
-#		stress_debug = 0
-#		end_convo() # wait a bit for this one
-	
-#	stress_debug = max(min(stress_debug, 100), 0)
-#	mood_debug = max(min(mood_debug, 100), 0)
-#	stresscounter_debug.text = (str(stress_debug)+'%')
-#	moodcounter_debug.text = (str(mood_debug)+'%')
+	# check for percentage unlocks
+	if(pre_mod_mood < mood_debug):
+		var unlocks = file_read.read_unlock(char_fpath, mood_debug)
+		process_unlocks(unlocks)
 	
 	prev_joke_result = final_score
 
@@ -240,6 +210,14 @@ func add_mood(amount):
 	
 	if(mood_debug >= 100):
 		messagewindow_debug.add_message("The conversant's spirits have recovered!")
+
+func set_mood(value):
+	mood_debug = value
+	mood_debug = min(max(mood_debug, 0), 100)
+	moodcounter_debug.text = (str(mood_debug)+'%')
+
+func get_working_mood():
+	return mood_debug
 
 func get_response_band(raw_score):
 	var aggreg_score_band = -1
@@ -309,12 +287,15 @@ func get_mod(strat_index, topic_index):
 	
 	return (cached_char_eval[0][strat_index] + cached_char_eval[1][topic_index] + base_eval[strat_index][topic_index])
 
-func start_convo():
-	print('starting conversation...')
+func start_convo(conversant):
+	print('starting conversation with '+conversant+'...')
 	visible = true
 	var sub_nodes = get_children()
 	for node in sub_nodes:
 		node.set_process(true)
+	$NPCManager.set_npc(conversant)
+	char_fpath = 'res://Responses/'+conversant.to_lower()+'_responses.txt'
+	textbox_debug.text = 'Pick a topic and card to get a response!'
 	emit_signal("convo_started")
 
 func end_convo():
@@ -322,6 +303,10 @@ func end_convo():
 	var cards = $Hand.get_child_count()
 	for i in range(cards):
 		$Hand.get_child(i).queue_free()
+	
+	# clear message boxes
+	textbox_debug.text = ''
+	messagewindow_debug.clear()
 	
 	var sub_nodes = get_children()
 	for node in sub_nodes:
@@ -332,7 +317,6 @@ func end_convo():
 	
 	get_node('../DeckManager').reset_card_uses()
 	emit_signal("convo_ended")
-
 
 func _on_BackButton_pressed():
 	end_convo()
