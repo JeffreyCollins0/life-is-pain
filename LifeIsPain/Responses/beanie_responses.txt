@@ -15,6 +15,9 @@ They/Them/Their
 [_MOOD_]
 15
 
+[STARTER/GUD]
+Hi... did you... need something?
+
 [HATS/BAD/01]
 Oh. I'm sorry... I know hats don't work on me...
 [HATS/MID/01]

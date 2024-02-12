@@ -59,6 +59,7 @@ var response_player
 
 signal convo_ended
 signal convo_started
+signal conversant_recovered(name)
 
 func _ready():
 	file_read = get_node('../FileReader');
@@ -210,6 +211,7 @@ func add_mood(amount):
 	
 	if(mood_debug >= 100):
 		messagewindow_debug.add_message("The conversant's spirits have recovered!")
+		emit_signal("conversant_recovered", $NPCManager.get_npc_name())
 
 func set_mood(value):
 	mood_debug = value
@@ -269,6 +271,9 @@ func callout_adapted(mods, file_read, char_fpath, strat, topic, rating_band):
 	else:
 		return 'MissingNo.'
 
+func add_hints(rating_band, topic, strat):
+	pass
+
 func process_unlocks(unlocks):
 	for unlock in unlocks:
 		if(unlock[0] == 1 && !is_topic_usable[unlock[1]]):
@@ -295,7 +300,14 @@ func start_convo(conversant):
 		node.set_process(true)
 	$NPCManager.set_npc(conversant)
 	char_fpath = 'res://Responses/'+conversant.to_lower()+'_responses.txt'
-	textbox_debug.text = 'Pick a topic and card to get a response!'
+	
+	var starter_resp = file_read.get_response(char_fpath, 'STARTER', 'GUD')
+	if(starter_resp == 'MissingNo.'):
+		textbox_debug.text = 'Pick a topic and card to get a response!'
+	else:
+		textbox_debug.text = starter_resp
+	textbox_debug.reset_typewriter()
+	
 	emit_signal("convo_started")
 
 func end_convo():

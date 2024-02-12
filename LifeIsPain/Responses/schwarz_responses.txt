@@ -1,22 +1,19 @@
-Shady
+Shwarz
 
 [_BIO_]
-Shady
+Shwarz
 They/Them/Their
 
 [_EVAL_]
-1, 0, 0.5, 0, 0.5, 1, 0, -1, 0, 0, -1
-1, -1, 0.5, -1, 1, 0
+0, -1, 0, 0.5, -1, 0, 0, 1, 0, 0.5, 1
+-1, 0.5, -1, 1, 0, 1
 
 [_UNLOCK_]
 050 | T04
 100 | S05
 
 [_MOOD_]
-40
-
-[STARTER/GUD]
-Heya, slick. How's it goin'?
+10
 
 [HATS/BAD/01]
 Hey, don't go bashing this hat of mine. It's a classic.
@@ -65,10 +62,11 @@ That would've been better, but the embellishment killed it.
 Nice one, that last bit of embellishment REALLY sold it.
 
 [OVERUSE/BAD/01]
-Oh yeah, just keep making the same joke over and over. Great.
+How many of the same joke are you going to tell? I'm swamped here.
 
 [UNLOCK/050]
-These shades were a gift from a friend of mine. So thoughtful...
+Sample Text
 
 [UNLOCK/100]
-Sometimes you gotta tell it like it is. Sugarcoating won't help.
+Sample Text
+

@@ -31,6 +31,10 @@ func new_message(message):
 	percent_visible = 0
 	typewriter_time = (default_typewriter_duration / typewriter_speed)
 
+func reset_typewriter():
+	typewriter_time = (default_typewriter_duration / typewriter_speed)
+	percent_visible = 0
+
 func _on_ConvoManager_convo_ended():
 	talk_player.playing = false
 	audio_disabled = true

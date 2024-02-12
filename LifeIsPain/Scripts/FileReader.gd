@@ -59,22 +59,6 @@ func get_response(filename, subject, rating_band):
 			
 			if(section_subject == subject && section_rating == rating_band):
 				var response = file.get_line()
-				
-				# detect unlocks
-#				if(line.substr(endofsubject_index+6, 1) != ']'):
-#					var unlocks_length = (line.length() - (endofsubject_index + 11 + 1))
-#					var unlocks_str = line.substr(endofsubject_index+11, unlocks_length)
-#					var raw_unlocks
-#					raw_unlocks = unlocks_str.split(' ')
-#
-#					var unlocks = []
-#					for raw in raw_unlocks:
-#						unlocks.append([
-#							int(raw.substr(0,1) == 'T'), # type designator (T('topic') or S('strategy'))
-#							int(raw.substr(1)) # unlock index
-#						])
-#					control.process_unlocks(unlocks)
-				
 				file.close()
 				return response
 	file.close()

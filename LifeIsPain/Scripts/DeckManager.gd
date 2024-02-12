@@ -4,7 +4,8 @@ var lib_fpath = 'res://Responses/library.txt'
 var deck_fpath = 'res://Responses/player_deck.txt'
 var def_deck_fpath = 'res://Responses/default_deck.txt' # debug only?
 
-var avail_cards = 11
+var avail_cards = 15
+var deck_size = 15
 var library = []
 var library_unlocked = []
 var is_card_usable = []
@@ -39,7 +40,7 @@ func _ready():
 			library_unlocked.append(library[i])
 	
 	# read deck from file
-	deck[0] = file_reader.read_deck(deck_fpath, 11, packed_lib[1])
+	deck[0] = file_reader.read_deck(deck_fpath, deck_size, packed_lib[1])
 	print("got stored deck "+str(deck[0]))
 	reset_card_uses()
 	
@@ -102,12 +103,12 @@ func get_avail_cards():
 
 func reset_card_uses():
 	# reset available card deals
-	for i in range(11):
+	for i in range(deck_size):
 		if(len(deck[1]) <= i):
 			deck[1].append(2)
 		else:
 			deck[1][i] = 2
-	avail_cards = 11
+	avail_cards = deck_size
 
 func get_card_data(card_id):
 	var raw_data = null
