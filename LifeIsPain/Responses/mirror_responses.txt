@@ -15,8 +15,13 @@ They/Them/Their
 [_MOOD_]
 80
 
-[STARTER/GUD]
+[STARTER/GUD/01]
 I'll need to cheer up before I can test my material out there...
+
+[_TIDBITS/03_]
+How long has it been since I left and talked to anyone?
+I know my way around a good pun, at least. That's gotta count for something.
+Did I remember to pet my plushie for luck?
 
 [BASE/BAD/01]
 No, that topic-joke pair doesn't make sense... I really have lost my touch.

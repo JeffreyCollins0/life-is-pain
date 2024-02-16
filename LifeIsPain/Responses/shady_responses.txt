@@ -15,8 +15,12 @@ They/Them/Their
 [_MOOD_]
 40
 
-[STARTER/GUD]
+[STARTER/GUD/01]
 Heya, slick. How's it goin'?
+
+[_TIDBITS/02_]
+Don't mind the wind. This is my favorite place to stand and people-watch.
+I tried taking the shades off once, but everything got too bright all of a sudden. Weird.
 
 [HATS/BAD/01]
 Hey, don't go bashing this hat of mine. It's a classic.
@@ -27,7 +31,7 @@ Good eye. This hat's my favorite!
 I see you've got taste. I like that!
 Heh, the hat really makes the person, doesn't it?
 
-[SUNGLASSES/BAD/01/UNL T04]
+[SUNGLASSES/BAD/01]
 So what if I wear shades? These were a gift from a friend.
 [SUNGLASSES/MID/01]
 Is it the shades, or was the punchline THAT hard to see?
@@ -36,7 +40,7 @@ Nice one. I like the cut of your jib, pal.
 
 [GIFTS/GUD/01]
 HA! Didn't think I'd like joking about those, but that made me feel a lot better. Thanks, pal.
-[BAD PUN/GUD/01/UNL S05]
+[BAD PUN/GUD/01]
 There's an honesty in a good pun. I respect that.
 [DEAD PAN/GUD/01]
 Heh, almost didn't catch that one. When it works, the no-sell REALLY works.

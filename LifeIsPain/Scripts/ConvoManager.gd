@@ -1,7 +1,7 @@
 extends Node2D
 
 # base set of keywords and strategies to start
-var keywords = [
+var topics = [
 	'HATS', 'BOXES', 'WEATHER', 'SUNGLASSES', 'GIFTS', 'PLUSHIES'
 ]
 var is_topic_usable = [
@@ -9,16 +9,23 @@ var is_topic_usable = [
 ]
 var strategies = [] # filled dynamically by deck manager
 var responses = [
-	[0.4, 'They hated it.'],
+	[0.6, 'They hated it.'],
 	[0.4, 'They didn\'t like it...'],
-	[0.4, 'They didn\'t react one way or another...'],
-	[0.4, 'They liked it.'],
-	[0.4, 'They loved it!']
+	[0.0, 'They didn\'t react one way or another...'],
+	[0.4, 'They liked it a little.'],
+	[0.6, 'They loved it!']
+]
+var response_templates = [
+	[0.6, 'They hated that ', '...'],
+	[0.4, 'They didn\'t like that ', '...'],
+	[0.0, 'They didn\'t react to that ', ' one way or another...'],
+	[0.4, 'They liked that ', ' a little.'],
+	[0.6, 'They loved that ', '!']
 ]
 var effect_bands = [
-	[0.6, 'BAD'],
-	[0.8, 'MID'],
-	[0.6, 'GUD']
+	[0.9, 'BAD'],
+	[0.2, 'MID'],
+	[0.9, 'GUD']
 ]
 var base_eval = [
 	[-1,   0,   -1,    0.5,  0,    0.5],
@@ -63,7 +70,7 @@ signal conversant_recovered(name)
 
 func _ready():
 	file_read = get_node('../FileReader');
-	textbox_debug = $Control/Textbox/MarginContainer/Label
+	textbox_debug = $Control/Textbox/Label
 	stresscounter_debug = $StressCounter/Value
 	moodcounter_debug = $MoodCounter/Value
 	messagewindow_debug = $MessageRollout
@@ -81,7 +88,7 @@ func select_topic(index):
 	$Hand.update_cards(saved_topic)
 
 func select_strat(index):
-	$TopicList_Custom.use_topic(keywords[saved_topic])
+	$TopicList_Custom.use_topic(topics[saved_topic])
 	determine_response(saved_topic, index)
 
 func determine_response(topic_index, strat_index):
@@ -90,17 +97,17 @@ func determine_response(topic_index, strat_index):
 	var char_eval = cached_char_eval
 	
 	# check if topic is overused and add the modifier if so
-	if($TopicList_Custom.is_topic_overused(keywords[saved_topic])):
+	if($TopicList_Custom.is_topic_overused(topics[saved_topic])):
 		$ModifierTally.add_modifier(-1.2)
 	var aux_mod = $ModifierTally.get_net_modifier()
 	
 	# initial message
-	messagewindow_debug.add_message("You told "+$NPCManager.get_npc_name()+" a "+strategies[strat_index]+" about "+keywords[topic_index]+"...")
+	messagewindow_debug.add_message("You told "+$NPCManager.get_npc_name()+" a "+strategies[strat_index]+" about "+topics[topic_index]+"...")
 	
 	# actual evaluation
 	var rating_band = 'MID'
 	var score = 0
-	var mod = 0
+	#var mod = 0
 	# base modifier
 	var base_mod = base_eval[strat_index][topic_index]
 	# npc modifiers
@@ -108,10 +115,10 @@ func determine_response(topic_index, strat_index):
 	npc_mod += char_eval[1][topic_index]
 	score += ((base_mod * (1 - npc_eval_percent)) + (npc_mod * npc_eval_percent))
 	# add auxiliary modifiers here
-	score += mod
+	#score += mod
 	score += aux_mod
 	
-	var final_score = (score / ((3.0 * npc_eval_percent) + abs(mod)))
+	var final_score = (score / ((3.0 * npc_eval_percent) + abs(aux_mod)))
 	print("Got final score "+str(final_score))
 	rating_band = get_effect_band(final_score)
 	
@@ -119,28 +126,29 @@ func determine_response(topic_index, strat_index):
 	$ModifierTally.modifier_tick()
 	
 	# notify any active modifier cards
-	$ModCardManager.update_modifiers(saved_topic, (final_score > effect_bands[0][0]))
+	$ModCardManager.update_modifiers(saved_topic, (rating_band != 'BAD'))
 	
 	# get initial response (override if a callout applies)
-	var char_response = file_read.get_response(char_fpath, keywords[topic_index], rating_band)
+	var char_response = file_read.get_response(char_fpath, topics[topic_index], rating_band)
 	if(char_response == 'MissingNo.'):
 		print("defaulting back to standard responses...")
-		char_response = file_read.get_response(default_fpath, keywords[topic_index], rating_band)
+		char_response = file_read.get_response(default_fpath, topics[topic_index], rating_band)
 	
 	# callout the biggest influence on the final score (for player feedback)
 	var mods = [
 		base_mod * (1 - npc_eval_percent),
 		char_eval[0][strat_index] * npc_eval_percent,
 		char_eval[1][topic_index] * npc_eval_percent,
-		mod,
+		#mod,
 		aux_mod
 	]
-	var callout = callout_adapted(mods, file_read, char_fpath, strategies[strat_index], keywords[topic_index], rating_band)
+	#print('[==] contributing mods to this result: '+str(mods))
+	var callout = callout_adapted(mods, file_read, char_fpath, strategies[strat_index], topics[topic_index], rating_band, final_score)
 	if(callout != 'MissingNo.'):
 		char_response = callout
 	
-	print("Got response "+char_response+"\n")
-	messagewindow_debug.add_message(get_response_band(final_score))
+	#print("Got response "+char_response+"\n")
+	#messagewindow_debug.add_message(get_response_band(final_score))
 	
 	textbox_debug.new_message(char_response)
 	
@@ -155,13 +163,17 @@ func determine_response(topic_index, strat_index):
 		response_player.stream = pos_resp_track
 		response_player.playing = true
 		
+		add_tidbit()
+		
 	elif(rating_band == 'BAD'):
 		add_mood(-5)
-		add_stress(10)
+		add_stress(8)
 		
 		# play sound
 		response_player.stream = neg_resp_track
 		response_player.playing = true
+		
+		add_hints(rating_band, topics[topic_index], strategies[strat_index])
 	
 	# check for percentage unlocks
 	if(pre_mod_mood < mood_debug):
@@ -179,9 +191,11 @@ func get_effect_band(raw_score):
 	return "MissingNo."
 
 func last_joke_successful():
+	#print('[==] got last result '+str(prev_joke_result)+' and threshold '+str(effect_bands[0][0]))
 	return (prev_joke_result > effect_bands[0][0])
 
 func add_stress(amount):
+	print('Added '+str(amount)+' stress')
 	#control.add_stress(amount)
 	stress_debug += amount
 	stress_debug = min(max(stress_debug, 0), 100)
@@ -229,8 +243,16 @@ func get_response_band(raw_score):
 			return band[1]
 	return "MissingNo."
 
+func get_response_band_templated(raw_score, thing_type):
+	var aggreg_score_band = -1
+	for band in response_templates:
+		aggreg_score_band += band[0]
+		if(raw_score <= aggreg_score_band):
+			return band[1] + thing_type + band[2]
+	return "MissingNo."
+
 # call out highest-influence aspect of joke for player feedback
-func callout_adapted(mods, file_read, char_fpath, strat, topic, rating_band):
+func callout_adapted(mods, file_read, char_fpath, strat, topic, rating_band, raw_score):
 	var callout = ''
 	var callout_search_term = 'MissingNo.'
 	var biggest_influence = 0
@@ -242,26 +264,35 @@ func callout_adapted(mods, file_read, char_fpath, strat, topic, rating_band):
 		# diagnose biggest demerit
 		biggest_influence = mods.min()
 	
+	var use_note = 'MissingNo.'
 	if(biggest_influence == mods[0]):
 		# base matrix was the biggest determinant
-		print("base matrix was the biggest determinant")
+		#print("base matrix was the biggest determinant")
 		callout_search_term = "BASE"
+		use_note = get_response_band_templated(raw_score, 'topic-card combo')
 	elif(biggest_influence == mods[1]):
 		# strategy was the biggest determinant
-		print("strategy was the biggest determinant")
+		#print("strategy was the biggest determinant")
 		callout_search_term = strat
+		use_note = get_response_band_templated(raw_score, 'card')
 	elif(biggest_influence == mods[2]):
 		# topic was the biggest determinant
-		print("topic was the biggest determinant")
+		#print("topic was the biggest determinant")
 		callout_search_term = topic
+		use_note = get_response_band_templated(raw_score, 'topic')
 	elif(biggest_influence == mods[3]):
 		# external modifier was the biggest determinant
-		print("modifier was the biggest determinant")
+		#print("modifier was the biggest determinant")
 		callout_search_term = "MODIFIER"
+		use_note = get_response_band_templated(raw_score, 'modifier')
 	elif(biggest_influence == mods[4]):
 		# topic overuse was the biggest determinant
-		print("overuse was the biggest determinant")
+		#print("overuse was the biggest determinant")
 		callout_search_term = "OVERUSE"
+		use_note = "They\'re getting tired of that topic..."
+	
+	if(use_note != 'MissingNo.'):
+		messagewindow_debug.add_message(use_note)
 	
 	if(rating_band == 'MID'):
 		rating_band = 'BAD'
@@ -274,6 +305,9 @@ func callout_adapted(mods, file_read, char_fpath, strat, topic, rating_band):
 func add_hints(rating_band, topic, strat):
 	pass
 
+func add_tidbit():
+	textbox_debug.new_message($NPCManager.get_tidbit())
+
 func process_unlocks(unlocks):
 	for unlock in unlocks:
 		if(unlock[0] == 1 && !is_topic_usable[unlock[1]]):
@@ -283,8 +317,8 @@ func process_unlocks(unlocks):
 
 func unlock_topic(topic_index):
 	is_topic_usable[topic_index] = true
-	print('Unlocked topic '+keywords[topic_index])
-	messagewindow_debug.add_message('You can now use the topic \"'+keywords[topic_index]+'\"!')
+	print('Unlocked topic '+topics[topic_index])
+	messagewindow_debug.add_message('You can now use the topic \"'+topics[topic_index]+'\"!')
 
 func get_mod(strat_index, topic_index):
 	if(cached_char_eval == null):
@@ -293,20 +327,25 @@ func get_mod(strat_index, topic_index):
 	return (cached_char_eval[0][strat_index] + cached_char_eval[1][topic_index] + base_eval[strat_index][topic_index])
 
 func start_convo(conversant):
-	print('starting conversation with '+conversant+'...')
+	#print('starting conversation with '+conversant+'...')
 	visible = true
 	var sub_nodes = get_children()
 	for node in sub_nodes:
 		node.set_process(true)
+	
 	$NPCManager.set_npc(conversant)
 	char_fpath = 'res://Responses/'+conversant.to_lower()+'_responses.txt'
+	cached_char_eval = $NPCManager.get_eval()
 	
 	var starter_resp = file_read.get_response(char_fpath, 'STARTER', 'GUD')
 	if(starter_resp == 'MissingNo.'):
 		textbox_debug.text = 'Pick a topic and card to get a response!'
 	else:
-		textbox_debug.text = starter_resp
-	textbox_debug.reset_typewriter()
+		#textbox_debug.text = starter_resp
+		textbox_debug.new_message(starter_resp)
+	#textbox_debug.reset_typewriter()
+	
+	$TopicList_Custom.reset_overused()
 	
 	emit_signal("convo_started")
 
@@ -325,7 +364,6 @@ func end_convo():
 		node.set_process(false)
 	
 	visible = false
-	print('conversation has ended.')
 	
 	get_node('../DeckManager').reset_card_uses()
 	emit_signal("convo_ended")

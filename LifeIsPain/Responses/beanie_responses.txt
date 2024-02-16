@@ -6,7 +6,7 @@ They/Them/Their
 
 [_EVAL_]
 0, -1, 0, 0.5, -1, 0, 0, 1, 0, 0.5, 1
--1, 0.5, -1, 1, 0, 1
+-1, 0.5, 1, -1, 0, 1
 
 [_UNLOCK_]
 050 | T05
@@ -15,8 +15,13 @@ They/Them/Their
 [_MOOD_]
 15
 
-[STARTER/GUD]
+[STARTER/GUD/01]
 Hi... did you... need something?
+
+[_TIDBITS/03_]
+Do you... like comic books? I love them. They're great for getting away from it all...
+I love this store. Sure, nobody else comes here, but it has these fluffy pillows to read all my favorite comics on.
+Sorry for always... trailing off... I'm kind of self-conscious. About... everything.
 
 [HATS/BAD/01]
 Oh. I'm sorry... I know hats don't work on me...

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scripts/ConvoManager.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/HandDebug.gd" type="Script" id=2]
@@ -25,6 +25,8 @@
 [ext_resource path="res://Scripts/DemoCard.gd" type="Script" id=23]
 [ext_resource path="res://Scripts/UIManager.gd" type="Script" id=24]
 [ext_resource path="res://Scripts/NPCManager.gd" type="Script" id=25]
+[ext_resource path="res://Prefabs/LogMessageChip.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Scripts/MessageLog.gd" type="Script" id=27]
 
 [node name="UIManager" type="Node2D"]
 script = ExtResource( 24 )
@@ -249,20 +251,13 @@ patch_margin_bottom = 15
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ConvoManager/Control/Textbox"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Label" type="Label" parent="ConvoManager/Control/Textbox"]
 margin_left = 8.0
-margin_right = -8.0
-margin_bottom = -16.0
-
-[node name="Label" type="Label" parent="ConvoManager/Control/Textbox/MarginContainer"]
 margin_top = 5.0
-margin_right = 96.0
-margin_bottom = 26.0
+margin_right = 104.0
+margin_bottom = 42.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 7 )
-text = "Pick a topic and card to get a response!"
 autowrap = true
 script = ExtResource( 12 )
 
@@ -273,6 +268,39 @@ margin_bottom = 146.0
 bbcode_text = "Sample Text"
 text = "Sample Text"
 script = ExtResource( 4 )
+
+[node name="MessageLog" type="Control" parent="ConvoManager/Control"]
+visible = false
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 67.0
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = -35.0
+script = ExtResource( 27 )
+
+[node name="ColorRect2" type="ColorRect" parent="ConvoManager/Control/MessageLog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.211765, 0.207843, 0.270588, 0.686275 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ConvoManager/Control/MessageLog"]
+margin_left = 3.0
+margin_top = 15.0
+margin_right = 95.0
+margin_bottom = 123.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConvoManager/Control/MessageLog/ScrollContainer"]
+
+[node name="MessageChip" parent="ConvoManager/Control/MessageLog/ScrollContainer/VBoxContainer" instance=ExtResource( 26 )]
+
+[node name="Label" type="Label" parent="ConvoManager/Control/MessageLog"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 69.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 7 )
+text = "Message Log"
 
 [node name="Hand" type="Node2D" parent="ConvoManager"]
 position = Vector2( 0, 128 )
@@ -410,17 +438,21 @@ text = "End"
 
 [node name="CancelableAudioPlayer" type="AudioStreamPlayer" parent="ConvoManager"]
 stream = ExtResource( 14 )
+volume_db = -3.0
 bus = "Cancelable"
 
 [node name="ResponseAudioPlayer" type="AudioStreamPlayer" parent="ConvoManager"]
 stream = ExtResource( 17 )
+volume_db = -3.0
 bus = "Response"
 
 [node name="SelectAudioPlayer" type="AudioStreamPlayer" parent="ConvoManager"]
 stream = ExtResource( 15 )
+volume_db = -3.0
 
 [node name="TalkAudioPlayer" type="AudioStreamPlayer" parent="ConvoManager"]
 stream = ExtResource( 16 )
+volume_db = -8.0
 
 [node name="FileReader" type="Node2D" parent="."]
 script = ExtResource( 5 )
@@ -451,10 +483,10 @@ text = "Customize"
 [connection signal="pressed" from="DeckManager/Control/LibList/ScrollDownButton" to="DeckManager/Control/LibList" method="_on_ScrollDownButton_pressed"]
 [connection signal="pressed" from="DeckManager/Control/BackButton" to="DeckManager" method="_on_BackButton_pressed"]
 [connection signal="convo_ended" from="ConvoManager" to="." method="_on_ConvoManager_convo_ended"]
-[connection signal="convo_ended" from="ConvoManager" to="ConvoManager/Control/Textbox/MarginContainer/Label" method="_on_ConvoManager_convo_ended"]
+[connection signal="convo_ended" from="ConvoManager" to="ConvoManager/Control/Textbox/Label" method="_on_ConvoManager_convo_ended"]
 [connection signal="convo_ended" from="ConvoManager" to="ConvoManager/NPCManager" method="_on_ConvoManager_convo_ended"]
 [connection signal="convo_started" from="ConvoManager" to="DeckManager" method="_on_ConvoManager_convo_started"]
-[connection signal="convo_started" from="ConvoManager" to="ConvoManager/Control/Textbox/MarginContainer/Label" method="_on_ConvoManager_convo_started"]
+[connection signal="convo_started" from="ConvoManager" to="ConvoManager/Control/Textbox/Label" method="_on_ConvoManager_convo_started"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollUpButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollUpButton_pressed"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollDownButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollDownButton_pressed"]
 [connection signal="pressed" from="ConvoManager/BackButton" to="ConvoManager" method="_on_BackButton_pressed"]

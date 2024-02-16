@@ -16,24 +16,20 @@ func on_turn_update(topic, did_joke_land):
 			control.add_mood(10)
 		else:
 			control.add_stress(10)
-		print('== played [Bury The Punchline] ==')
 	elif(mod_index == 1):
 		# beat, beat, offbeat
 		if(did_joke_land && !prev_successful):
 			control.add_mood(10)
-		print('== played [Beat, Beat, Offbeat] ==')
 	elif(mod_index == 2):
 		# hang too long
 		if(did_joke_land):
 			control.add_stress(-10)
 		else:
 			control.add_stress(10)
-		print('== played [Hang Too Long] ==')
 	elif(mod_index == 3):
 		# improvise
 		if(!prev_successful):
 			control.add_mood(5)
-		print('== played [Improvise] ==')
 	
 	# notify the effect has ended
 	return true

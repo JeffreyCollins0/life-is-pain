@@ -55,10 +55,15 @@ func get_response(filename, subject, rating_band):
 					break
 			var section_rating = line.substr(endofsubject_index, 3)
 			# use this later for randomized response-picking
-			#var section_resp_count = int(line.substr(endofsubject_index+4, 2))
+			var section_resp_count = int(line.substr(endofsubject_index+4, 2))
 			
 			if(section_subject == subject && section_rating == rating_band):
+				var response_index = (randi() % section_resp_count)
+				
+				for i in range(response_index):
+					file.get_line()
 				var response = file.get_line()
+				
 				file.close()
 				return response
 	file.close()
@@ -122,6 +127,26 @@ func read_mood(filename):
 			
 			file.close()
 			return mood_val
+
+func read_tidbits(filename):
+	var file = File.new()
+	if(!file.file_exists(filename)):
+		print("File "+filename+" not found.")
+		return null
+	file.open(filename, File.READ)
+	
+	while(!file.eof_reached()):
+		var line = file.get_line()
+		
+		if(line.substr(0,9) == "[_TIDBITS"):
+			var tidbits = []
+			var tidbit_count = int(line.substr(10, 2))
+			
+			for i in range(tidbit_count):
+				tidbits.append(file.get_line())
+			
+			file.close()
+			return tidbits
 
 func read_unlock_old(filename, subject, rating_band):
 	var file = File.new()

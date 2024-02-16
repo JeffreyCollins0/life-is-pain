@@ -72,12 +72,12 @@ func add_topic(topic):
 	update_entries()
 
 func select_topic(chip_id):
-	get_parent().select_topic(current_item + chip_id)
-	selected_topic = current_item + chip_id
-	update_selected()
+	if(get_parent().is_topic_usable[current_item + chip_id]):
+		get_parent().select_topic(current_item + chip_id)
+		selected_topic = current_item + chip_id
+		update_selected()
 
 func use_topic(topic):
-	var entries = $TopicChipTray.get_children()
 	var index = topics.find(topic)
 	if(index == -1):
 		return
@@ -92,8 +92,11 @@ func use_topic(topic):
 	update_entries()
 
 func is_topic_overused(topic):
-	var entries = $TopicChipTray.get_children()
 	var index = topics.find(topic)
 	if(index == -1):
 		return false
 	return (topic_uses[index] <= 0)
+
+func reset_overused():
+	for i in range(len(topic_uses)):
+		topic_uses[i] = 3

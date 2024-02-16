@@ -25,25 +25,19 @@ func _on_DebugConvoButton_pressed():
 	$DebugConvoButton.visible = false
 	$DebugCustButton.visible = false
 
-
 func _on_DebugCustButton_pressed():
 	change_state('cust')
 	$DeckManager.start_cust()
 	$DebugConvoButton.visible = false
 	$DebugCustButton.visible = false
 
-
 func _on_DeckManager_cust_ended():
 	change_state('walk')
-	$DebugConvoButton.visible = true
 	$DebugCustButton.visible = true
-
 
 func _on_ConvoManager_convo_ended():
 	change_state('walk')
-	$DebugConvoButton.visible = true
 	$DebugCustButton.visible = true
-
 
 func _on_Player_convo_available(conversant):
 	$DebugConvoButton.visible = true

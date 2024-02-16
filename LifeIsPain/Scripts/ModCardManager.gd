@@ -13,6 +13,7 @@ func _ready():
 
 func new_modifier(modifier_id):
 	# instance the new modifier and add it to the array
+	print('adding modifier '+str(modifier_id))
 	var new_mod = null
 	if(modifier_id in [0, 1, 2, 3]):
 		new_mod = mod_card_prefabs[1].instance()
@@ -26,16 +27,17 @@ func new_modifier(modifier_id):
 func play_modifier(modifier_id):
 	# look through and set the activated flag
 	print('played mod card '+str(modifier_id))
-	var to_remove = []
+	var to_remove = -1
 	
 	for i in range(len(current_mods)):
 		if(current_mods[i][0].get_modifier_id() == modifier_id):
-			print('found assoc. card, triggering on_played')
+			#print('found assoc. card at index '+str(i)+', triggering on_played')
 			var effect_ended = current_mods[i][0].on_played()
 			current_mods[i][1] = true
 			
 			if(effect_ended):
-				to_remove.append(i)
+				to_remove = i
+			break
 			
 			#if(!effect_ended):
 			#	current_mods[i][1] = true
@@ -43,20 +45,19 @@ func play_modifier(modifier_id):
 			#	current_mods.pop_at(i)
 			#return
 	
-	# pop now-ended effects
-	if(len(to_remove) > 0):
-		for i in to_remove:
-			current_mods.pop_at(i)
+	# pop now-ended effect
+	if(to_remove != -1):
+		current_mods.pop_at(to_remove)
+	#if(len(to_remove) > 0):
+	#	for i in to_remove:
+	#		current_mods.pop_at(i)
 
 func update_modifiers(topic, did_joke_land):
 	# loop through activated and call the function
-	#print('going through mod cards '+str(current_mods)+' through range '+str(range(len(current_mods)-1)))
 	var to_remove = []
 	
-	for i in range(len(current_mods)-1):
-		#print('looking at index '+str(i))
-		#print('got mod chunk '+str(current_mods[i]))
-		if(current_mods[i][1]): # not accepting even a proper array index?
+	for i in range(len(current_mods)):
+		if(current_mods[i][1]):
 			var effect_ended = current_mods[i][0].on_turn_update(topic, did_joke_land)
 			
 			if(effect_ended):

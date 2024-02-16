@@ -19,9 +19,6 @@ func _ready():
 	chip_base_pos = entries[0].position
 	chip_offset = entries[1].position - chip_base_pos
 
-#func _process(delta):
-#	pass
-
 func update_entries():
 	var entries = $CardChipTray.get_children()
 	for i in range(len(entries)):
@@ -77,7 +74,6 @@ func select_card(chip_id):
 	if(card_index == selected_card):
 		selected_card = -1
 	else:
-		#get_parent().select_topic(current_item + chip_id)
 		selected_card = card_index
 	
 	control.select_card_to_swap(self, card_index, working_deck[card_index])
@@ -89,11 +85,9 @@ func get_card_position(card_index):
 		return Vector2.ZERO
 	
 	var final_offset = (chip_base_pos + (chip_offset * chip_index))
-	#print('got final offset '+str(final_offset)+' from offset '+str(chip_offset)+' and chip index '+str(chip_index))
 	return final_offset
 
 func replace_card(index, value, source_list, source_index):
-	#print('replacing card '+str(working_deck[index])+' with '+str(value)+' at index '+str(index))
 	working_deck[index] = value
 	
 	# get original position and set target position

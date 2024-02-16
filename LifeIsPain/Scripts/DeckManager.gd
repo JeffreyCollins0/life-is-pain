@@ -41,7 +41,6 @@ func _ready():
 	
 	# read deck from file
 	deck[0] = file_reader.read_deck(deck_fpath, deck_size, packed_lib[1])
-	print("got stored deck "+str(deck[0]))
 	reset_card_uses()
 	
 	# initialize deck lists
@@ -86,7 +85,7 @@ func deal_last_used_card():
 		if(card_pos == -1):
 			return null
 		
-		deck[1][card_pos] = 1
+		#deck[1][card_pos] = 1
 		return last_card
 
 func mark_last_used(card_id):
@@ -196,13 +195,15 @@ func end_cust():
 	$Control/DeckList.clear_selection()
 	$Control/LibList.clear_selection()
 	
+	# copy working deck into current deck
+	deck[0] = $Control/DeckList.working_deck
+	
 	var sub_nodes = get_children()
 	for node in sub_nodes:
 		node.set_process(false)
 	
 	visible = false
 	
-	print('customization has ended.')
 	emit_signal("cust_ended")
 
 

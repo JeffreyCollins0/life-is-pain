@@ -101,11 +101,9 @@ func _process(delta):
 			var card_mod_id = selected_card.get_mod_id()
 			if(card_mod_id != -1):
 				# play modifier card
-				#print('Playing mod card '+str(card_mod_id))
 				get_node('../ModCardManager').play_modifier(card_mod_id)
 			else:
 				# play strategy card
-				print('Playing strategy card '+str(actual_selection)+' with mod id '+str(card_mod_id))
 				control.select_strat(actual_selection)
 			
 			deck.mark_last_used(actual_selection)
@@ -143,7 +141,6 @@ func deal_random_card():
 	new_card.init(card_data)
 	add_child(new_card)
 	
-	#print('dealt card with id '+str(card_data[0])+' and mod id '+str(card_data[3]))
 	if(card_data[3] != -1):
 		# instance a modifier onto the mod card manager
 		mod_manager.new_modifier(card_data[3])
@@ -163,5 +160,4 @@ func deal_last_used_card():
 
 func unlock_strategy(strat_index):
 	deck.is_card_usable[strat_index] = true
-	print('Unlocked strategy '+control.strategies[strat_index])
 	messagewindow_debug.add_message('You can now use \"'+control.strategies[strat_index]+'\"!')
