@@ -6,11 +6,11 @@ They/Them/Their
 
 [_EVAL_]
 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5
-0.5, 0.5, 0.5, 0.5, 0.5, 0.5
+0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5
 
 [_UNLOCK_]
-050 | T04
-100 | S05
+050 | -
+100 | -
 
 [_MOOD_]
 80
@@ -26,18 +26,12 @@ Did I remember to pet my plushie for luck?
 [BASE/BAD/01]
 No, that topic-joke pair doesn't make sense... I really have lost my touch.
 [BASE/GUD/01]
-Yes. That's just a good joke, no ifs, ands or buts.
+Yes. That pair's just a good joke, no ifs, ands or buts.
 
 [MODIFIER/BAD/01]
-Ugh, that one would've been good, but the embellishment killed it.
+Ugh, that one would've been good, but the modifier killed it.
 [MODIFIER/GUD/01]
 Yeah, that last modifier really sells it. I'll remember that.
 
 [OVERUSE/BAD/01]
-I can't keep making the same joke too many times, it'd get old.
-
-[UNLOCK/050]
-These shades were a gift from a friend of mine. So thoughtful...
-
-[UNLOCK/100]
-Sometimes you gotta tell it like it is. Sugarcoating won't help.
+I can't keep using the same topic too many times, it'd get old.

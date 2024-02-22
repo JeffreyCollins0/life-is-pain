@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Materials/ground_debug.tres" type="Material" id=1]
 [ext_resource path="res://Materials/obj_debug.tres" type="Material" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Sprites/OWShady.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://Sprites/OWBeanie.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://Scripts/TutorialBlocker.gd" type="Script" id=9]
+[ext_resource path="res://Sprites/OSchwarz.tres" type="SpriteFrames" id=10]
+[ext_resource path="res://Scripts/SchwarzChange.gd" type="Script" id=11]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -20,6 +22,12 @@ extents = Vector3( 0.499058, 0.502397, 0.497482 )
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 0.0593344, 0.0800592, 0.0487024 )
+
+[sub_resource type="CubeMesh" id=9]
+size = Vector3( 0.15, 0.18, 0.12 )
 
 [sub_resource type="CylinderShape" id=4]
 height = 0.219068
@@ -44,6 +52,11 @@ material/0 = ExtResource( 1 )
 
 [node name="Floor2" type="MeshInstance" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5 )
+mesh = SubResource( 6 )
+material/0 = ExtResource( 1 )
+
+[node name="Floor3" type="MeshInstance" parent="Environment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -0.24 )
 mesh = SubResource( 6 )
 material/0 = ExtResource( 1 )
 
@@ -116,6 +129,44 @@ mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 
+[node name="SchwarzEnviro" type="Spatial" parent="Environment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52845, 0, -0.310912 )
+script = ExtResource( 11 )
+associated_conversant = "Schwarz"
+
+[node name="KinematicBody" type="KinematicBody" parent="Environment/SchwarzEnviro"]
+transform = Transform( 0.867948, 0, 0.496656, 0, 1, 0, -0.496656, 0, 0.867948, -0.19216, 0.0808405, -0.235814 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/SchwarzEnviro/KinematicBody"]
+shape = SubResource( 8 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Environment/SchwarzEnviro/KinematicBody"]
+transform = Transform( 0.779593, 0, 0, 0, 0.896345, 0, 0, 0, 0.779593, 0, 0, 0 )
+mesh = SubResource( 9 )
+skeleton = NodePath("")
+
+[node name="KinematicBody2" type="KinematicBody" parent="Environment/SchwarzEnviro"]
+transform = Transform( 0.939633, 0, -0.342184, 0, 1, 0, 0.342184, 0, 0.939633, -0.209, 0.081, 0.35 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/SchwarzEnviro/KinematicBody2"]
+shape = SubResource( 8 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Environment/SchwarzEnviro/KinematicBody2"]
+transform = Transform( 0.779593, 0, 0, 0, 0.896345, 0, 0, 0, 0.779593, 0, 0, 0 )
+mesh = SubResource( 9 )
+skeleton = NodePath("")
+
+[node name="KinematicBody3" type="KinematicBody" parent="Environment/SchwarzEnviro"]
+transform = Transform( 0.477281, 0, -0.878751, 0, 1, 0, 0.878751, 0, 0.477281, -0.0304979, 0.0808404, -0.241022 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/SchwarzEnviro/KinematicBody3"]
+shape = SubResource( 8 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Environment/SchwarzEnviro/KinematicBody3"]
+transform = Transform( 0.779593, 0, 0, 0, 0.896345, 0, 0, 0, 0.779593, 0, 0, 0 )
+mesh = SubResource( 9 )
+skeleton = NodePath("")
+
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0920264, 0, 1.72428 )
 script = ExtResource( 4 )
@@ -180,6 +231,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
+playing = true
+
+[node name="TestNPC4" type="StaticBody" parent="." groups=["NPC"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80559, 0, -0.282016 )
+script = ExtResource( 6 )
+conversant_id = 3
+conversant_name = "Schwarz"
+
+[node name="CollisionShape" type="CollisionShape" parent="TestNPC4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0 )
+shape = SubResource( 4 )
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="TestNPC4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
+billboard = 2
+frames = ExtResource( 10 )
 frame = 1
 playing = true
 
@@ -199,7 +266,6 @@ visible = false
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 1
 playing = true
 
 [node name="MeshInstance" type="MeshInstance" parent="TestNPC3"]

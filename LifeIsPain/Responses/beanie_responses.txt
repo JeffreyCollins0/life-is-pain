@@ -6,7 +6,7 @@ They/Them/Their
 
 [_EVAL_]
 0, -1, 0, 0.5, -1, 0, 0, 1, 0, 0.5, 1
--1, 0.5, 1, -1, 0, 1
+-1, 0.5, 1, -1, 0, 1, 0, 0, 0, 0, 0
 
 [_UNLOCK_]
 050 | T05
@@ -26,7 +26,7 @@ Sorry for always... trailing off... I'm kind of self-conscious. About... everyth
 [HATS/BAD/01]
 Oh. I'm sorry... I know hats don't work on me...
 [HATS/MID/01]
-Hmm... Not a fan of hats, then.
+...Not a fan of hats, I see...
 [HATS/GUD/03]
 Thanks... I like this hat.
 
@@ -35,7 +35,7 @@ I guess? People in sunglasses scare me...
 [SUNGLASSES/MID/01]
 That was okay. I guess noir isn't really my thing...
 [SUNGLASSES/GUD/01]
-Normally I'm not a fan, but that made me feel a bit better.
+That made me feel a bit better. Thanks.
 
 [PLUSHIES/BAD/01]
 Oh... I like plushies, but alright...
@@ -56,16 +56,16 @@ Ooh, clever... Those are always hard to pull off, so... props.
 [MINIMIZE/BAD/01]
 That one hurt a bit... People look down on me 'cause I'm a cube...
 [SLAPSTICK/BAD/01]
-Wait, are you hurt!? What do I do? Amputation? Bandages? CPR?
+Wait, are you hurt!? What do I do? Amputation? Bandages? CPR? You're making me worry...
 [BOXES/GUD/01]
 Haha! See, you get it. Cubes all the way.
 [WEATHER/GUD/01]
 I love weather like this. It's perfect for reading comic books...
 
 [BASE/BAD/01]
-That one... might not be the best idea, just, in general...
+That combo... might not be the best idea, just, in general...
 [BASE/GUD/01]
-That's a good one. Simple jokes can work wonders sometimes...
+That's a good combo. Simple jokes can work wonders sometimes...
 
 [MODIFIER/BAD/01]
 Did you... really need to add that last bit?

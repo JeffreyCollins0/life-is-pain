@@ -1,15 +1,17 @@
 extends Node2D
 
-var topics = [
-	'HATS', 'BOXES', 'WEATHER', 'SUNGLASSES', 
+#var topics = [ # filled dynamically
+	#'HATS', 'BOXES', 'WEATHER', 'SUNGLASSES'#, 
 	#'DUMMY1', 'DUMMY2', 'DUMMY3', 'DUMMY4', 'DUMMY5', 'DUMMY6', 'DUMMY7', # for testing only
-	'GIFTS', 'PLUSHIES'
-]
+	#'GIFTS', 'PLUSHIES'
+#]
 var topic_uses = [
 	3, 3, 3, 3,
 	#3, 3, 3, 3, 3, 3, 3,
 	3, 3
 ]
+var topics = [] # filled dynamically
+var topic_map = {}
 
 export (int) var items_to_display = 6 #7
 export (int) var topic_cooldown = 2
@@ -18,6 +20,13 @@ var current_item = 0
 var selected_topic = 0
 
 func _ready():
+	
+	var control_topics = get_parent().topics
+	var control_usable = get_parent().is_topic_usable
+	for i in range(len(control_topics)):
+		if(control_usable[i]):
+			add_topic(control_topics[i], i)
+	
 	var entries = $TopicChipTray.get_children()
 	for i in range(len(entries)):
 		entries[i].init(i)
@@ -29,7 +38,7 @@ func update_entries():
 	var entries = $TopicChipTray.get_children()
 	# redo this thing here
 	for i in range(len(entries)):
-		if(i < items_to_display):
+		if(i < min(items_to_display, len(topics))):
 			if(!entries[i].visible):
 				entries[i].visible = true
 			entries[i].set_display(topics[current_item + i], topic_uses[current_item + i])
@@ -58,6 +67,7 @@ func _on_ScrollUpButton_pressed():
 		current_item -= 1
 		update_buttons()
 		update_entries()
+		update_selected()
 
 func _on_ScrollDownButton_pressed():
 	var scroll_length = max(len(topics)-items_to_display, 0)
@@ -65,17 +75,22 @@ func _on_ScrollDownButton_pressed():
 		current_item += 1
 		update_buttons()
 		update_entries()
+		update_selected()
 
-func add_topic(topic):
-	topics.append(topic)
-	topic_uses.append(3)
-	update_entries()
+func add_topic(topic, original_index):
+	if(!topics.has(topic)):
+		topics.append(topic)
+		topic_uses.append(3)
+		topic_map[topic] = original_index
+	
+		update_entries()
 
 func select_topic(chip_id):
-	if(get_parent().is_topic_usable[current_item + chip_id]):
-		get_parent().select_topic(current_item + chip_id)
-		selected_topic = current_item + chip_id
-		update_selected()
+	#if(get_parent().is_topic_usable[current_item + chip_id]):
+	var selected = topics[current_item + chip_id]
+	get_parent().select_topic(topic_map[selected])
+	selected_topic = current_item + chip_id
+	update_selected()
 
 func use_topic(topic):
 	var index = topics.find(topic)
@@ -100,3 +115,6 @@ func is_topic_overused(topic):
 func reset_overused():
 	for i in range(len(topic_uses)):
 		topic_uses[i] = 3
+
+func get_selected_topic():
+	return topic_map[ topics[ selected_topic ] ]

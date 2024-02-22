@@ -5,68 +5,67 @@ Shwarz
 They/Them/Their
 
 [_EVAL_]
-0, -1, 0, 0.5, -1, 0, 0, 1, 0, 0.5, 1
--1, 0.5, -1, 1, 0, 1
+-0.5, 0, 0.5, 0, 1, 0, 0, 0.5, 1, -0.5, 0
+-0.5, -1, 0, 0, -0.5, 0, 0, 0, 0, 0, 0
 
 [_UNLOCK_]
-050 | T04
-100 | S05
+050 | T06
+100 | S04
 
 [_MOOD_]
 10
 
-[HATS/BAD/01]
-Hey, don't go bashing this hat of mine. It's a classic.
-[HATS/MID/01]
-Hmm... Not a fan of hats, then.
-[HATS/GUD/03]
-Good eye. This hat's my favorite!
-I see you've got taste. I like that!
-Heh, the hat really makes the person, doesn't it?
+[STARTER/GUD/01]
+Terribly sorry, we're- well, I'M a bit swamped at the moment. This is the observatory. Kindly get out of the way.
 
-[SUNGLASSES/BAD/01/UNL T04]
-So what if I wear shades? These were a gift from a friend.
-[SUNGLASSES/MID/01]
-Is it the shades, or was the punchline THAT hard to see?
-[SUNGLASSES/GUD/01]
-Nice one. I like the cut of your jib, pal.
+[_TIDBITS/04_]
+I would say you came at a terrible time, but there are no non-terrible times.
+Apologies for the mess, I've been so overworked I haven't had the chance to clean.
+At this point I don't even have meals. I just stress-eat constantly.
+I used to have co-workers to help. Now it's just me and the satellite data.
 
-[GIFTS/GUD/01]
-HA! Didn't think I'd like joking about those, but that made me feel a lot better. Thanks, pal.
-[BAD PUN/GUD/01/UNL S05]
-There's an honesty in a good pun. I respect that.
-[DEAD PAN/GUD/01]
-Heh, almost didn't catch that one. When it works, the no-sell REALLY works.
 [SLAPSTICK/GUD/01]
-Going all in like that takes guts, pal. I really appreciate that.
-[HARD TRUTH/GUD/01]
-Yeah, call 'em like you see 'em! Really cuts to the heart of things.
+Slapstick brings me so much joy. You really are one of a kind, aren't you?
+[SHARP TURN/GUD/02]
+Good use of misdirection. It's the only kind of deception that's fun...
+Well done. Here's a sharp turn for you: they took a working observatory with employees and equipment, and slashed the budget until only one was left.
+[TALK FUNNY/GUD/01]
+That one's great! It may not be that clever, but I'm just punchy enough from the sleep deprivation not to care. Well done.
 
-[WORDPLAY/BAD/01]
-Was that a play on words? I can't make sense of that stuff...
-[DUAL-SPEAK/BAD/01]
-I didn't catch that one. Just say what you mean.
-[BOXES/BAD/01]
-Boxes? Pull out all the creative stops, why don't you. Ugh...
-[WEATHER/BAD/01]
-Yeah, the weather sucks. We all KNOW it sucks. Don't gotta point it out.
+[BAD PUN/BAD/01]
+You've got better in you. If you have time for this, then don't settle for "good enough".
+[EUPHEMISM/BAD/01]
+I've no time to untangle implications. Are you here to tell jokes or not?
+
+[BOXES/BAD/02]
+Ah, boxes. These boxes with screens torment me day and night with data and analysis from a space satellite.
+Who even bought that many screens to use for data readouts? Half of those I don't even use, they just stress me out.
+[TIME/GUD/02]
+Time? I'm short on that, though with my satellite's comms delay, I'm often left doing more work than I'm asked just to fill the time... I ought to stop doing that.
+I wish I had some time off... I could probably just get my required tasks done and take some time while waiting for the next downlink.
+[SPACE/GUD/02]
+Oh, I love space more than anything. It's such a vibrant place, treacherous though it is. I suppose that's part of the thrill of it.
+I love it! Space was what drew me to this job... and what enables my rampant workaholism. I really ought to stop running more experiments than needed.
+[WEATHER/GUD/02]
+A joke about the weather? That's a rare treat. I never go outside because of work, so I wouldn't know what the forecast is like for today.
+Ah, the weather - always bringing clouds and signal interference. On the upside, it gives me time to catch up on my work, and for that I am grateful.
 
 [BASE/BAD/01]
-Hate to say it, but that one wasn't good on a basic level.
+That combination needs rethinking. Consider it more carefully, preferably without interrupting my work.
 [BASE/GUD/01]
-Didn't even need the bells and whistles. That's just a good joke.
+A solid combination with solid execution. Well done.
 
 [MODIFIER/BAD/01]
-That would've been better, but the embellishment killed it.
+That embellishment was both unnecessary and detrimental. There's strength in simplicity.
 [MODIFIER/GUD/01]
-Nice one, that last bit of embellishment REALLY sold it.
+Good judgement, adding a modifier. It completed the package.
 
 [OVERUSE/BAD/01]
-How many of the same joke are you going to tell? I'm swamped here.
+Did you come here to tell jokes on only one topic? DO NOT waste my time.
 
 [UNLOCK/050]
-Sample Text
+I could talk for hours about space. It's why I took this job... and why I haven't quit, even though I definitely should. *Sigh* the things we do for what we love...
 
 [UNLOCK/100]
-Sample Text
+Slapstick might not seem clever, but its value is very real. It's an excellent source of catharsis, no?
 

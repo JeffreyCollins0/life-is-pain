@@ -23,6 +23,7 @@ var cancelable_player
 var select_player
 var messagewindow_debug
 var mod_manager
+var topic_list
 
 func _ready():
 	control = get_parent()
@@ -32,6 +33,7 @@ func _ready():
 	cancelable_player = get_node('../CancelableAudioPlayer')
 	select_player = get_node('../SelectAudioPlayer')
 	mod_manager = get_node('../ModCardManager')
+	topic_list = get_node('../TopicList_Custom')
 	
 	eff_up_icon = load('res://Sprites/EffUpIcon.png')
 	eff_down_icon = load('res://Sprites/EffDownIcon.png')
@@ -40,17 +42,18 @@ func _ready():
 	card_swap_track = load('res://Sounds/CardHover.wav')
 
 func _process(delta):
-	if(get_child_count() < 5 && deck.get_available_cards() > 0):
-		#print('drawing a new card to make 5...')
+	if(get_child_count() < 5 && (deck.get_available_cards() - get_child_count()) > 0):
+		print('drawing a new card to make 5...')
 		deal_random_card()
 		reset_card_positions()
+		update_cards(topic_list.get_selected_topic())
 	
-	# mouse movement
 	if(get_child_count() <= 0):
 		print('You have run out of cards.')
 		control.end_convo()
 		return
 	
+	# mouse movement
 	var mouse_pos = get_viewport().get_mouse_position()
 	if((mouse_pos - saved_mouse_pos).length() >= mouse_move_deadzone):
 		if(mouse_pos.y >= position.y):

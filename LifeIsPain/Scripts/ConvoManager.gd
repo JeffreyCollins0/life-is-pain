@@ -2,10 +2,12 @@ extends Node2D
 
 # base set of keywords and strategies to start
 var topics = [
-	'HATS', 'BOXES', 'WEATHER', 'SUNGLASSES', 'GIFTS', 'PLUSHIES'
+	'HATS', 'BOXES', 'WEATHER', 'SUNGLASSES', 'GIFTS', 'PLUSHIES',
+	'SPACE', 'PLANTS', 'COMICS', 'FRIENDS', 'TIME'
 ]
 var is_topic_usable = [
-	true, true, true, true, false, false
+	true, true, true, true, false, false,
+	true, true, true, true, true
 ]
 var strategies = [] # filled dynamically by deck manager
 var responses = [
@@ -28,17 +30,17 @@ var effect_bands = [
 	[0.9, 'GUD']
 ]
 var base_eval = [
-	[-1,   0,   -1,    0.5,  0,    0.5],
-	[ 1,   0,    1,    0,   -1,   -1],
-	[ 0,   0.5,  0,    1,    0,    0],
-	[ 0,  -1,   -1,    1,    0,    1],
-	[ 0.5,  1,   0,    0.5,  0,    0],
-	[-1,   0.5,  1,    0,    0,   -1],
-	[ 0,   1,    0,    0,    1,    0],
-	[ 0,   0,    0.5, -1,   -1,    0.5],
-	[ 0,   0.5,  0,    0,    1,    0],
-	[ 1,   0,    0,   -1,    0,    1],
-	[ 0,  -1,    0.5,  0,    0.5,  0]
+	[-1,   0,   -1,    0,    0,    0.5,  1,    1,    0.5,  0,    0],
+	[ 0.5, 0,    1,    0,   -1,   -1,    0.5,  0,    0,    0,    1],
+	[ 0,   0.5,  0,    1,    0,    0,   -1,   -1,    1,    0.5,  0],
+	[ 0,  -1,   -1,    0.5,  0,    1,    0,    0,    0.5,  1,    0],
+	[ 0.5, 1,    0,    0.5,  0,    0,    0,    0,    1,   -1,   -1],
+	[-1,   1,    1,    0,    0,   -1,    0,    0.5,  0,    0,  0.5],
+	[ 0,   0,    0,    1,    1,    0,    0.5, -1,    0,   -1,  0.5],
+	[ 1,   0,    0.5, -1,   -1,    0.5,  0,    0,    0,    0,    1],
+	[ 0,   0.5,  0,    0,    1,    0,   -1,    0.5, -1,    1,    0],
+	[ 1,   0,    0,   -1,    0.5,  1,    0,    0,   -1,    0.5,  0],
+	[ 0,  -1,    0.5,  0,    0.5,  0,    1,    1,    0,    0,   -1]
 ]
 var npc_eval_percent = 0.6
 
@@ -163,7 +165,7 @@ func determine_response(topic_index, strat_index):
 		response_player.stream = pos_resp_track
 		response_player.playing = true
 		
-		add_tidbit()
+		#add_tidbit()
 		
 	elif(rating_band == 'BAD'):
 		add_mood(-5)
@@ -319,6 +321,7 @@ func unlock_topic(topic_index):
 	is_topic_usable[topic_index] = true
 	print('Unlocked topic '+topics[topic_index])
 	messagewindow_debug.add_message('You can now use the topic \"'+topics[topic_index]+'\"!')
+	$TopicList_Custom.add_topic(topics[topic_index], topic_index)
 
 func get_mod(strat_index, topic_index):
 	if(cached_char_eval == null):

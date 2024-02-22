@@ -6,7 +6,7 @@ They/Them/Their
 
 [_EVAL_]
 1, 0, 0.5, 0, 0.5, 1, 0, -1, 0, 0, -1
-1, -1, 0.5, -1, 1, 0
+1, -1, 0.5, -1, 1, 0, 0, 0, 0, 0, 0
 
 [_UNLOCK_]
 050 | T04
@@ -31,12 +31,14 @@ Good eye. This hat's my favorite!
 I see you've got taste. I like that!
 Heh, the hat really makes the person, doesn't it?
 
-[SUNGLASSES/BAD/01]
+[SUNGLASSES/BAD/02]
 So what if I wear shades? These were a gift from a friend.
-[SUNGLASSES/MID/01]
 Is it the shades, or was the punchline THAT hard to see?
-[SUNGLASSES/GUD/01]
+[SUNGLASSES/MID/01]
+Not great, not terrible either. It's gotta be hard, comin' up with jokes about shades.
+[SUNGLASSES/GUD/02]
 Nice one. I like the cut of your jib, pal.
+Always nice to see someone who ain't afraid of shades.
 
 [GIFTS/GUD/01]
 HA! Didn't think I'd like joking about those, but that made me feel a lot better. Thanks, pal.
@@ -69,7 +71,7 @@ That would've been better, but the embellishment killed it.
 Nice one, that last bit of embellishment REALLY sold it.
 
 [OVERUSE/BAD/01]
-Oh yeah, just keep making the same joke over and over. Great.
+Oh yeah, just keep using the same topic over and over. Great.
 
 [UNLOCK/050]
 These shades were a gift from a friend of mine. So thoughtful...

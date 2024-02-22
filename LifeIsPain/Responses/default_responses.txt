@@ -57,5 +57,47 @@ Plushies are alright... I guess.
 [PLUSHIES/GUD/01]
 Nice one! We all need some cuteness in life, right?
 
-[OVERUSE/BAD/01]
+
+[SPACE/BAD/01]
+Space, huh. Like it's even worth the effort in a world like this...
+[SPACE/MID/01]
+Space is cool. I don't know much about it, though.
+[SPACE/GUD/01]
+Space is awesome! It seems so much cooler than being here...
+
+
+[PLANTS/BAD/01]
+Now I'm reminded of how many houseplants I've killed...
+[PLANTS/MID/01]
+Plants are... something, I guess?
+[PLANTS/GUD/01]
+Plants definitely have a beauty to them, and not just the flowers.
+
+
+[COMICS/BAD/01]
+I never really got the whole "comic book" thing. Wouldn't a movie be better?
+[COMICS/MID/01]
+Comics? I don't really know enough to have an opinion...
+[COMICS/GUD/01]
+I used to read those as a kid! Those were really fun. I wonder if I should get back into it...
+
+
+[FRIENDS/BAD/01]
+I had some friends, though they're all gone now. There never seems to be the time these days...
+[FRIENDS/MID/01]
+I wonder where all my friends are now... I should check up on that.
+[FRIENDS/GUD/01]
+I might not have many, but my friends are great! I love them.
+
+
+[TIME/BAD/01]
+Yeah, the clock keeps ticking. It's the only thing more oppressive than this atmosphere.
+[TIME/MID/01]
+Time goes on. It is what it is, I guess...
+[TIME/GUD/01]
+It's weird how relative time is. These jokes are making the time pass fast, so you're clearly doing something right!
+
+
+[OVERUSE/BAD/02]
 This conversation is getting stale...
+How many jokes are you going to make about that?
