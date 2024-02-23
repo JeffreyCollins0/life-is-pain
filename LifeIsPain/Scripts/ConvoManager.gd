@@ -203,7 +203,7 @@ func add_stress(amount):
 	stress_debug = min(max(stress_debug, 0), 100)
 	
 	var stress_text = increment_prefab.instance()
-	stress_text.position = $StressCounter.position + Vector2(0, 32.0)
+	stress_text.position = $StressCounter.position + Vector2(0, 64.0) # orig. 32
 	stress_text.init(-amount)
 	self.add_child(stress_text)
 	
@@ -219,7 +219,7 @@ func add_mood(amount):
 	mood_debug = min(max(mood_debug, 0), 100)
 	
 	var mood_text = increment_prefab.instance()
-	mood_text.position = $MoodCounter.position + Vector2(0, 32.0)
+	mood_text.position = $MoodCounter.position + Vector2(0, 64.0)
 	mood_text.init(amount)
 	self.add_child(mood_text)
 	
