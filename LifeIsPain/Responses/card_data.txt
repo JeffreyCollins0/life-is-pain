@@ -24,11 +24,11 @@ Euphemism | He's my sweet cheese, my fun time boy
 Dual-Speak | It's funny on TWO levels.
 
 [MODIF 11 | 00]
-Hide Punchline | +3 mood if the next joke works, else +3 stress
+Subtlety | +3 mood if the next joke works, else +3 stress
 [MODIF 12 | 01]
-Beat, Offbeat | +4 mood if the last joke failed and the next doesn't
+Offbeat | +4 mood if the last joke failed and the next doesn't
 [MODIF 13 | 02]
-Hang Too Long | -2 stress if the next joke works, else +2 stress
+Long Pause | -2 stress if the next joke works, else +2 stress
 [MODIF 14 | 03]
 Improvise | +2 mood if the last joke failed
 [MODIF 15 | 04]

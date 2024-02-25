@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/ConvoManager.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/HandDebug.gd" type="Script" id=2]
@@ -27,6 +27,8 @@
 [ext_resource path="res://Scripts/NPCManager.gd" type="Script" id=25]
 [ext_resource path="res://Prefabs/LogMessageChip.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scripts/MessageLog.gd" type="Script" id=27]
+[ext_resource path="res://DinoCrushSmallCondensed.tres" type="DynamicFont" id=28]
+[ext_resource path="res://Sprites/TalkIndicator.tres" type="SpriteFrames" id=29]
 
 [node name="UIManager" type="Node2D"]
 script = ExtResource( 24 )
@@ -40,6 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 240.0
 margin_bottom = 160.0
+rect_scale = Vector2( 2, 2 )
 
 [node name="ColorRect" type="ColorRect" parent="DeckManager/Control"]
 anchor_right = 1.0
@@ -191,7 +194,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 64.0
 margin_bottom = 12.0
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 28 )
 text = "Card Title"
 
 [node name="Description" type="Label" parent="DeckManager/Control/DemoCard"]
@@ -230,7 +233,6 @@ anchor_bottom = 1.0
 
 [node name="Sprite" type="Sprite" parent="ConvoManager/Control"]
 position = Vector2( 386, 172 )
-scale = Vector2( 2, 2 )
 texture = ExtResource( 13 )
 
 [node name="Textbox" type="Control" parent="ConvoManager/Control"]
@@ -260,6 +262,13 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 7 )
 autowrap = true
 script = ExtResource( 12 )
+
+[node name="TalkIndicator" type="AnimatedSprite" parent="ConvoManager/Control/Textbox"]
+visible = false
+position = Vector2( 97.5, 38 )
+frames = ExtResource( 29 )
+frame = 2
+playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ConvoManager/Control"]
 visible = false

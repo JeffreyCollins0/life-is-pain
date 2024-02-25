@@ -16,10 +16,12 @@ var audio_disabled = false
 
 var talk_player
 var talk_loop_track = null
+var talk_indicator
 
 func _ready():
 	talk_player = get_node('../../../../ConvoManager/TalkAudioPlayer')
 	typewriter_time = (default_typewriter_duration / typewriter_speed)
+	talk_indicator = get_node('../TalkIndicator')
 	
 	talk_loop_track = load('res://Sounds/ShadyTalk.wav')
 
@@ -40,9 +42,14 @@ func _process(delta):
 				
 				text = message_chunks.pop_front()
 				reset_typewriter()
+			else:
+				talk_indicator.visible = false
 	
 	if(typewriter_time > 0 && !audio_disabled):
 		typewriter_time -= delta
+		
+		if(!talk_indicator.visible):
+			talk_indicator.visible = true
 		
 		percent_visible = (1.0 - (typewriter_time / (default_typewriter_duration / typewriter_speed) ))
 		talk_player.playing = true
@@ -94,6 +101,7 @@ func reset_typewriter():
 
 func _on_ConvoManager_convo_ended():
 	talk_player.playing = false
+	talk_indicator.visible = false
 	audio_disabled = true
 	clear_messages()
 

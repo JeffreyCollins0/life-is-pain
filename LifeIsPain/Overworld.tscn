@@ -213,7 +213,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 7 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="TestNPC2" type="StaticBody" parent="." groups=["NPC"]]
@@ -231,7 +231,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 4
+frame = 3
 playing = true
 
 [node name="TestNPC4" type="StaticBody" parent="." groups=["NPC"]]
@@ -248,7 +248,6 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 10 )
-frame = 2
 playing = true
 
 [node name="TestNPC3" type="StaticBody" parent="." groups=["NPC"]]
@@ -267,7 +266,7 @@ visible = false
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 4
+frame = 3
 playing = true
 
 [node name="MeshInstance" type="MeshInstance" parent="TestNPC3"]
