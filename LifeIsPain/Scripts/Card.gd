@@ -18,6 +18,7 @@ func _process(delta):
 		position += ((targ_pos - position) * move_rate)
 	elif(position != targ_pos):
 		position = targ_pos
+	position = round_vec2(position)
 
 func init(card_data):
 	card_id = card_data[0]
@@ -47,3 +48,6 @@ func update_topic(topic_id, pos_spr, neg_spr):
 		$BaseModIndicator.texture = neg_spr
 	else:
 		$BaseModIndicator.visible = false
+
+func round_vec2(vector):
+	return Vector2(round(vector.x), round(vector.y))
