@@ -6,7 +6,7 @@ They/Them/Their
 
 [_EVAL_]
 0, -1, 0, 0.5, -1, 0, 0, 1, 0, 0.5, 1
--1, 0.5, 1, -1, 0, 1, 0, 0, 0, 0, 0
+-1, 0.5, 0.5, -1, 0, 1, 0, 0, 1, 0, 0
 
 [_UNLOCK_]
 050 | T05
@@ -36,6 +36,13 @@ I guess? People in sunglasses scare me...
 That was okay. I guess noir isn't really my thing...
 [SUNGLASSES/GUD/01]
 That made me feel a bit better. Thanks.
+
+[COMICS/BAD/01]
+..Have you ever read a comic book before? I could suggest some...
+[COMICS/MID/01]
+That was... alright... (Maybe I'm just getting my hopes up since they're making jokes about comics...)
+[COMICS/GUD/01]
+Haha, Good one! I love comics more than anything!
 
 [PLUSHIES/BAD/01]
 Oh... I like plushies, but alright...
@@ -79,5 +86,5 @@ Oh, is this all the same kind of joke? I'm a little bored now...
 ...Do you like plushies, too? I love how comforting they are...
 
 [UNLOCK/100]
-I know I should be more straightforward, but... It's so hard...
+I know I should be more straightforward, but... It's so hard... Euphemisms are a nice compromise for that.
 

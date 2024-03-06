@@ -2,14 +2,14 @@ extends Label
 
 export (float) var typewriter_speed = 1.0
 export (String) var valid_delimiters = ' .,-'
-const max_chars = 60 # determined manually at the moment
+const max_chars = 52 #42 #60 # determined manually at the moment
 
 # for queuing and chunking messages into box-sized increments
 var messages = []
 var message_chunks = []
 
 var default_typewriter_duration = 0.8
-var default_typewriter_pause = 1.4
+var default_typewriter_pause = 2.0 #1.4
 var typewriter_time = 0
 var pause_time = 0
 var audio_disabled = false
@@ -60,8 +60,11 @@ func _process(delta):
 			
 			pause_time = default_typewriter_pause
 
-func new_message(message):
-	messages.push_back(message)
+func new_message(message, priority=false):
+	if(priority):
+		messages.push_front(message)
+	else:
+		messages.push_back(message)
 	
 	# prompt the post-pause check if the system is hibernating
 	if(typewriter_time <= 0 && pause_time <= 0):
@@ -84,9 +87,9 @@ func chunk_dialogue(message):
 		
 		var naive_next_chunk = message.substr(chunk_pointer, max_chars)
 		
-		var best_stop_pos = chunk_pointer
+		var best_stop_pos = 0
 		for delimiter in valid_delimiters:
-			var last_occurance = naive_next_chunk.find_last(delimiter) + 1
+			var last_occurance = naive_next_chunk.rfind(delimiter, chunk_pointer + max_chars) + 1
 			if(last_occurance > best_stop_pos):
 				best_stop_pos = last_occurance
 		

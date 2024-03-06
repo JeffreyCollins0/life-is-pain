@@ -4,7 +4,7 @@
 [ext_resource path="res://DinoCrushSmallCondensed.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/Card.gd" type="Script" id=3]
 [ext_resource path="res://BitCrush.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Sprites/EffDownIcon.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/EffDownIconA.png" type="Texture" id=5]
 
 [node name="Card" type="Node2D"]
 script = ExtResource( 3 )
@@ -36,6 +36,6 @@ autowrap = true
 
 [node name="BaseModIndicator" type="Sprite" parent="."]
 visible = false
-position = Vector2( 47, 34 )
+position = Vector2( 47, 44 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )

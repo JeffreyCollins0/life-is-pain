@@ -7,7 +7,7 @@ var topics = [
 ]
 var is_topic_usable = [
 	true, true, true, true, false, false,
-	true, true, true, true, true
+	false, false, true, true, true
 ]
 var strategies = [] # filled dynamically by deck manager
 var responses = [
@@ -165,7 +165,7 @@ func determine_response(topic_index, strat_index):
 		response_player.stream = pos_resp_track
 		response_player.playing = true
 		
-		#add_tidbit()
+		add_tidbit()
 		
 	elif(rating_band == 'BAD'):
 		add_mood(-5)
@@ -174,8 +174,6 @@ func determine_response(topic_index, strat_index):
 		# play sound
 		response_player.stream = neg_resp_track
 		response_player.playing = true
-		
-		add_hints(rating_band, topics[topic_index], strategies[strat_index])
 	
 	# check for percentage unlocks
 	if(pre_mod_mood < mood_debug):
@@ -304,18 +302,26 @@ func callout_adapted(mods, file_read, char_fpath, strat, topic, rating_band, raw
 	else:
 		return 'MissingNo.'
 
-func add_hints(rating_band, topic, strat):
-	pass
-
 func add_tidbit():
-	textbox_debug.new_message($NPCManager.get_tidbit())
+	var tidbit = $NPCManager.get_tidbit()
+	if(tidbit != 'MissingNo.'):
+		textbox_debug.new_message(tidbit)
 
 func process_unlocks(unlocks):
 	for unlock in unlocks:
+		var unlock_successful = false
+		
 		if(unlock[0] == 1 && !is_topic_usable[unlock[1]]):
 			unlock_topic(unlock[1])
+			unlock_successful = true
 		elif(unlock[0] == 0 && !(get_node('../DeckManager').is_card_usable[unlock[1]])):
 			$Hand.unlock_strategy(unlock[1])
+			unlock_successful = true
+		
+		if(unlock_successful):
+			var unlock_message = file_read.read_unlock_message(char_fpath, mood_debug)
+			if(unlock_message != 'MissingNo.'):
+				textbox_debug.new_message(unlock_message, true)
 
 func unlock_topic(topic_index):
 	is_topic_usable[topic_index] = true

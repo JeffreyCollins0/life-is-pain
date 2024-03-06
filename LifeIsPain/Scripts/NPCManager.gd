@@ -60,7 +60,7 @@ func get_npc_name():
 #	pass
 
 func get_tidbit():
-	if(working_tidbits.has(char_name)):
+	if(working_tidbits.has(char_name) && (randi() % 100) < 64): # not every time, but enough of the time
 		var tidbits = working_tidbits[char_name]
 		var tidbit_index = (randi() % len(tidbits)-1)
 		return tidbits[tidbit_index]

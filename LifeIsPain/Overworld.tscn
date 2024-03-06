@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Materials/ground_debug.tres" type="Material" id=1]
 [ext_resource path="res://Materials/obj_debug.tres" type="Material" id=2]
@@ -9,8 +9,14 @@
 [ext_resource path="res://Sprites/OWShady.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://Sprites/OWBeanie.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://Scripts/TutorialBlocker.gd" type="Script" id=9]
-[ext_resource path="res://Sprites/OSchwarz.tres" type="SpriteFrames" id=10]
+[ext_resource path="res://Sprites/OWSchwarz.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://Scripts/SchwarzChange.gd" type="Script" id=11]
+[ext_resource path="res://Sprites/OWPlagueis.tres" type="SpriteFrames" id=12]
+[ext_resource path="res://Scripts/TutorialTrigger.gd" type="Script" id=13]
+[ext_resource path="res://DinoCrushSmallCondensed.tres" type="DynamicFont" id=15]
+[ext_resource path="res://BitCrush.tres" type="DynamicFont" id=16]
+[ext_resource path="res://Scripts/TutorialModal.gd" type="Script" id=17]
+[ext_resource path="res://DinoCrush.tres" type="DynamicFont" id=18]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -28,6 +34,9 @@ extents = Vector3( 0.0593344, 0.0800592, 0.0487024 )
 
 [sub_resource type="CubeMesh" id=9]
 size = Vector3( 0.15, 0.18, 0.12 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.647824, 0.181298, 0.0982638 )
 
 [sub_resource type="CylinderShape" id=4]
 height = 0.219068
@@ -117,14 +126,14 @@ mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 
-[node name="Obstacle7" type="KinematicBody" parent="Environment"]
+[node name="TutorialBlocker" type="KinematicBody" parent="Environment"]
 transform = Transform( 0.9, 0, 0, 0, 0.2, 0, 0, 0, 0.1, 0, 0.1, 1.05 )
 script = ExtResource( 9 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Environment/Obstacle7"]
+[node name="CollisionShape" type="CollisionShape" parent="Environment/TutorialBlocker"]
 shape = SubResource( 3 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Environment/Obstacle7"]
+[node name="MeshInstance" type="MeshInstance" parent="Environment/TutorialBlocker"]
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
@@ -167,8 +176,120 @@ transform = Transform( 0.779593, 0, 0, 0, 0.896345, 0, 0, 0, 0.779593, 0, 0, 0 )
 mesh = SubResource( 9 )
 skeleton = NodePath("")
 
-[node name="Player" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0920264, 0, 1.72428 )
+[node name="Area" type="Area" parent="Environment"]
+script = ExtResource( 13 )
+tutorial_title = "base_tut"
+start_index = 1
+end_index = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/Area"]
+transform = Transform( 0.786644, 0, 0.617407, 0, 1, 0, -0.617407, 0, 0.786644, 0.0452818, 0.18408, 1.60254 )
+shape = SubResource( 10 )
+
+[node name="Panel" type="Panel" parent="Environment/Area"]
+visible = false
+margin_left = 77.0
+margin_top = 18.0
+margin_right = 405.0
+margin_bottom = 307.0
+script = ExtResource( 17 )
+
+[node name="TextureRect" type="TextureRect" parent="Environment/Area/Panel"]
+margin_left = 11.0
+margin_top = 8.0
+margin_right = 1546.0
+margin_bottom = 605.0
+rect_scale = Vector2( 0.2, 0.2 )
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Environment/Area/Panel"]
+visible = false
+margin_left = 8.0
+margin_top = 1.0
+margin_right = 133.0
+margin_bottom = 11.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 15 )
+text = "Tutorial Title Goes Here"
+autowrap = true
+
+[node name="Label2" type="Label" parent="Environment/Area/Panel"]
+margin_left = 8.0
+margin_top = 130.0
+margin_right = 164.0
+margin_bottom = 205.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 16 )
+text = "Tutorial Title Goes Here"
+autowrap = true
+
+[node name="Button" type="Button" parent="Environment/Area/Panel"]
+margin_left = 334.0
+margin_top = 245.0
+margin_right = 370.0
+margin_bottom = 256.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 18 )
+text = "Next"
+
+[node name="Area2" type="Area" parent="Environment"]
+script = ExtResource( 13 )
+tutorial_title = "base_tut"
+start_index = 4
+end_index = 5
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/Area2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0452818, 0.18408, 0.964144 )
+shape = SubResource( 10 )
+
+[node name="Panel" type="Panel" parent="Environment/Area2"]
+visible = false
+margin_left = 78.0
+margin_top = 18.0
+margin_right = 404.0
+margin_bottom = 306.0
+script = ExtResource( 17 )
+
+[node name="TextureRect" type="TextureRect" parent="Environment/Area2/Panel"]
+margin_left = 9.0
+margin_top = 10.0
+margin_right = 1549.0
+margin_bottom = 607.0
+rect_scale = Vector2( 0.2, 0.2 )
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Environment/Area2/Panel"]
+visible = false
+margin_left = 8.0
+margin_top = 1.0
+margin_right = 133.0
+margin_bottom = 11.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 15 )
+text = "Tutorial Title Goes Here"
+autowrap = true
+
+[node name="Label2" type="Label" parent="Environment/Area2/Panel"]
+margin_left = 8.0
+margin_top = 132.0
+margin_right = 163.0
+margin_bottom = 206.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 16 )
+text = "Tutorial Title Goes Here"
+autowrap = true
+
+[node name="Button" type="Button" parent="Environment/Area2/Panel"]
+margin_left = 332.0
+margin_top = 244.0
+margin_right = 368.0
+margin_bottom = 255.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 18 )
+text = "Next"
+
+[node name="Player" type="KinematicBody" parent="." groups=["Player"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.196783, 0, 1.88112 )
 script = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
@@ -213,7 +334,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 7 )
-frame = 2
+frame = 4
 playing = true
 
 [node name="TestNPC2" type="StaticBody" parent="." groups=["NPC"]]
@@ -231,7 +352,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 3
 playing = true
 
 [node name="TestNPC4" type="StaticBody" parent="." groups=["NPC"]]
@@ -248,6 +368,23 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 10 )
+frame = 2
+playing = true
+
+[node name="TestNPC5" type="StaticBody" parent="." groups=["NPC"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.575709, 0, -0.706302 )
+script = ExtResource( 6 )
+conversant_id = 4
+conversant_name = "Plagueis"
+
+[node name="CollisionShape" type="CollisionShape" parent="TestNPC5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0 )
+shape = SubResource( 4 )
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="TestNPC5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
+billboard = 2
+frames = ExtResource( 12 )
 playing = true
 
 [node name="TestNPC3" type="StaticBody" parent="." groups=["NPC"]]
@@ -266,13 +403,16 @@ visible = false
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 3
 playing = true
 
 [node name="MeshInstance" type="MeshInstance" parent="TestNPC3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0483988, 0.0515495, 0 )
 mesh = SubResource( 7 )
 
+[connection signal="body_entered" from="Environment/Area" to="Environment/Area" method="_on_Area_body_entered"]
+[connection signal="pressed" from="Environment/Area/Panel/Button" to="Environment/Area/Panel" method="_on_Button_pressed"]
+[connection signal="body_entered" from="Environment/Area2" to="Environment/Area2" method="_on_Area_body_entered"]
+[connection signal="pressed" from="Environment/Area2/Panel/Button" to="Environment/Area2/Panel" method="_on_Button_pressed"]
 [connection signal="convo_available" from="Player" to="UIManager" method="_on_Player_convo_available"]
 [connection signal="convo_unavailable" from="Player" to="UIManager" method="_on_Player_convo_unavailable"]
 [connection signal="body_entered" from="Player/TalkableArea" to="Player" method="_on_TalkableArea_body_entered"]

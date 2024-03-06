@@ -1,0 +1,82 @@
+Plagueis
+
+[_BIO_]
+Plagueis
+They/Them/Their
+
+[_EVAL_]
+0, 1, 0, 0.5, 0, -1, 1, 0, -1, 0.5, 0
+1, 0, 0.5, 0.5, 0, -1, 0, 1, 0, 0, -1
+
+[_UNLOCK_]
+050 | T07
+100 | S03
+
+[_MOOD_]
+45
+
+[STARTER/GUD/01]
+Your eyes have no pupils, fascinating.
+
+[_TIDBITS/03_]
+I desire... pickles. This industrial runoff is at least moderately acidic, so it should work.
+I've been refining the chemicals from this output to fortify and fertilize my garden. Plants don't survive naturally anymore, so I have to help them along.
+I really hope someday I can make this a real garden, so people will understand the beauty of plants. This'll also help with the food supply, too, since it helps plants grow in harsh environments.
+
+[HATS/BAD/01]
+Oh good, not another "but I can't see your face" person. I need this for my research.
+[HATS/MID/01]
+If you're trying to mock my mask, it didn't work.
+[HATS/GUD/03]
+Nice of you to notice my mask. I love it, plus it means I don't have to worry about my facial expressions being weird.
+
+[PLANTS/BAD/01]
+Messed up a joke about plants. I'm disappointed, and that doesn't happen often. Well, back to drinking more chemicals.
+[PLANTS/MID/01]
+You could do better. Plants need a lot of cheering up with so little sunlight around.
+[PLANTS/GUD/01]
+You like plants too? Plants are amazing. They need a bit of modifying with the changes in climate and such, but they're so complicated and interesting.
+
+[PLUSHIES/BAD/01]
+Never really got plushies. They always get dirty from work, and then they just look so sad. It's a waste.
+
+[TALK FUNNY/GUD/01]
+You talk weird. I think we'll be best friends.
+[EUPHEMISM/GUD/01]
+Euphemisms are fun, and it's more fun to hear a new one and then loudly say what it means. People get angry when you do it, though. Odd.
+[SATIRIZE/GUD/01]
+Everything is crazy when you think hard enough. How does a plant coordinate every cell to do things? Good to see somebody else gets it.
+[MINIMIZE/GUD/01]
+A classic, take a big thing and make it sound like a small thing. Tale as old as time.
+[WEATHER/GUD/01]
+The weather's always grey around here, but it gives enough sunlight for the plants to grow, so it's fine.
+[SUNGLASSES/GUD/01]
+Oh, so you don't like eye contact either. I get ya, that's always weird.
+
+[SHARP TURN/BAD/01]
+What? You said a thing and then another thing that wasn't related. I'm confused.
+[HARD TRUTH/BAD/01]
+Yeah, I know the truth is hard. I sometimes wonder if the plants will all die when I do, and that makes me really sad.
+[TIME/BAD/01]
+Ugh, time is so slow! How am I supposed to experiment and iterate when the plants take so long to grow? Why can't it go faster?
+
+
+[BASE/BAD/01]
+That combo doesn't seem to work well. Try another.
+[BASE/GUD/01]
+That's a good combo. I wonder if it works with any topic... I could solve humor overnight.
+
+[MODIFIER/BAD/01]
+The base was good, but the additions didn't work. Just like runoff water...
+[MODIFIER/GUD/01]
+Good thing you added the extra modifier. I was trying not to laugh, but you got me anyway.
+
+[OVERUSE/BAD/01]
+You really like using that one topic. That goes against all my data on conversation.
+
+[UNLOCK/050]
+Plants are intriguing. I've spent most of my life growing plants, and I've had to improve my chemistry to help them along.
+
+[UNLOCK/100]
+I've been told my voice is weird. Maybe my mask filters it oddly, what with all the toxin filters I installed.
+

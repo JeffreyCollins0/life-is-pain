@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/ConvoManager.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/HandDebug.gd" type="Script" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://Scripts/MessageLog.gd" type="Script" id=27]
 [ext_resource path="res://DinoCrushSmallCondensed.tres" type="DynamicFont" id=28]
 [ext_resource path="res://Sprites/TalkIndicator.tres" type="SpriteFrames" id=29]
+[ext_resource path="res://TinyUnicode.tres" type="DynamicFont" id=30]
 
 [node name="UIManager" type="Node2D"]
 script = ExtResource( 24 )
@@ -262,12 +263,13 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 7 )
 autowrap = true
 script = ExtResource( 12 )
+typewriter_speed = 0.6
 
 [node name="TalkIndicator" type="AnimatedSprite" parent="ConvoManager/Control/Textbox"]
 visible = false
 position = Vector2( 97.5, 38 )
 frames = ExtResource( 29 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ConvoManager/Control"]
@@ -277,39 +279,6 @@ margin_bottom = 146.0
 bbcode_text = "Sample Text"
 text = "Sample Text"
 script = ExtResource( 4 )
-
-[node name="MessageLog" type="Control" parent="ConvoManager/Control"]
-visible = false
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 67.0
-margin_top = 5.0
-margin_right = 45.0
-margin_bottom = -35.0
-script = ExtResource( 27 )
-
-[node name="ColorRect2" type="ColorRect" parent="ConvoManager/Control/MessageLog"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.211765, 0.207843, 0.270588, 0.686275 )
-
-[node name="ScrollContainer" type="ScrollContainer" parent="ConvoManager/Control/MessageLog"]
-margin_left = 3.0
-margin_top = 15.0
-margin_right = 95.0
-margin_bottom = 123.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ConvoManager/Control/MessageLog/ScrollContainer"]
-
-[node name="MessageChip" parent="ConvoManager/Control/MessageLog/ScrollContainer/VBoxContainer" instance=ExtResource( 26 )]
-
-[node name="Label" type="Label" parent="ConvoManager/Control/MessageLog"]
-margin_left = 3.0
-margin_top = 5.0
-margin_right = 69.0
-margin_bottom = 19.0
-custom_fonts/font = ExtResource( 7 )
-text = "Message Log"
 
 [node name="Hand" type="Node2D" parent="ConvoManager"]
 position = Vector2( 0, 260 )
@@ -438,8 +407,46 @@ margin_top = 4.0
 margin_right = 108.0
 margin_bottom = 44.0
 custom_colors/font_color = Color( 0.517647, 0.717647, 0.835294, 1 )
-custom_fonts/font = ExtResource( 11 )
+custom_fonts/font = ExtResource( 30 )
 autowrap = true
+
+[node name="Control2" type="Control" parent="ConvoManager"]
+visible = false
+margin_right = 480.0
+margin_bottom = 320.0
+
+[node name="MessageLog" type="Control" parent="ConvoManager/Control2"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 67.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -161.0
+rect_scale = Vector2( 2, 2 )
+script = ExtResource( 27 )
+
+[node name="ColorRect2" type="ColorRect" parent="ConvoManager/Control2/MessageLog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.211765, 0.207843, 0.270588, 0.882353 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ConvoManager/Control2/MessageLog"]
+margin_left = 3.0
+margin_top = 15.0
+margin_right = 95.0
+margin_bottom = 123.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConvoManager/Control2/MessageLog/ScrollContainer"]
+
+[node name="MessageChip" parent="ConvoManager/Control2/MessageLog/ScrollContainer/VBoxContainer" instance=ExtResource( 26 )]
+
+[node name="Label" type="Label" parent="ConvoManager/Control2/MessageLog"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 69.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 7 )
+text = "Message Log"
 
 [node name="BackButton" type="Button" parent="ConvoManager"]
 margin_left = 4.0
@@ -479,9 +486,10 @@ margin_right = 252.0
 margin_bottom = 247.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 7 )
-text = "Converse"
+text = "E - Converse"
 
 [node name="DebugCustButton" type="Button" parent="."]
+visible = false
 margin_left = 3.0
 margin_top = 4.0
 margin_right = 67.0

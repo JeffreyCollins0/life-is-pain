@@ -1,12 +1,7 @@
 extends Node2D
 
-#var UI_state = 'walk' # walk/talk/cust/fail/win/title
-#var current_UI = null
 var setup_done = false
 var saved_conversant = 'MissingNo.'
-
-func _ready():
-	pass
 
 func _process(delta):
 	if(!setup_done):
@@ -15,28 +10,25 @@ func _process(delta):
 		$DebugConvoButton.visible = false
 		setup_done = true
 
-func change_state(new_state):
-	#UI_state = new_state # add in checks later
-	pass
+# allow for conversing via button input
+func _input(event):
+	if(event.is_action_pressed("converse") && $DebugConvoButton.visible):
+		_on_DebugConvoButton_pressed()
 
 func _on_DebugConvoButton_pressed():
-	change_state('talk')
 	$ConvoManager.start_convo(saved_conversant)
 	$DebugConvoButton.visible = false
 	$DebugCustButton.visible = false
 
 func _on_DebugCustButton_pressed():
-	change_state('cust')
 	$DeckManager.start_cust()
 	$DebugConvoButton.visible = false
 	$DebugCustButton.visible = false
 
 func _on_DeckManager_cust_ended():
-	change_state('walk')
 	$DebugCustButton.visible = true
 
 func _on_ConvoManager_convo_ended():
-	change_state('walk')
 	$DebugCustButton.visible = true
 
 func _on_Player_convo_available(conversant):

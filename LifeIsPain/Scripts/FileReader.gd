@@ -217,6 +217,26 @@ func read_unlock(filename, mood):
 	file.close()
 	return unlocks
 
+func read_unlock_message(filename, mood):
+	var file = File.new()
+	if(!file.file_exists(filename)):
+		print("File "+filename+" not found.")
+		return null
+	file.open(filename, File.READ)
+	
+	var message = 'MissingNo.'
+	
+	while(!file.eof_reached()):
+		var line = file.get_line()
+		
+		if(line.substr(0,7) == "[UNLOCK"):
+			var line_mood = int(line.substr(8,3))
+			if(line_mood <= mood):
+				message = file.get_line()
+			
+	file.close()
+	return message
+
 func read_card_data(filename, card_id):
 	var file = File.new()
 	if(!file.file_exists(filename)):

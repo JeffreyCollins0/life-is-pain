@@ -6,7 +6,7 @@ They/Them/Their
 
 [_EVAL_]
 -0.5, 0, 0.5, 0, 1, 0, 0, 0.5, 1, -0.5, 0
--0.5, -1, 0, 0, -0.5, 0, 0, 0, 0, 0, 0
+-1, -1, 0.5, 0, 0, 0, 1, 0.5, 0, 0, 1
 
 [_UNLOCK_]
 050 | T06
@@ -49,6 +49,8 @@ I love it! Space was what drew me to this job... and what enables my rampant wor
 [WEATHER/GUD/02]
 A joke about the weather? That's a rare treat. I never go outside because of work, so I wouldn't know what the forecast is like for today.
 Ah, the weather - always bringing clouds and signal interference. On the upside, it gives me time to catch up on my work, and for that I am grateful.
+[PLANTS/GUD/01]
+Plants can bring joy as well. I used to have one on my desk, though it soon died after my coworkers were no longer there to assist me.
 
 [BASE/BAD/01]
 That combination needs rethinking. Consider it more carefully, preferably without interrupting my work.

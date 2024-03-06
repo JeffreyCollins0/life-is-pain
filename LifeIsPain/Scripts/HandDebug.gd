@@ -35,10 +35,10 @@ func _ready():
 	mod_manager = get_node('../ModCardManager')
 	topic_list = get_node('../TopicList_Custom')
 	
-	eff_up_icon = load('res://Sprites/EffUpIcon.png')
-	eff_down_icon = load('res://Sprites/EffDownIcon.png')
-	eff_up2_icon = load('res://Sprites/EffUpIcon2.png')
-	eff_down2_icon = load('res://Sprites/EffDownIcon2.png')
+	eff_up_icon = load('res://Sprites/EffUpIconA.png')
+	eff_down_icon = load('res://Sprites/EffDownIconA.png')
+	eff_up2_icon = load('res://Sprites/EffUpIcon2A.png')
+	eff_down2_icon = load('res://Sprites/EffDownIcon2A.png')
 	card_swap_track = load('res://Sounds/CardHover.wav')
 
 func _process(delta):

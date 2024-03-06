@@ -6,7 +6,7 @@ They/Them/Their
 
 [_EVAL_]
 1, 0, 0.5, 0, 0.5, 1, 0, -1, 0, 0, -1
-1, -1, 0.5, -1, 1, 0, 0, 0, 0, 0, 0
+1, -1, 0, 1, 0.5, 0, -1, 0, 0, 0.5, 0
 
 [_UNLOCK_]
 050 | T04
@@ -42,6 +42,8 @@ Always nice to see someone who ain't afraid of shades.
 
 [GIFTS/GUD/01]
 HA! Didn't think I'd like joking about those, but that made me feel a lot better. Thanks, pal.
+[FRIENDS/GUD/01]
+I love my friends. The fellas and I go way back, and we look out for each other.
 [BAD PUN/GUD/01]
 There's an honesty in a good pun. I respect that.
 [DEAD PAN/GUD/01]
