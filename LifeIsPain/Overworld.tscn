@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Materials/ground_debug.tres" type="Material" id=1]
 [ext_resource path="res://Materials/obj_debug.tres" type="Material" id=2]
@@ -13,10 +13,23 @@
 [ext_resource path="res://Scripts/SchwarzChange.gd" type="Script" id=11]
 [ext_resource path="res://Sprites/OWPlagueis.tres" type="SpriteFrames" id=12]
 [ext_resource path="res://Scripts/TutorialTrigger.gd" type="Script" id=13]
+[ext_resource path="res://LifeIsPain_Environment.obj" type="ArrayMesh" id=14]
 [ext_resource path="res://DinoCrushSmallCondensed.tres" type="DynamicFont" id=15]
 [ext_resource path="res://BitCrush.tres" type="DynamicFont" id=16]
 [ext_resource path="res://Scripts/TutorialModal.gd" type="Script" id=17]
 [ext_resource path="res://DinoCrush.tres" type="DynamicFont" id=18]
+[ext_resource path="res://OWMat1.tres" type="Material" id=19]
+[ext_resource path="res://OWMat1A.tres" type="Material" id=20]
+[ext_resource path="res://OWMat2.tres" type="Material" id=21]
+[ext_resource path="res://Models/LifeIsPain_TVStack.obj" type="ArrayMesh" id=22]
+[ext_resource path="res://Models/LifeIsPain_GardenPipe.obj" type="ArrayMesh" id=23]
+[ext_resource path="res://Models/LifeIsPain_StoreFrontWall.obj" type="ArrayMesh" id=24]
+[ext_resource path="res://Models/LifeIsPain_Ground.obj" type="ArrayMesh" id=25]
+[ext_resource path="res://Models/LifeIsPain_StoreBackWall.obj" type="ArrayMesh" id=26]
+[ext_resource path="res://Models/LifeIsPain_ObsWall.obj" type="ArrayMesh" id=27]
+[ext_resource path="res://Models/LifeIsPain_StartWall.obj" type="ArrayMesh" id=28]
+[ext_resource path="res://Models/LifeIsPain_GardenWall.obj" type="ArrayMesh" id=29]
+[ext_resource path="res://Models/LifeIsPain_MainWall.obj" type="ArrayMesh" id=30]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -35,8 +48,11 @@ extents = Vector3( 0.0593344, 0.0800592, 0.0487024 )
 [sub_resource type="CubeMesh" id=9]
 size = Vector3( 0.15, 0.18, 0.12 )
 
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 0.599375, 0.143914, 0.146008 )
+
 [sub_resource type="BoxShape" id=10]
-extents = Vector3( 0.647824, 0.181298, 0.0982638 )
+extents = Vector3( 0.200262, 0.181298, 0.0982638 )
 
 [sub_resource type="CylinderShape" id=4]
 height = 0.219068
@@ -56,21 +72,44 @@ size = Vector3( 0.1, 0.1, 0.12 )
 [node name="Environment" type="Spatial" parent="."]
 
 [node name="Floor" type="MeshInstance" parent="Environment"]
+visible = false
 mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
 
 [node name="Floor2" type="MeshInstance" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5 )
+visible = false
 mesh = SubResource( 6 )
 material/0 = ExtResource( 1 )
 
 [node name="Floor3" type="MeshInstance" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -0.24 )
+visible = false
 mesh = SubResource( 6 )
 material/0 = ExtResource( 1 )
 
+[node name="MeshInstance" type="MeshInstance" parent="Environment"]
+transform = Transform( -0.15, 0, -1.31134e-08, 0, 0.15, 0, 1.31134e-08, 0, -0.15, 0, 0, 0 )
+visible = false
+mesh = ExtResource( 14 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 19 )
+material/1 = ExtResource( 19 )
+material/2 = ExtResource( 19 )
+material/3 = ExtResource( 19 )
+material/4 = ExtResource( 19 )
+material/5 = ExtResource( 19 )
+material/6 = ExtResource( 19 )
+material/7 = ExtResource( 21 )
+material/8 = ExtResource( 21 )
+material/9 = ExtResource( 21 )
+material/10 = ExtResource( 21 )
+material/11 = ExtResource( 21 )
+material/12 = ExtResource( 20 )
+material/13 = ExtResource( 19 )
+
 [node name="Obstacle1" type="StaticBody" parent="Environment"]
-transform = Transform( 0.158296, 0, -0.244478, 0, 0.2, 0, 0.122239, 0, 0.316592, 0.350529, 0.1, 0.44689 )
+transform = Transform( 0.158296, 0, -0.244478, 0, 0.2, 0, 0.122239, 0, 0.316592, 1.21511, 0.1, 2.38537 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Obstacle1"]
 shape = SubResource( 3 )
@@ -81,7 +120,7 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 
 [node name="Obstacle2" type="StaticBody" parent="Environment"]
-transform = Transform( 0.0938529, 0, 0.20712, 0, 0.2, 0, -0.03452, 0, 0.563118, -0.501695, 0.1, 0.0718488 )
+transform = Transform( 0.0938529, 0, 0.20712, 0, 0.2, 0, -0.03452, 0, 0.563118, 1.50055, 0.1, 2.31323 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Obstacle2"]
 shape = SubResource( 3 )
@@ -92,18 +131,19 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 
 [node name="Obstacle3" type="StaticBody" parent="Environment"]
-transform = Transform( 0.1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0.5, 0.1, 1.5 )
+transform = Transform( -4.37114e-09, 0, 1, 0, 0.2, 0, -0.1, 0, -4.37114e-08, -1.05921, 0.1, -0.306309 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Obstacle3"]
 shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Environment/Obstacle3"]
+visible = false
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 
 [node name="Obstacle4" type="StaticBody" parent="Environment"]
-transform = Transform( 0.1, 0, 0, 0, 0.2, 0, 0, 0, 1, -0.5, 0.1, 1.5 )
+transform = Transform( 0.1, 0, 0, 0, 0.2, 0, 0, 0, 1, -1.49816, 0.1, 0.228944 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Obstacle4"]
 shape = SubResource( 3 )
@@ -115,7 +155,7 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 
 [node name="Obstacle5" type="StaticBody" parent="Environment"]
-transform = Transform( 0.9, 0, 0, 0, 0.2, 0, 0, 0, 0.1, 0, 0.1, 1.95 )
+transform = Transform( 0.9, 0, 0, 0, 0.2, 0, 0, 0, 0.1, -1.04447, 0.1, 0.762552 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Obstacle5"]
 shape = SubResource( 3 )
@@ -127,13 +167,14 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 
 [node name="TutorialBlocker" type="KinematicBody" parent="Environment"]
-transform = Transform( 0.9, 0, 0, 0, 0.2, 0, 0, 0, 0.1, 0, 0.1, 1.05 )
+transform = Transform( -1.74846e-08, 0, -0.1, 0, 0.2, 0, 0.4, 0, -4.37114e-09, -0.548565, 0.1, 0.0232544 )
 script = ExtResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/TutorialBlocker"]
 shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Environment/TutorialBlocker"]
+visible = false
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
@@ -177,14 +218,14 @@ mesh = SubResource( 9 )
 skeleton = NodePath("")
 
 [node name="Area" type="Area" parent="Environment"]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -1.06465, 0.193383, 0.372343 )
 script = ExtResource( 13 )
 tutorial_title = "base_tut"
 start_index = 1
 end_index = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Area"]
-transform = Transform( 0.786644, 0, 0.617407, 0, 1, 0, -0.617407, 0, 0.786644, 0.0452818, 0.18408, 1.60254 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="Panel" type="Panel" parent="Environment/Area"]
 visible = false
@@ -233,13 +274,13 @@ custom_fonts/font = ExtResource( 18 )
 text = "Next"
 
 [node name="Area2" type="Area" parent="Environment"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.473284, 0.159086, 0.0193238 )
 script = ExtResource( 13 )
 tutorial_title = "base_tut"
 start_index = 4
 end_index = 5
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Area2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0452818, 0.18408, 0.964144 )
 shape = SubResource( 10 )
 
 [node name="Panel" type="Panel" parent="Environment/Area2"]
@@ -289,7 +330,7 @@ custom_fonts/font = ExtResource( 18 )
 text = "Next"
 
 [node name="Player" type="KinematicBody" parent="." groups=["Player"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.196783, 0, 1.88112 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23961, 0, 0.520019 )
 script = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
@@ -322,7 +363,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0 )
 shape = SubResource( 5 )
 
 [node name="TestNPC" type="StaticBody" parent="." groups=["NPC"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37167, 0, -0.134043 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.429035, 0, -1.2303 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="TestNPC"]
@@ -334,11 +375,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 7 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="TestNPC2" type="StaticBody" parent="." groups=["NPC"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175391, 0, -0.428631 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05664, 0, 1.16997 )
 script = ExtResource( 6 )
 conversant_id = 1
 conversant_name = "Beanie"
@@ -352,10 +393,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
+frame = 3
 playing = true
 
 [node name="TestNPC4" type="StaticBody" parent="." groups=["NPC"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80559, 0, -0.282016 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68709, 0, -3.28869 )
 script = ExtResource( 6 )
 conversant_id = 3
 conversant_name = "Schwarz"
@@ -368,11 +410,10 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 10 )
-frame = 2
 playing = true
 
 [node name="TestNPC5" type="StaticBody" parent="." groups=["NPC"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.575709, 0, -0.706302 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.132502, 1.19209e-07, 2.26912 )
 script = ExtResource( 6 )
 conversant_id = 4
 conversant_name = "Plagueis"
@@ -385,10 +426,11 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 12 )
+frame = 3
 playing = true
 
 [node name="TestNPC3" type="StaticBody" parent="." groups=["NPC"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.348911, 0, 1.63217 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.20839, 0, -0.15939 )
 script = ExtResource( 6 )
 conversant_id = 2
 conversant_name = "Mirror"
@@ -403,11 +445,67 @@ visible = false
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
+frame = 3
 playing = true
 
 [node name="MeshInstance" type="MeshInstance" parent="TestNPC3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0483988, 0.0515495, 0 )
 mesh = SubResource( 7 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.157744, 0.98748, 0, -0.98748, 0.157744, 0, 1.04668, 0 )
+visible = false
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, 0, 0, 0 )
+mesh = ExtResource( 25 )
+material/0 = ExtResource( 19 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, 0.816812, 0, -0.702125 )
+mesh = ExtResource( 30 )
+material/0 = ExtResource( 21 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, 1.17564, 0, 0.799965 )
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 21 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, 0.826941, 0, 1.61249 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 21 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="."]
+transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, -0.29736, 0, 2.30044 )
+mesh = ExtResource( 29 )
+material/0 = ExtResource( 20 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="."]
+transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, 0.266192, 0, 2.42787 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 19 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="."]
+transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, -1.44524, 0, -3.56494 )
+mesh = ExtResource( 27 )
+material/0 = ExtResource( 21 )
+
+[node name="MeshInstance8" type="MeshInstance" parent="."]
+transform = Transform( -0.158046, 0, -0.0249275, 0, 0.16, 0, 0.0249275, 0, -0.158046, -1.45215, 0, -3.56581 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 19 )
+
+[node name="MeshInstance9" type="MeshInstance" parent="."]
+transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, -0.78855, 0, 0.032886 )
+mesh = ExtResource( 28 )
+material/0 = ExtResource( 21 )
+
+[node name="MeshInstance10" type="MeshInstance" parent="."]
+transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, 0, 0, 0 )
+
+[node name="MeshInstance11" type="MeshInstance" parent="."]
+transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, 0, 0, 0 )
 
 [connection signal="body_entered" from="Environment/Area" to="Environment/Area" method="_on_Area_body_entered"]
 [connection signal="pressed" from="Environment/Area/Panel/Button" to="Environment/Area/Panel" method="_on_Button_pressed"]
