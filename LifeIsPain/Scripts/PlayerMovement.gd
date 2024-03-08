@@ -4,6 +4,7 @@ export (float) var move_speed = 1.1
 export (int) var slide_angle_checks = 4
 export (float) var slide_angle_tolerance = 80.0
 const signs = [1, -1] # check for sliding in both directions
+const move_update_threshold = 0.24 # for updating overworld opacity changes
 
 var basis_up = -Vector3.AXIS_Z
 var basis_right = Vector3.AXIS_X
@@ -12,8 +13,10 @@ var moving = false
 
 signal convo_available(conversant)
 signal convo_unavailable
+signal moved_threshold_dist
 var saved_nearest = -1
 var saved_conversants = []
+var saved_position = Vector3.ZERO
 
 func _ready():
 	basis_up = -$CameraMount.transform.basis.z
@@ -55,6 +58,12 @@ func _process(delta):
 			move_and_collide(d_pos)
 			sprite_update(d_pos)
 			update_nearest_npc()
+		
+		# for notifying movement-based environment updates
+		if((global_translation - saved_position).length() > move_update_threshold):
+			emit_signal("moved_threshold_dist")
+			saved_position = global_translation
+		
 	elif(moving):
 		sprite_update(Vector3.ZERO)
 
