@@ -5,6 +5,7 @@ var char_name = 'MissingNo.'
 var working_moods = {}
 var working_tidbits = {}
 var working_eval = []
+var working_pronouns = {}
 
 var mugshot
 var name_display
@@ -26,6 +27,9 @@ func set_npc(npc_name):
 	
 	# load bio data
 	var bio_data = file_reader.read_bio(char_fname)
+	if(bio_data != null && !working_pronouns.has(char_name)):
+		working_pronouns[char_name] = [bio_data[1], bio_data[2], bio_data[3]]
+	
 	var mood = file_reader.read_mood(char_fname)
 	if(mood != null && !working_moods.has(char_name)):
 		get_parent().set_mood(mood)
@@ -69,6 +73,12 @@ func get_tidbit():
 
 func get_eval():
 	return working_eval
+
+func get_pronoun(pronoun_index):
+	if(pronoun_index > 2 || pronoun_index < 0):
+		return '[Unknowable]'
+	else:
+		return working_pronouns[char_name][pronoun_index]
 
 func _on_ConvoManager_convo_ended():
 	# get the current mood from convomanager and save to file before resetting to a dummy 0

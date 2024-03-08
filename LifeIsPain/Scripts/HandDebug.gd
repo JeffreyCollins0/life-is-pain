@@ -6,6 +6,7 @@ export (float) var mouse_move_deadzone = 0.05
 
 var saved_mouse_pos = Vector2.ZERO
 var saved_selection = -1
+var failed_draw_count = 0
 
 # can we draw this card from the deck?
 #var is_card_usable = []
@@ -42,8 +43,8 @@ func _ready():
 	card_swap_track = load('res://Sounds/CardHover.wav')
 
 func _process(delta):
-	if(get_child_count() < 5 && (deck.get_available_cards() - get_child_count()) > 0):
-		print('drawing a new card to make 5...')
+	if(get_child_count() < 5 && (deck.get_available_cards() - get_child_count()) > 0 && failed_draw_count < 5):
+		#print('drawing a new card to make 5...')
 		deal_random_card()
 		reset_card_positions()
 		update_cards(topic_list.get_selected_topic())
@@ -87,6 +88,7 @@ func _process(delta):
 				
 				var new_pos = Vector2( (base_pos) + (section_width/2.0), 0 ) + offset
 				card.targ_pos = Vector2(max(min(new_pos.x, get_viewport().size.x - (section_width/1.5)), (section_width/1.5)), new_pos.y)
+		
 		elif(saved_mouse_pos.y >= position.y && mouse_pos.y < position.y):
 			reset_card_positions()
 		
@@ -138,7 +140,10 @@ func update_cards(topic_index):
 func deal_random_card():
 	var card_data = deck.deal_random_card()
 	if(card_data == null):
+		failed_draw_count += 1
 		return
+	else:
+		failed_draw_count = 0
 	
 	var new_card = card_prefab.instance()
 	new_card.init(card_data)

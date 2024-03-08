@@ -11,18 +11,18 @@ var is_topic_usable = [
 ]
 var strategies = [] # filled dynamically by deck manager
 var responses = [
-	[0.6, 'They hated it.'],
-	[0.4, 'They didn\'t like it...'],
-	[0.0, 'They didn\'t react one way or another...'],
-	[0.4, 'They liked it a little.'],
-	[0.6, 'They loved it!']
+	[0.6, ' hated it.'],
+	[0.4, ' didn\'t like it...'],
+	[0.0, ' didn\'t react one way or another...'],
+	[0.4, ' liked it a little.'],
+	[0.6, ' loved it!']
 ]
 var response_templates = [
-	[0.6, 'They hated that ', '...'],
-	[0.4, 'They didn\'t like that ', '...'],
-	[0.0, 'They didn\'t react to that ', ' one way or another...'],
-	[0.4, 'They liked that ', ' a little.'],
-	[0.6, 'They loved that ', '!']
+	[0.6, ' hated that ', '...'],
+	[0.4, ' didn\'t like that ', '...'],
+	[0.0, ' didn\'t react to that ', ' one way or another...'],
+	[0.4, ' liked that ', ' a little.'],
+	[0.6, ' loved that ', '!']
 ]
 var effect_bands = [
 	[0.9, 'BAD'],
@@ -224,7 +224,7 @@ func add_mood(amount):
 	moodcounter_debug.text = (str(mood_debug)+'%')
 	
 	if(mood_debug >= 100):
-		messagewindow_debug.add_message("The conversant's spirits have recovered!")
+		messagewindow_debug.add_message($NPCManager.get_npc_name() + "'s spirits have recovered!") # The conversant
 		emit_signal("conversant_recovered", $NPCManager.get_npc_name())
 
 func set_mood(value):
@@ -240,7 +240,7 @@ func get_response_band(raw_score):
 	for band in responses:
 		aggreg_score_band += band[0]
 		if(raw_score <= aggreg_score_band):
-			return band[1]
+			return $NPCManager.get_pronoun(0) + band[1]
 	return "MissingNo."
 
 func get_response_band_templated(raw_score, thing_type):
@@ -248,7 +248,7 @@ func get_response_band_templated(raw_score, thing_type):
 	for band in response_templates:
 		aggreg_score_band += band[0]
 		if(raw_score <= aggreg_score_band):
-			return band[1] + thing_type + band[2]
+			return $NPCManager.get_pronoun(0) + band[1] + thing_type + band[2]
 	return "MissingNo."
 
 # call out highest-influence aspect of joke for player feedback
@@ -280,16 +280,16 @@ func callout_adapted(mods, file_read, char_fpath, strat, topic, rating_band, raw
 		#print("topic was the biggest determinant")
 		callout_search_term = topic
 		use_note = get_response_band_templated(raw_score, 'topic')
+	#elif(biggest_influence == mods[3]):
+	#	# external modifier was the biggest determinant
+	#	#print("modifier was the biggest determinant")
+	#	callout_search_term = "MODIFIER"
+	#	use_note = get_response_band_templated(raw_score, 'modifier')
 	elif(biggest_influence == mods[3]):
-		# external modifier was the biggest determinant
-		#print("modifier was the biggest determinant")
-		callout_search_term = "MODIFIER"
-		use_note = get_response_band_templated(raw_score, 'modifier')
-	elif(biggest_influence == mods[4]):
 		# topic overuse was the biggest determinant
 		#print("overuse was the biggest determinant")
 		callout_search_term = "OVERUSE"
-		use_note = "They\'re getting tired of that topic..."
+		use_note = $NPCManager.get_npc_name()+' seems to be getting tired of that topic...' #"They\'re getting tired of that topic..."
 	
 	if(use_note != 'MissingNo.'):
 		messagewindow_debug.add_message(use_note)
@@ -350,9 +350,7 @@ func start_convo(conversant):
 	if(starter_resp == 'MissingNo.'):
 		textbox_debug.text = 'Pick a topic and card to get a response!'
 	else:
-		#textbox_debug.text = starter_resp
 		textbox_debug.new_message(starter_resp)
-	#textbox_debug.reset_typewriter()
 	
 	$TopicList_Custom.reset_overused()
 	

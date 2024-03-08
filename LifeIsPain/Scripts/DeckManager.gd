@@ -66,7 +66,7 @@ func deal_random_card():
 		rerolls += 1
 	
 	if(rerolls == 20):
-		print('[!] unable to find an available card in 20 draws... [!]')
+		#print('[!] unable to find an available card in 20 draws... [!]')
 		return null
 	
 	var card_data = get_card_data(deck[0][card_id])
