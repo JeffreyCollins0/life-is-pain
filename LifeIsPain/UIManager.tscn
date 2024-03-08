@@ -51,6 +51,7 @@ anchor_bottom = 1.0
 color = Color( 0.211765, 0.207843, 0.270588, 1 )
 
 [node name="DebugSaveButton" type="Button" parent="DeckManager/Control"]
+visible = false
 margin_left = 96.0
 margin_top = 73.0
 margin_right = 144.0
@@ -59,6 +60,7 @@ custom_fonts/font = ExtResource( 7 )
 text = "Save"
 
 [node name="DebugLoadButton" type="Button" parent="DeckManager/Control"]
+visible = false
 margin_left = 96.0
 margin_top = 96.0
 margin_right = 144.0
@@ -263,13 +265,13 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 7 )
 autowrap = true
 script = ExtResource( 12 )
-typewriter_speed = 0.6
+typewriter_speed = 0.8
 
 [node name="TalkIndicator" type="AnimatedSprite" parent="ConvoManager/Control/Textbox"]
 visible = false
 position = Vector2( 97.5, 38 )
 frames = ExtResource( 29 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ConvoManager/Control"]

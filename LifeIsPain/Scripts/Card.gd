@@ -41,10 +41,10 @@ func get_mod_id():
 func update_topic(topic_id, pos_spr, neg_spr):
 	var base_mod = get_node('../..').get_mod(card_id, topic_id)
 	if(base_mod > 0):
-		$BaseModIndicator.visible = true
+		#$BaseModIndicator.visible = true
 		$BaseModIndicator.texture = pos_spr
 	elif(base_mod < 0):
-		$BaseModIndicator.visible = true
+		#$BaseModIndicator.visible = true
 		$BaseModIndicator.texture = neg_spr
 	else:
 		$BaseModIndicator.visible = false
