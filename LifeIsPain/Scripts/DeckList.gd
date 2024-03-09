@@ -93,13 +93,15 @@ func replace_card(index, value, source_list, source_index):
 	# get original position and set target position
 	var original_position = source_list.get_card_position(source_index)
 	var new_position = get_card_position(index)
+	var list_pos_diff = source_list.position - position
 	
 	var chips = $CardChipTray.get_children()
 	var chip_index = index - current_item
 	if(chip_index < 0 || chip_index >= items_to_display):
 		return
-	chips[chip_index].position = original_position
+	chips[chip_index].position = original_position + list_pos_diff
 	chips[chip_index].target_pos = new_position
+	chips[chip_index].z_index = 4
 	
 	update_entries()
 

@@ -35,7 +35,6 @@
 script = ExtResource( 24 )
 
 [node name="DeckManager" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 10 )
 
 [node name="Control" type="Control" parent="DeckManager"]
@@ -48,7 +47,7 @@ rect_scale = Vector2( 2, 2 )
 [node name="ColorRect" type="ColorRect" parent="DeckManager/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.211765, 0.207843, 0.270588, 1 )
+color = Color( 0.0431373, 0.0392157, 0.294118, 1 )
 
 [node name="DebugSaveButton" type="Button" parent="DeckManager/Control"]
 visible = false
@@ -69,21 +68,20 @@ custom_fonts/font = ExtResource( 7 )
 text = "Load"
 
 [node name="DeckList" type="Node2D" parent="DeckManager/Control"]
-position = Vector2( -3, 0 )
+position = Vector2( 145, 0 )
 script = ExtResource( 21 )
 
 [node name="ColorRect2" type="ColorRect" parent="DeckManager/Control/DeckList"]
 margin_left = 6.0
-margin_top = 6.0
 margin_right = 95.0
-margin_bottom = 154.0
-color = Color( 0.0431373, 0.0392157, 0.294118, 1 )
+margin_bottom = 160.0
+color = Color( 0.219608, 0.290196, 0.419608, 1 )
 
 [node name="Label" type="Label" parent="DeckManager/Control/DeckList"]
 margin_left = 10.0
-margin_top = 10.0
+margin_top = 5.5
 margin_right = 50.0
-margin_bottom = 24.0
+margin_bottom = 19.5
 custom_fonts/font = ExtResource( 7 )
 text = "Deck"
 
@@ -127,10 +125,11 @@ custom_fonts/font = ExtResource( 11 )
 text = "v"
 
 [node name="LibList" type="Node2D" parent="DeckManager/Control"]
-position = Vector2( 142, 0 )
+position = Vector2( 57.5, 0 )
 script = ExtResource( 21 )
 
 [node name="ColorRect2" type="ColorRect" parent="DeckManager/Control/LibList"]
+visible = false
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 95.0
@@ -139,9 +138,9 @@ color = Color( 0.0431373, 0.0392157, 0.294118, 1 )
 
 [node name="Label" type="Label" parent="DeckManager/Control/LibList"]
 margin_left = 10.0
-margin_top = 10.0
+margin_top = 6.0
 margin_right = 50.0
-margin_bottom = 24.0
+margin_bottom = 20.0
 custom_fonts/font = ExtResource( 7 )
 text = "Library"
 
@@ -185,7 +184,7 @@ custom_fonts/font = ExtResource( 11 )
 text = "v"
 
 [node name="DemoCard" type="Node2D" parent="DeckManager/Control"]
-position = Vector2( 92, 6 )
+position = Vector2( 4, 6 )
 script = ExtResource( 23 )
 
 [node name="Backer" type="Sprite" parent="DeckManager/Control/DemoCard"]
@@ -213,11 +212,12 @@ autowrap = true
 margin_left = 201.0
 margin_top = 3.0
 margin_right = 237.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 custom_fonts/font = ExtResource( 7 )
 text = "Back"
 
 [node name="ConvoManager" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 1 )
 
 [node name="Control" type="Control" parent="ConvoManager"]

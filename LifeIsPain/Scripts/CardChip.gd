@@ -34,6 +34,9 @@ func _process(delta):
 			position += ((target - position) * move_rate)
 		elif(position != target):
 			position = target
+			
+			if(z_index > 0):
+				z_index = 0
 
 func init(chip_index, parent):
 	chip_id = chip_index
