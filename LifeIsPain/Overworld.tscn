@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Scripts/OW_Fade.gd" type="Script" id=1]
 [ext_resource path="res://Models/LifeIsPain_Dumpster2.obj" type="ArrayMesh" id=2]
@@ -34,6 +34,8 @@
 [ext_resource path="res://Models/LifeIsPain_Tire.obj" type="ArrayMesh" id=32]
 [ext_resource path="res://Models/LifeIsPain_Door.obj" type="ArrayMesh" id=33]
 [ext_resource path="res://Models/LifeIsPain_Dumpster1.obj" type="ArrayMesh" id=34]
+[ext_resource path="res://Scripts/CutsceneTrigger.gd" type="Script" id=35]
+[ext_resource path="res://Materials/ground_debug.tres" type="Material" id=36]
 
 [sub_resource type="BoxShape" id=13]
 extents = Vector3( 0.0467851, 0.0463571, 0.0466765 )
@@ -57,7 +59,7 @@ extents = Vector3( 0.0611635, 0.1411, 0.0574565 )
 extents = Vector3( 0.16412, 0.172019, 0.154641 )
 
 [sub_resource type="CylinderShape" id=20]
-height = 0.0433758
+height = 0.129253
 radius = 0.0754504
 
 [sub_resource type="ConcavePolygonShape" id=12]
@@ -66,11 +68,15 @@ data = PoolVector3Array( 4.8768, 0, -14.0217, 5.9297, 0, -13.2773, 4.8768, 3.112
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.499058, 0.502397, 0.497482 )
 
+[sub_resource type="QuadMesh" id=21]
+
+[sub_resource type="QuadMesh" id=22]
+
 [sub_resource type="BoxShape" id=11]
 extents = Vector3( 0.599375, 0.143914, 0.146008 )
 
 [sub_resource type="BoxShape" id=10]
-extents = Vector3( 0.200262, 0.181298, 0.0982638 )
+extents = Vector3( 0.0941167, 0.181298, 0.0982638 )
 
 [sub_resource type="CylinderShape" id=4]
 height = 0.219068
@@ -145,7 +151,7 @@ shape = SubResource( 19 )
 transform = Transform( 0.916726, 0, 0.399517, 0, 1, 0, -0.399517, 0, 0.916726, 0.650519, -2.98023e-08, -3.45757 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Obstacle8"]
-transform = Transform( 0.512927, -0.858432, 0, 0.858432, 0.512927, 0, 0, 0, 1, -0.00725091, 0.0698306, 0.00172448 )
+transform = Transform( 0.681, 0, 0, 0, 1, 0, 0, 0, 1, -0.00725091, 0.0698306, 0.00172448 )
 shape = SubResource( 20 )
 
 [node name="BaseCollision" type="StaticBody" parent="Environment"]
@@ -255,6 +261,24 @@ mesh = ExtResource( 33 )
 skeleton = NodePath("../../..")
 material/0 = ExtResource( 19 )
 
+[node name="MeshInstance13" type="MeshInstance" parent="Environment/TutorialBlocker"]
+transform = Transform( -1.63918e-07, 0, 2.5, 0, 5, 0, -15, 0, -4.37115e-07, -0.790735, 0.711407, 7.65573 )
+mesh = SubResource( 21 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 36 )
+
+[node name="MeshInstance14" type="MeshInstance" parent="Environment/TutorialBlocker"]
+transform = Transform( 2.68953, 0, -0.941794, 0, 5, 0, 7.53435, 0, 0.336191, 3.2483, 0.711407, 3.1391 )
+mesh = SubResource( 22 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 36 )
+
+[node name="MeshInstance15" type="MeshInstance" parent="Environment/TutorialBlocker"]
+transform = Transform( 3.75, 0, 0, 0, 5, 0, -1.7053e-12, 0, 10, 1.0341, 0.711407, 0.314536 )
+mesh = SubResource( 21 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 36 )
+
 [node name="Area" type="Area" parent="Environment"]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -1.06465, 0.193383, 0.372343 )
 monitoring = false
@@ -313,7 +337,7 @@ custom_fonts/font = ExtResource( 18 )
 text = "Next"
 
 [node name="Area2" type="Area" parent="Environment"]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.473284, 0.159086, 0.0193238 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.433245, 0.159086, 0.0193238 )
 monitoring = false
 script = ExtResource( 13 )
 tutorial_title = "base_tut"
@@ -369,6 +393,112 @@ rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 18 )
 text = "Next"
 
+[node name="Area3" type="Area" parent="Environment"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.50628, 0.159086, 0.0193238 )
+script = ExtResource( 35 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/Area3"]
+shape = SubResource( 10 )
+
+[node name="Panel" type="Panel" parent="Environment/Area3"]
+visible = false
+margin_left = 78.0
+margin_top = 18.0
+margin_right = 404.0
+margin_bottom = 306.0
+script = ExtResource( 17 )
+
+[node name="TextureRect" type="TextureRect" parent="Environment/Area3/Panel"]
+margin_left = 9.0
+margin_top = 10.0
+margin_right = 1549.0
+margin_bottom = 607.0
+rect_scale = Vector2( 0.2, 0.2 )
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Environment/Area3/Panel"]
+visible = false
+margin_left = 8.0
+margin_top = 1.0
+margin_right = 133.0
+margin_bottom = 11.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 15 )
+text = "Tutorial Title Goes Here"
+autowrap = true
+
+[node name="Label2" type="Label" parent="Environment/Area3/Panel"]
+margin_left = 8.0
+margin_top = 132.0
+margin_right = 163.0
+margin_bottom = 206.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 16 )
+text = "Tutorial Title Goes Here"
+autowrap = true
+
+[node name="Button" type="Button" parent="Environment/Area3/Panel"]
+margin_left = 332.0
+margin_top = 244.0
+margin_right = 368.0
+margin_bottom = 255.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 18 )
+text = "Next"
+
+[node name="Area4" type="Area" parent="Environment"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.13863, 0.159086, -2.05454 )
+script = ExtResource( 35 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/Area4"]
+shape = SubResource( 10 )
+
+[node name="Panel" type="Panel" parent="Environment/Area4"]
+visible = false
+margin_left = 78.0
+margin_top = 18.0
+margin_right = 404.0
+margin_bottom = 306.0
+script = ExtResource( 17 )
+
+[node name="TextureRect" type="TextureRect" parent="Environment/Area4/Panel"]
+margin_left = 9.0
+margin_top = 10.0
+margin_right = 1549.0
+margin_bottom = 607.0
+rect_scale = Vector2( 0.2, 0.2 )
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Environment/Area4/Panel"]
+visible = false
+margin_left = 8.0
+margin_top = 1.0
+margin_right = 133.0
+margin_bottom = 11.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 15 )
+text = "Tutorial Title Goes Here"
+autowrap = true
+
+[node name="Label2" type="Label" parent="Environment/Area4/Panel"]
+margin_left = 8.0
+margin_top = 132.0
+margin_right = 163.0
+margin_bottom = 206.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 16 )
+text = "Tutorial Title Goes Here"
+autowrap = true
+
+[node name="Button" type="Button" parent="Environment/Area4/Panel"]
+margin_left = 332.0
+margin_top = 244.0
+margin_right = 368.0
+margin_bottom = 255.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 18 )
+text = "Next"
+
 [node name="Player" type="KinematicBody" parent="." groups=["Player"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23961, 0, 0.520019 )
 script = ExtResource( 4 )
@@ -415,7 +545,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 7 )
-frame = 1
+frame = 4
 playing = true
 
 [node name="TestNPC2" type="StaticBody" parent="." groups=["NPC"]]
@@ -450,7 +580,7 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 10 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="TestNPC5" type="StaticBody" parent="." groups=["NPC"]]
@@ -559,6 +689,10 @@ light_energy = 0.8
 [connection signal="pressed" from="Environment/Area/Panel/Button" to="Environment/Area/Panel" method="_on_Button_pressed"]
 [connection signal="body_entered" from="Environment/Area2" to="Environment/Area2" method="_on_Area_body_entered"]
 [connection signal="pressed" from="Environment/Area2/Panel/Button" to="Environment/Area2/Panel" method="_on_Button_pressed"]
+[connection signal="body_entered" from="Environment/Area3" to="Environment/Area3" method="_on_Area_body_entered"]
+[connection signal="pressed" from="Environment/Area3/Panel/Button" to="Environment/Area3/Panel" method="_on_Button_pressed"]
+[connection signal="body_entered" from="Environment/Area4" to="Environment/Area4" method="_on_Area_body_entered"]
+[connection signal="pressed" from="Environment/Area4/Panel/Button" to="Environment/Area4/Panel" method="_on_Button_pressed"]
 [connection signal="convo_available" from="Player" to="UIManager" method="_on_Player_convo_available"]
 [connection signal="convo_unavailable" from="Player" to="UIManager" method="_on_Player_convo_unavailable"]
 [connection signal="body_entered" from="Player/TalkableArea" to="Player" method="_on_TalkableArea_body_entered"]

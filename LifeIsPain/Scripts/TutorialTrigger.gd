@@ -10,3 +10,8 @@ func _on_Area_body_entered(body):
 		$Panel.init(tutorial_title, start_index, end_index)
 		$Panel.visible = true
 		seen_already = true
+		body.lock_player_movement()
+		
+		yield($Panel, "modal_ended")
+		
+		body.unlock_player_movement()

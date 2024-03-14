@@ -10,6 +10,7 @@ var basis_up = -Vector3.AXIS_Z
 var basis_right = Vector3.AXIS_X
 var facing = -basis_right
 var moving = false
+var can_move = false
 
 signal convo_available(conversant)
 signal convo_unavailable
@@ -23,6 +24,12 @@ func _ready():
 	basis_right = $CameraMount.transform.basis.x
 
 func _process(delta):
+	if(!can_move):
+		if(moving):
+			sprite_update(Vector3.ZERO)
+		
+		return
+	
 	var d_pos = Vector3.ZERO
 	var input_result = Vector2.ZERO
 	
@@ -122,6 +129,12 @@ func update_nearest_npc():
 	if(nearest != -1 && nearest != saved_nearest):
 		saved_nearest = nearest
 		emit_signal("convo_available", nearest_name)
+
+func lock_player_movement():
+	can_move = false
+
+func unlock_player_movement():
+	can_move = true
 
 func _on_TalkableArea_body_entered(body):
 	if(!body.is_in_group('NPC')):

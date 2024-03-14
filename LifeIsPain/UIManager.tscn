@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scripts/ConvoManager.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/HandDebug.gd" type="Script" id=2]
@@ -30,11 +30,21 @@
 [ext_resource path="res://DinoCrushSmallCondensed.tres" type="DynamicFont" id=28]
 [ext_resource path="res://Sprites/TalkIndicator.tres" type="SpriteFrames" id=29]
 [ext_resource path="res://TinyUnicode.tres" type="DynamicFont" id=30]
+[ext_resource path="res://Scripts/Narrator.gd" type="Script" id=31]
+[ext_resource path="res://Scripts/CutAnim2.gd" type="Script" id=32]
+[ext_resource path="res://IntroImages/IntroCut2.png" type="Texture" id=33]
+[ext_resource path="res://IntroImages/IntroCut3.png" type="Texture" id=34]
+[ext_resource path="res://Scripts/CutAnim4.gd" type="Script" id=35]
+[ext_resource path="res://Scripts/CutAnim1.gd" type="Script" id=36]
+[ext_resource path="res://IntroImages/IntroEyes.tres" type="SpriteFrames" id=37]
+[ext_resource path="res://IntroImages/IntroCut5.png" type="Texture" id=38]
+[ext_resource path="res://IntroImages/IntroCut4.png" type="Texture" id=39]
 
 [node name="UIManager" type="Node2D"]
 script = ExtResource( 24 )
 
 [node name="DeckManager" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 10 )
 
 [node name="Control" type="Control" parent="DeckManager"]
@@ -72,7 +82,7 @@ position = Vector2( 145, 0 )
 script = ExtResource( 21 )
 
 [node name="ColorRect2" type="ColorRect" parent="DeckManager/Control/DeckList"]
-margin_left = 6.0
+margin_left = 2.0
 margin_right = 95.0
 margin_bottom = 160.0
 color = Color( 0.219608, 0.290196, 0.419608, 1 )
@@ -271,7 +281,7 @@ typewriter_speed = 0.8
 visible = false
 position = Vector2( 97.5, 38 )
 frames = ExtResource( 29 )
-frame = 4
+frame = 6
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ConvoManager/Control"]
@@ -500,6 +510,93 @@ rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 7 )
 text = "Customize"
 
+[node name="Narrator" type="Node2D" parent="."]
+script = ExtResource( 31 )
+
+[node name="FadeBG" type="ColorRect" parent="Narrator"]
+margin_right = 480.0
+margin_bottom = 320.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="CutAnim1" type="Node2D" parent="Narrator"]
+visible = false
+script = ExtResource( 36 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Narrator/CutAnim1"]
+position = Vector2( 240, 160 )
+frames = ExtResource( 37 )
+
+[node name="CutAnim2" type="Node2D" parent="Narrator"]
+visible = false
+position = Vector2( 480, 0 )
+script = ExtResource( 32 )
+move_spd = 72.0
+
+[node name="Sprite" type="Sprite" parent="Narrator/CutAnim2"]
+texture = ExtResource( 33 )
+centered = false
+
+[node name="CutAnim3" type="Node2D" parent="Narrator"]
+visible = false
+position = Vector2( 0, 320 )
+script = ExtResource( 32 )
+move_spd = 64.0
+
+[node name="Sprite" type="Sprite" parent="Narrator/CutAnim3"]
+texture = ExtResource( 34 )
+centered = false
+
+[node name="CutAnim4" type="Node2D" parent="Narrator"]
+visible = false
+script = ExtResource( 35 )
+
+[node name="Sprite" type="Sprite" parent="Narrator/CutAnim4"]
+texture = ExtResource( 39 )
+centered = false
+
+[node name="CutAnim5" type="Node2D" parent="Narrator"]
+visible = false
+position = Vector2( 480, 0 )
+script = ExtResource( 32 )
+
+[node name="Sprite" type="Sprite" parent="Narrator/CutAnim5"]
+position = Vector2( -480, 0 )
+texture = ExtResource( 38 )
+centered = false
+
+[node name="NarrationTextShadow" type="Label" parent="Narrator"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 71.0
+margin_top = 126.0
+margin_right = 243.0
+margin_bottom = 159.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 7 )
+text = "Sample Text"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="NarrationText" type="Label" parent="Narrator"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 69.0
+margin_top = 124.0
+margin_right = 241.0
+margin_bottom = 157.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 7 )
+text = "Sample Text"
+align = 1
+valign = 1
+autowrap = true
+
 [connection signal="cust_ended" from="DeckManager" to="." method="_on_DeckManager_cust_ended"]
 [connection signal="pressed" from="DeckManager/Control/DebugSaveButton" to="DeckManager" method="_on_DebugSaveButton_pressed"]
 [connection signal="pressed" from="DeckManager/Control/DebugLoadButton" to="DeckManager" method="_on_DebugLoadButton_pressed"]
@@ -518,3 +615,8 @@ text = "Customize"
 [connection signal="pressed" from="ConvoManager/BackButton" to="ConvoManager" method="_on_BackButton_pressed"]
 [connection signal="pressed" from="DebugConvoButton" to="." method="_on_DebugConvoButton_pressed"]
 [connection signal="pressed" from="DebugCustButton" to="." method="_on_DebugCustButton_pressed"]
+[connection signal="scene_ended" from="Narrator/CutAnim1" to="Narrator" method="on_anim_end"]
+[connection signal="scene_ended" from="Narrator/CutAnim2" to="Narrator" method="on_anim_end"]
+[connection signal="scene_ended" from="Narrator/CutAnim3" to="Narrator" method="on_anim_end"]
+[connection signal="scene_ended" from="Narrator/CutAnim4" to="Narrator" method="on_anim_end"]
+[connection signal="scene_ended" from="Narrator/CutAnim5" to="Narrator" method="on_anim_end"]

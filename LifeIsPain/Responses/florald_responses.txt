@@ -1,0 +1,71 @@
+Florald
+
+[_BIO_]
+Florald
+They/Them/Their
+
+[_EVAL_]
+0, -1, 1, 0, 0, 0.5, 1, 0, 0, -1, 0.5
+0, 1, -1, 0.5, 1, 0, 0, -1, 0, 0.5, 0
+
+[_UNLOCK_]
+050 | T09
+100 | S08
+
+[_MOOD_]
+10
+
+[STARTER/GUD/01]
+What do you want? I'm trying to live here.
+
+[_TIDBITS/03_]
+I love making art, even if I usually can't manage it. A lot of it ends up being protest graffiti, though.
+I hate this place. The world's dying and nobody bothered to save it, and now I'm having to live with that.
+Sometimes I wonder if I should talk to that gardener over there. Maybe they could help me out or something.
+
+[GIFTS/BAD/01]
+Nobody's forcing you to give gifts, alright? Some people like those, so back off.
+[GIFTS/MID/01]
+Come on, don't halfheart things like that.
+[GIFTS/GUD/02]
+People don't understand how much a gift means to people. That is, unless you halfheart it.
+I got an amazing gift once. Changed my whole outlook on peopl- well, person. The rest are still terrible.
+
+[SUNGLASSES/GUD/01]
+Sunglasses look so cool. Wish I had a pair, though it's not worth much when I don't have eyes.
+[FRIENDS/GUD/01]
+I've never had friends, but it sounds so fun. I guess tellin' people to get bent all the time doesn't help with that.
+[SATIRIZE/GUD/01]
+That's amazing. Never thought I'd be able to talk about how terrible things are without seein' red.
+[HARD TRUTH/GUD/01]
+Good to see someone else sees how messed up the world is. You don't let it get to you that much, though. Makes me think I should work on making my own life better.
+[BOXES/GUD/01]
+Boxes don't get enough credit. The nutrients in this dumpster've kept me alive for a long time. Not like I can smell anyway.
+
+[MINIMIZE/BAD/01]
+Oh yeah, jump on that bandwagon. Everyone still thinks I'm "just some plant" even though I've had to augment my body just to not wilt and die.
+[EUPHEMISM/BAD/01]
+Come off it with this halfhearted stuff. Euphemisms are what let people gloss over real problems just because it's "uncomfortable".
+[WEATHER/BAD/02]
+Yeah, the weather's terrible now that the climate's shifted. It's almost like people should have stood up and done something about that.
+I can barely survive in this weather. Not like anyone with the power to change things cared what would happen to us plants... jerks.
+
+
+[BASE/BAD/01]
+That combo was a bad idea on a basic level.
+[BASE/GUD/01]
+Heh, that's a good one, plain and simple. 
+
+[MODIFIER/BAD/01]
+That would've been better, but the embellishment killed it.
+[MODIFIER/GUD/01]
+Nice one, that last bit of embellishment REALLY sold it.
+
+[OVERUSE/BAD/01]
+Come on, this topic again? Stop wastin' my time!
+
+[UNLOCK/050]
+A stranger gave me my first paints a while ago. That's the first nice thing anyone's done for me, and it kills me I never got their name.
+
+[UNLOCK/100]
+Make 'em think you'll do one thing, then do the opposite. They never see it coming. I think I'll work on turning my situation around, when I can manage it. Thanks, stranger.

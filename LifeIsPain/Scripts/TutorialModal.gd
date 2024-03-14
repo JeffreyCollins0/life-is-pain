@@ -5,6 +5,8 @@ var tutorial_title = 'MissingNo.'
 var index_range = [-1, -1]
 var current_index = -1
 
+signal modal_ended
+
 func init(title, start_index = -1, end_index = -1):
 	tutorial_title = title
 	
@@ -25,6 +27,7 @@ func next_page():
 	if(current_index >= index_range[1]):
 		# end of section reached, report that we finished it
 		visible = false
+		emit_signal("modal_ended")
 		return
 	
 	current_index += 1
