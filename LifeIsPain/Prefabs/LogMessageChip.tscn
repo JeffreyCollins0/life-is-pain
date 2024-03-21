@@ -1,24 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://TinyUnicode.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/LogMessageChip.gd" type="Script" id=2]
 
-[node name="MessageChip" type="Control"]
+[node name="MarginContainer" type="MarginContainer"]
+margin_right = 137.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 6, 8 )
+script = ExtResource( 2 )
+NPCColor = Color( 0.584314, 0.729412, 0.780392, 0.588235 )
+IntColor = Color( 0, 0, 0, 0 )
+TipColor = Color( 0.564706, 0.717647, 0.54902, 0.588235 )
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 1.0
-margin_bottom = 1.0
-
-[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
-margin_right = 124.0
-margin_bottom = 21.0
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 137.0
+margin_bottom = 8.0
 color = Color( 0.317647, 0.498039, 0.803922, 0.588235 )
 
-[node name="Label" type="Label" parent="MarginContainer"]
-margin_right = 124.0
-margin_bottom = 21.0
+[node name="Label" type="Label" parent="."]
+margin_right = 137.0
+margin_bottom = 5.0
+size_flags_vertical = 2
 custom_fonts/font = ExtResource( 1 )
-text = "ABCDEFGHIJKLMNOPQRZTUVWXYZ
-abcdefghijklmnopqrstuvwxyz
-0123456789-=!?./,\":;'|\\"
+text = "This is a sample message."
+autowrap = true

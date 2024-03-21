@@ -63,6 +63,7 @@ var textbox_debug
 var stresscounter_debug
 var moodcounter_debug
 var messagewindow_debug
+var message_log
 var increment_prefab
 var response_player
 
@@ -76,6 +77,7 @@ func _ready():
 	stresscounter_debug = $StressCounter/Value
 	moodcounter_debug = $MoodCounter/Value
 	messagewindow_debug = $MessageRollout
+	message_log = $MessageLog
 	increment_prefab = load('res://Prefabs/IncrementText.tscn')
 	pos_resp_track = load('res://Sounds/PositiveResponse.wav')
 	neg_resp_track = load('res://Sounds/NegResp1.wav')
@@ -104,7 +106,9 @@ func determine_response(topic_index, strat_index):
 	var aux_mod = $ModifierTally.get_net_modifier()
 	
 	# initial message
-	messagewindow_debug.add_message("You told "+$NPCManager.get_npc_name()+" a "+strategies[strat_index]+" about "+topics[topic_index]+"...")
+	var joke_msg = "You told "+$NPCManager.get_npc_name()+" a "+strategies[strat_index]+" about "+topics[topic_index]+"..."
+	messagewindow_debug.add_message(joke_msg)
+	message_log.log_message(joke_msg, "Internal")
 	
 	# actual evaluation
 	var rating_band = 'MID'
@@ -153,6 +157,7 @@ func determine_response(topic_index, strat_index):
 	#messagewindow_debug.add_message(get_response_band(final_score))
 	
 	textbox_debug.new_message(char_response)
+	message_log.log_message($NPCManager.get_npc_name()+": "+char_response, "NPC")
 	
 	var pre_mod_mood = mood_debug
 	
@@ -209,6 +214,7 @@ func add_stress(amount):
 	
 	if(stress_debug >= 100):
 		messagewindow_debug.add_message("You're too stressed and can't think...")
+		message_log.log_message("You're too stressed and can't think...", "Internal")
 		end_convo() # wait a bit for this one
 
 func add_mood(amount):
@@ -224,7 +230,8 @@ func add_mood(amount):
 	moodcounter_debug.text = (str(mood_debug)+'%')
 	
 	if(mood_debug >= 100):
-		messagewindow_debug.add_message($NPCManager.get_npc_name() + "'s spirits have recovered!") # The conversant
+		messagewindow_debug.add_message($NPCManager.get_npc_name() + "'s spirits have recovered!")
+		message_log.log_message($NPCManager.get_npc_name() + "'s spirits have recovered!", "Internal")
 		emit_signal("conversant_recovered", $NPCManager.get_npc_name())
 
 func set_mood(value):
@@ -293,6 +300,7 @@ func callout_adapted(mods, file_read, char_fpath, strat, topic, rating_band, raw
 	
 	if(use_note != 'MissingNo.'):
 		messagewindow_debug.add_message(use_note)
+		message_log.log_message(use_note, "Tip")
 	
 	if(rating_band == 'MID'):
 		rating_band = 'BAD'
@@ -306,6 +314,7 @@ func add_tidbit():
 	var tidbit = $NPCManager.get_tidbit()
 	if(tidbit != 'MissingNo.'):
 		textbox_debug.new_message(tidbit)
+		message_log.log_message($NPCManager.get_npc_name()+": "+tidbit, "NPC")
 
 func process_unlocks(unlocks):
 	for unlock in unlocks:
@@ -322,11 +331,14 @@ func process_unlocks(unlocks):
 			var unlock_message = file_read.read_unlock_message(char_fpath, mood_debug)
 			if(unlock_message != 'MissingNo.'):
 				textbox_debug.new_message(unlock_message, true)
+				message_log.log_message($NPCManager.get_npc_name()+": "+unlock_message, "NPC")
 
 func unlock_topic(topic_index):
 	is_topic_usable[topic_index] = true
 	print('Unlocked topic '+topics[topic_index])
-	messagewindow_debug.add_message('You can now use the topic \"'+topics[topic_index]+'\"!')
+	var unlock_toast = 'You can now use the topic \"'+topics[topic_index]+'\"!'
+	messagewindow_debug.add_message(unlock_toast)
+	message_log.log_message(unlock_toast, "Internal")
 	$TopicList_Custom.add_topic(topics[topic_index], topic_index)
 
 func get_mod(strat_index, topic_index):
@@ -351,8 +363,13 @@ func start_convo(conversant):
 		textbox_debug.text = 'Pick a topic and card to get a response!'
 	else:
 		textbox_debug.new_message(starter_resp)
+		message_log.log_message($NPCManager.get_npc_name()+": "+starter_resp, "NPC")
 	
 	$TopicList_Custom.reset_overused()
+	
+	for _i in range(5):
+		$Hand.deal_random_card()
+	$Hand.reset_card_positions()
 	
 	emit_signal("convo_started")
 

@@ -13,8 +13,8 @@ func on_played():
 		control.add_mood(5)
 	elif(mod_index == 5):
 		# self-roast
-		control.add_mood(6)
-		control.add_stress(4)
+		control.add_mood(8)
+		control.add_stress(8)
 	elif(mod_index == 6):
 		# think fast
 		for i in range(2):

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/IntroCut4.png-83490406d4715b452fc228e9248fc074.stex"
+path="res://.import/MirrorMug.png-d4a990bf2c954beb61cb11c60b15c5ad.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IntroImages/IntroCut4.png"
-dest_files=[ "res://.import/IntroCut4.png-83490406d4715b452fc228e9248fc074.stex" ]
+source_file="res://Sprites/MirrorMug.png"
+dest_files=[ "res://.import/MirrorMug.png-d4a990bf2c954beb61cb11c60b15c5ad.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

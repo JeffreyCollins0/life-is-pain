@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Scripts/ConvoManager.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/HandDebug.gd" type="Script" id=2]
@@ -25,7 +25,6 @@
 [ext_resource path="res://Scripts/DemoCard.gd" type="Script" id=23]
 [ext_resource path="res://Scripts/UIManager.gd" type="Script" id=24]
 [ext_resource path="res://Scripts/NPCManager.gd" type="Script" id=25]
-[ext_resource path="res://Prefabs/LogMessageChip.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Scripts/MessageLog.gd" type="Script" id=27]
 [ext_resource path="res://DinoCrushSmallCondensed.tres" type="DynamicFont" id=28]
 [ext_resource path="res://Sprites/TalkIndicator.tres" type="SpriteFrames" id=29]
@@ -237,7 +236,7 @@ margin_bottom = 320.0
 [node name="ColorRect" type="ColorRect" parent="ConvoManager/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.211765, 0.207843, 0.270588, 1 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="PanelContainer" type="PanelContainer" parent="ConvoManager/Control"]
 visible = false
@@ -281,7 +280,7 @@ typewriter_speed = 0.8
 visible = false
 position = Vector2( 97.5, 38 )
 frames = ExtResource( 29 )
-frame = 6
+frame = 7
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ConvoManager/Control"]
@@ -422,43 +421,14 @@ custom_colors/font_color = Color( 0.517647, 0.717647, 0.835294, 1 )
 custom_fonts/font = ExtResource( 30 )
 autowrap = true
 
-[node name="Control2" type="Control" parent="ConvoManager"]
-visible = false
-margin_right = 480.0
-margin_bottom = 320.0
-
-[node name="MessageLog" type="Control" parent="ConvoManager/Control2"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 67.0
-margin_top = 5.0
-margin_right = -5.0
-margin_bottom = -161.0
+[node name="LogButton" type="Button" parent="ConvoManager"]
+margin_left = 137.0
+margin_top = 94.0
+margin_right = 163.0
+margin_bottom = 105.0
 rect_scale = Vector2( 2, 2 )
-script = ExtResource( 27 )
-
-[node name="ColorRect2" type="ColorRect" parent="ConvoManager/Control2/MessageLog"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.211765, 0.207843, 0.270588, 0.882353 )
-
-[node name="ScrollContainer" type="ScrollContainer" parent="ConvoManager/Control2/MessageLog"]
-margin_left = 3.0
-margin_top = 15.0
-margin_right = 95.0
-margin_bottom = 123.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ConvoManager/Control2/MessageLog/ScrollContainer"]
-
-[node name="MessageChip" parent="ConvoManager/Control2/MessageLog/ScrollContainer/VBoxContainer" instance=ExtResource( 26 )]
-
-[node name="Label" type="Label" parent="ConvoManager/Control2/MessageLog"]
-margin_left = 3.0
-margin_top = 5.0
-margin_right = 69.0
-margin_bottom = 19.0
-custom_fonts/font = ExtResource( 7 )
-text = "Message Log"
+custom_fonts/font = ExtResource( 30 )
+text = "Log"
 
 [node name="BackButton" type="Button" parent="ConvoManager"]
 margin_left = 4.0
@@ -468,6 +438,53 @@ margin_bottom = 198.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 7 )
 text = "End"
+
+[node name="MessageLog" type="Control" parent="ConvoManager"]
+visible = false
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 67.0
+margin_top = 5.0
+margin_right = 67.0
+margin_bottom = 5.0
+rect_scale = Vector2( 2, 2 )
+script = ExtResource( 27 )
+
+[node name="ColorRect2" type="ColorRect" parent="ConvoManager/MessageLog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 168.0
+margin_bottom = 127.0
+color = Color( 0.129412, 0.121569, 0.231373, 0.882353 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ConvoManager/MessageLog"]
+margin_left = 3.0
+margin_top = 15.0
+margin_right = 95.0
+margin_bottom = 123.0
+rect_min_size = Vector2( 162, 24 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConvoManager/MessageLog/ScrollContainer"]
+margin_right = 162.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 162, 24 )
+
+[node name="Label" type="Label" parent="ConvoManager/MessageLog"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 69.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 7 )
+text = "Message Log"
+
+[node name="CloseButton" type="Button" parent="ConvoManager/MessageLog"]
+margin_left = 132.0
+margin_top = 2.0
+margin_right = 165.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 30 )
+text = "Close"
+align = 2
 
 [node name="CancelableAudioPlayer" type="AudioStreamPlayer" parent="ConvoManager"]
 stream = ExtResource( 14 )
@@ -597,6 +614,23 @@ align = 1
 valign = 1
 autowrap = true
 
+[node name="SkipText" type="Label" parent="Narrator"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 377.0
+margin_top = 290.0
+margin_right = 423.0
+margin_bottom = 299.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 7 )
+text = "E - Skip"
+align = 1
+valign = 1
+autowrap = true
+
 [connection signal="cust_ended" from="DeckManager" to="." method="_on_DeckManager_cust_ended"]
 [connection signal="pressed" from="DeckManager/Control/DebugSaveButton" to="DeckManager" method="_on_DebugSaveButton_pressed"]
 [connection signal="pressed" from="DeckManager/Control/DebugLoadButton" to="DeckManager" method="_on_DebugLoadButton_pressed"]
@@ -606,13 +640,16 @@ autowrap = true
 [connection signal="pressed" from="DeckManager/Control/LibList/ScrollDownButton" to="DeckManager/Control/LibList" method="_on_ScrollDownButton_pressed"]
 [connection signal="pressed" from="DeckManager/Control/BackButton" to="DeckManager" method="_on_BackButton_pressed"]
 [connection signal="convo_ended" from="ConvoManager" to="." method="_on_ConvoManager_convo_ended"]
+[connection signal="convo_ended" from="ConvoManager" to="DeckManager" method="_on_ConvoManager_convo_ended"]
 [connection signal="convo_ended" from="ConvoManager" to="ConvoManager/Control/Textbox/Label" method="_on_ConvoManager_convo_ended"]
 [connection signal="convo_ended" from="ConvoManager" to="ConvoManager/NPCManager" method="_on_ConvoManager_convo_ended"]
 [connection signal="convo_started" from="ConvoManager" to="DeckManager" method="_on_ConvoManager_convo_started"]
 [connection signal="convo_started" from="ConvoManager" to="ConvoManager/Control/Textbox/Label" method="_on_ConvoManager_convo_started"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollUpButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollUpButton_pressed"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollDownButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollDownButton_pressed"]
+[connection signal="pressed" from="ConvoManager/LogButton" to="ConvoManager/MessageLog" method="_on_LogButton_pressed"]
 [connection signal="pressed" from="ConvoManager/BackButton" to="ConvoManager" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="ConvoManager/MessageLog/CloseButton" to="ConvoManager/MessageLog" method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="DebugConvoButton" to="." method="_on_DebugConvoButton_pressed"]
 [connection signal="pressed" from="DebugCustButton" to="." method="_on_DebugCustButton_pressed"]
 [connection signal="scene_ended" from="Narrator/CutAnim1" to="Narrator" method="on_anim_end"]

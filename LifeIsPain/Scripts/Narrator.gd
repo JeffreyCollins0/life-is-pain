@@ -23,12 +23,33 @@ var narration_pointer = 2
 var paused = false
 var mode = 'text' # swap between text, visual and fadein /fadeout
 
+var skip_heat = 0 # have the skip text gradually fade after appearing
+
 func _ready():
 	$NarrationText.text = ''
 	$NarrationTextShadow.text = ''
 
+func _input(event):
+	if(event.is_action_pressed("converse") && !paused):
+		#print('got skipping heat '+str(skip_heat)+' vs '+str(default_text_pause / 2.0))
+		if(skip_heat > (default_text_pause / 2.0)):
+			skip_cutscene()
+		else:
+			$SkipText.visible = true
+			skip_heat = default_text_pause
+
 func _process(delta):
 	if(!paused):
+		if(skip_heat > 0):
+			skip_heat -= delta
+			
+			$SkipText.modulate = Color(1.0, 1.0, 1.0, (skip_heat / default_text_pause))
+			
+			if(skip_heat <= 0):
+				skip_heat = 0
+				$SkipText.visible = false
+				$SkipText.modulate = Color.white
+		
 		if(pause_time > 0):
 			pause_time -= delta
 			
@@ -98,6 +119,8 @@ func invoke_narration():
 		fade_time = (default_text_pause * 1.2)
 		mode = 'fade out'
 		paused = true
+		
+		print('pointer is now '+str(narration_pointer))
 
 		$NarrationText.percent_visible = 0
 		$NarrationTextShadow.percent_visible = 0
@@ -172,3 +195,46 @@ func read_next_narration():
 	narration_pointer += 1
 	file.close()
 	return line
+
+func skip_cutscene():
+	var file = File.new()
+	if(!file.file_exists(narration_fpath)):
+		print("File "+narration_fpath+" not found.")
+		return 'MissingNo.'
+	file.open(narration_fpath, File.READ)
+	
+	for _i in range(narration_pointer):
+		if(!file.eof_reached()):
+			file.get_line()
+		else:
+			file.close()
+			break
+	
+	# move the pointer to the end of this section
+	var skipped_lines = 1
+	var line = ''
+	while(line != '[BREAK]'):
+		if(!file.eof_reached()):
+			line = file.get_line()
+			skipped_lines += 1
+		else:
+			file.close()
+			break
+	
+	narration_pointer += skipped_lines
+	
+	fade_direction = -1.0
+	fade_time = (default_text_pause * 1.2)
+	mode = 'fade out'
+	paused = true
+	
+	print('pointer is now '+str(narration_pointer))
+	
+	text_time = 0
+	
+	$SkipText.visible = false
+	$NarrationText.percent_visible = 0
+	$NarrationTextShadow.percent_visible = 0
+	
+	if(anim_obj != null):
+		anim_obj.visible = false

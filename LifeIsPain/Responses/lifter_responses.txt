@@ -1,0 +1,80 @@
+Lifter
+
+[_BIO_]
+Lifter
+They/Them/Their
+
+[_EVAL_]
+0.5, 0, -1, 1, 0, 0.5, -1, 0, 0, 1, 0
+0, 1, 0.5, 0, 0, -1, 0, -1, 1, 0, 0.5
+
+[_UNLOCK_]
+050 | T08
+100 | S10
+
+[_MOOD_]
+40
+
+[STARTER/GUD/01]
+Yo, 'sup... uh... sidekick? Yeah! You're my sidekick now. Pleased to meet ya.
+
+[_TIDBITS/03_]
+I actually got into lifting after reading comic books. Always looked up to those heroes, the ones strong enough to solve everything by punching!
+A ship was supposed to come and pick these boxes up a while ago. It never came, so I'm just usin' these for weight training in the meantime!
+I had to do a lot to tip this storage tank over, but it was worth it for all this glowing sludge. Look at the stuff! No way you can drink that and not get SOME kinda superpowers, right?
+
+[COMICS/BAD/01]
+Whaddya say about comic books? I don't see what's not to like. Maybe I just didn't get the joke?
+[COMICS/MID/01]
+I'll be honest, that sounds like what I'd come up with if you asked me to make a joke. Don't worry, it takes a lot of thinkin'...
+[COMICS/GUD/02]
+That's what I'm talkin' about! I love those!
+I gotta show you my comic collection sometime. It's huge! I'm always knockin' over the stacks, though...
+
+[HARD TRUTH/BAD/01]
+I... Guess? You never know if punching will solve a problem till you try! Maybe I'm just not punching the clouds hard enough!
+[HARD TRUTH/MID/01]
+I don't really get what you're sayin'. Was it a joke? Then why was it so... sad?
+[HARD TRUTH/GUD/01]
+Yeah, I get what you're sayin'. I can't think about all those complicated problems, so I figured I'd just drink sludge, get superpowers and solve stuff directly. You're right, though. I can solve things other ways!
+
+[TALK FUNNY/GUD/01]
+Ha! Nice one, sidekick. I love doin' voices like that!
+[EUPHEMISM/GUD/01]
+I dunno what the word is for that, but it's like when they have ten different titles for the same hero and use those instead of their actual name. It's so cool!
+[BOXES/GUD/01]
+Right on, these boxes are really heavy! Makes for great training, so I can punch all these clouds away!
+[WEATHER/GUD/01]
+The sky's been all dark and grey for months now. I heard talk that it's changes in the climate or some such, but that won't matter once I figure out how to punch 'em!
+[TIME/GUD/01]
+Timing your sets is important for training, and for deliveries! I always keep track by how many times my flasher goes around in a circle.
+
+[DEAD PAN/BAD/01]
+Was that a joke? You just said a thing all serious-like. I don't get it...
+[PLANTS/BAD/01]
+Oh, I hate plants! One time I fell of the pier and got that seaweed stuff all over me. Worst day I've ever had.
+[SATIRIZE/BAD/01]
+Sounds like you're blowin' things out of proportion there. It's not all that bad, sidekick!
+[PLUSHIES/BAD/01]
+Those plushie things are fun, but they're not all that useful... If I'm gonna make people happy, I gotta focus everything on training to punch those clouds! You feel me?
+
+
+[BASE/BAD/01]
+I don't think those two things go together very good...
+[BASE/GUD/01]
+Those two things go together pretty good! I wouldn't have thought about that.
+
+[MODIFIER/BAD/01]
+That woulda been good if you hadn't added the last bit. Maybe I just didn't get it?
+[MODIFIER/GUD/01]
+I'm glad you added that last bit. That made it a lot funnier!
+
+[OVERUSE/BAD/01]
+You keep repeatin' that topic a lot, sidekick. Reps are good and all, but maybe mix it up?
+
+[UNLOCK/050]
+I love comic books! I always wanted to be all strong and fix stuff like the heroes in those.
+
+[UNLOCK/100]
+Saying stuff without actually saying it is so cool! ...even if I'm kinda bad at it. Takes too much thinking. Maybe I should get to work helping people with non-punching things...
+

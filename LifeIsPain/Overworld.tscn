@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Scripts/OW_Fade.gd" type="Script" id=1]
 [ext_resource path="res://Models/LifeIsPain_Dumpster2.obj" type="ArrayMesh" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://Models/LifeIsPain_Dumpster1.obj" type="ArrayMesh" id=34]
 [ext_resource path="res://Scripts/CutsceneTrigger.gd" type="Script" id=35]
 [ext_resource path="res://Materials/ground_debug.tres" type="Material" id=36]
+[ext_resource path="res://Sprites/OWLifter.tres" type="SpriteFrames" id=37]
 
 [sub_resource type="BoxShape" id=13]
 extents = Vector3( 0.0467851, 0.0463571, 0.0466765 )
@@ -545,7 +546,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 7 )
-frame = 4
+frame = 3
 playing = true
 
 [node name="TestNPC2" type="StaticBody" parent="." groups=["NPC"]]
@@ -563,7 +564,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="TestNPC4" type="StaticBody" parent="." groups=["NPC"]]
@@ -580,7 +581,7 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 10 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="TestNPC5" type="StaticBody" parent="." groups=["NPC"]]
@@ -597,7 +598,7 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 12 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="TestNPC3" type="StaticBody" parent="." groups=["NPC"]]
@@ -616,7 +617,7 @@ visible = false
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="MeshInstance" type="MeshInstance" parent="TestNPC3"]
@@ -637,6 +638,22 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 31 )
+playing = true
+
+[node name="TestNPC7" type="StaticBody" parent="." groups=["NPC"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.33547, -1.19209e-07, -3.3599 )
+script = ExtResource( 6 )
+conversant_id = 6
+conversant_name = "Lifter"
+
+[node name="CollisionShape" type="CollisionShape" parent="TestNPC7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0 )
+shape = SubResource( 4 )
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="TestNPC7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
+billboard = 2
+frames = ExtResource( 37 )
 frame = 3
 playing = true
 

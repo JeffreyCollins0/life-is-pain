@@ -24,17 +24,17 @@ Euphemism | He's my sweet cheese, my fun time boy
 Dual-Speak | It's funny on TWO levels.
 
 [MODIF 11 | 00]
-Subtlety | +3 mood if the next joke works, else +3 stress
+Subtlety | +12 mood if the next joke works, else +12 stress
 [MODIF 12 | 01]
-Offbeat | +4 mood if the last joke failed and the next doesn't
+Offbeat | +10 mood if the last joke failed and the next doesn't
 [MODIF 13 | 02]
-Long Pause | -2 stress if the next joke works, else +2 stress
+Long Pause | -10 stress if the next joke works, else +10 stress
 [MODIF 14 | 03]
-Improvise | +2 mood if the last joke failed
+Improvise | +5 mood if the last joke failed
 [MODIF 15 | 04]
-Set 'Em Up | +1 mood
+Set 'Em Up | +5 mood
 [MODIF 16 | 05]
-Self-Roast | +2 mood, +2 stress
+Self-Roast | +8 mood, +8 stress
 [MODIF 17 | 06]
 Think Fast | Draw 2 new cards
 [MODIF 18 | 07]

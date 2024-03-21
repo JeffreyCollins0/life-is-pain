@@ -210,5 +210,8 @@ func end_cust():
 func _on_BackButton_pressed():
 	end_cust()
 
-func _on_ConvoManager_convo_started():
+#func _on_ConvoManager_convo_started():
+#	reset_card_uses()
+
+func _on_ConvoManager_convo_ended():
 	reset_card_uses()

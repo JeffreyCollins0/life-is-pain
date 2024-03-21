@@ -44,7 +44,7 @@ func set_npc(npc_name):
 		working_tidbits[char_name] = file_reader.read_tidbits(char_fname)
 	
 	# set debug mugshot
-	var mug = load('res://Sprites/'+char_name+'Mug_Demo.png')
+	var mug = load('res://Sprites/'+char_name+'Mug.png')
 	if(mug != null):
 		mugshot.texture = mug
 	

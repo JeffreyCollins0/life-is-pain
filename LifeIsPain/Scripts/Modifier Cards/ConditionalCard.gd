@@ -13,9 +13,9 @@ func on_turn_update(topic, did_joke_land):
 	if(mod_index == 0):
 		# bury the punchline
 		if(did_joke_land):
-			control.add_mood(10)
+			control.add_mood(12)
 		else:
-			control.add_stress(10)
+			control.add_stress(12)
 	elif(mod_index == 1):
 		# beat, beat, offbeat
 		if(did_joke_land && !prev_successful):

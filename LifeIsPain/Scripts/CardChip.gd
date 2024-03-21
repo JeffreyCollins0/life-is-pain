@@ -43,8 +43,9 @@ func init(chip_index, parent):
 	target_pos = position
 	control = parent
 
-func set_display(topic_text, is_mod_card):
-	$VBoxContainer/Label.text = topic_text
+func set_display(topic_text, id_text, is_mod_card):
+	$VBoxContainer/NameText.text = topic_text
+	$IDText.text = id_text
 	is_mod = is_mod_card
 	
 	# configure card color
