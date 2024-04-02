@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/LifeIsPain_PaperStack2.obj-e6d66153c5a6aca010d84eadd6ca66ae.mesh"
+
+[deps]
+
+files=[ "res://.import/LifeIsPain_PaperStack2.obj-e6d66153c5a6aca010d84eadd6ca66ae.mesh" ]
+
+source_file="res://Models/LifeIsPain_PaperStack2.obj"
+dest_files=[ "res://.import/LifeIsPain_PaperStack2.obj-e6d66153c5a6aca010d84eadd6ca66ae.mesh", "res://.import/LifeIsPain_PaperStack2.obj-e6d66153c5a6aca010d84eadd6ca66ae.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

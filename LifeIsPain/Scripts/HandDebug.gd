@@ -168,4 +168,6 @@ func deal_last_used_card():
 
 func unlock_strategy(strat_index):
 	deck.is_card_usable[strat_index] = true
-	messagewindow_debug.add_message('You can now use \"'+control.strategies[strat_index]+'\"!')
+	var unlock_toast = 'You can now use \"'+control.strategies[strat_index]+'\"!'
+	messagewindow_debug.add_message(unlock_toast)
+	control.get_node('MessageLog').log_message(unlock_toast, "Internal")

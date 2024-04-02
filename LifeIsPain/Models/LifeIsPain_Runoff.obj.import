@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/LifeIsPain_Runoff.obj-d40590e689efd52cfc47187269b8a3fd.mesh"
+
+[deps]
+
+files=[ "res://.import/LifeIsPain_Runoff.obj-d40590e689efd52cfc47187269b8a3fd.mesh" ]
+
+source_file="res://Models/LifeIsPain_Runoff.obj"
+dest_files=[ "res://.import/LifeIsPain_Runoff.obj-d40590e689efd52cfc47187269b8a3fd.mesh", "res://.import/LifeIsPain_Runoff.obj-d40590e689efd52cfc47187269b8a3fd.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -12,7 +12,7 @@
 [ext_resource path="res://Scripts/DeckManager.gd" type="Script" id=10]
 [ext_resource path="res://BitCrush.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Scripts/TextboxTypeWriter.gd" type="Script" id=12]
-[ext_resource path="res://Sprites/ShadyMug_Demo.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/ShadyMug.png" type="Texture" id=13]
 [ext_resource path="res://Sounds/CardHover.wav" type="AudioStream" id=14]
 [ext_resource path="res://Sounds/CardSelect2.wav" type="AudioStream" id=15]
 [ext_resource path="res://Sounds/ShadyTalk.wav" type="AudioStream" id=16]
@@ -244,8 +244,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Sprite" type="Sprite" parent="ConvoManager/Control"]
-position = Vector2( 386, 172 )
+position = Vector2( 406, 172 )
 texture = ExtResource( 13 )
+
+[node name="BonusTextSpawn" type="Position2D" parent="ConvoManager/Control"]
+position = Vector2( 365, 211 )
 
 [node name="Textbox" type="Control" parent="ConvoManager/Control"]
 margin_left = 136.0
@@ -257,6 +260,9 @@ rect_scale = Vector2( 2, 2 )
 [node name="NinePatchRect" type="NinePatchRect" parent="ConvoManager/Control/Textbox"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -7.0
+margin_right = -12.0
+margin_bottom = 35.0
 texture = ExtResource( 9 )
 patch_margin_left = 8
 patch_margin_top = 8
@@ -266,10 +272,10 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="Label" type="Label" parent="ConvoManager/Control/Textbox"]
-margin_left = 8.0
+margin_left = -2.0
 margin_top = 5.0
-margin_right = 104.0
-margin_bottom = 42.0
+margin_right = 95.0
+margin_bottom = 70.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 7 )
 autowrap = true
@@ -278,9 +284,9 @@ typewriter_speed = 0.8
 
 [node name="TalkIndicator" type="AnimatedSprite" parent="ConvoManager/Control/Textbox"]
 visible = false
-position = Vector2( 97.5, 38 )
+position = Vector2( 89, 72 )
 frames = ExtResource( 29 )
-frame = 7
+frame = 6
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ConvoManager/Control"]
@@ -401,13 +407,11 @@ custom_fonts/font = ExtResource( 7 )
 text = "Chef%"
 align = 2
 
-[node name="BonusTextSpawn" type="Position2D" parent="ConvoManager"]
-position = Vector2( 345, 211 )
-
 [node name="ModifierTally" type="Node2D" parent="ConvoManager"]
 script = ExtResource( 20 )
 
 [node name="MessageRollout" type="Node2D" parent="ConvoManager"]
+visible = false
 position = Vector2( 115, 98 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 6 )
@@ -423,9 +427,9 @@ autowrap = true
 
 [node name="LogButton" type="Button" parent="ConvoManager"]
 margin_left = 137.0
-margin_top = 94.0
+margin_top = 168.0
 margin_right = 163.0
-margin_bottom = 105.0
+margin_bottom = 179.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 30 )
 text = "Log"
@@ -573,11 +577,10 @@ centered = false
 
 [node name="CutAnim5" type="Node2D" parent="Narrator"]
 visible = false
-position = Vector2( 480, 0 )
+position = Vector2( 0, -320 )
 script = ExtResource( 32 )
 
 [node name="Sprite" type="Sprite" parent="Narrator/CutAnim5"]
-position = Vector2( -480, 0 )
 texture = ExtResource( 38 )
 centered = false
 
@@ -645,6 +648,7 @@ autowrap = true
 [connection signal="convo_ended" from="ConvoManager" to="ConvoManager/NPCManager" method="_on_ConvoManager_convo_ended"]
 [connection signal="convo_started" from="ConvoManager" to="DeckManager" method="_on_ConvoManager_convo_started"]
 [connection signal="convo_started" from="ConvoManager" to="ConvoManager/Control/Textbox/Label" method="_on_ConvoManager_convo_started"]
+[connection signal="convo_started" from="ConvoManager" to="ConvoManager/MessageLog" method="_on_ConvoManager_convo_started"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollUpButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollUpButton_pressed"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollDownButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollDownButton_pressed"]
 [connection signal="pressed" from="ConvoManager/LogButton" to="ConvoManager/MessageLog" method="_on_LogButton_pressed"]

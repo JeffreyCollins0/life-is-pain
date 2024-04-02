@@ -1,6 +1,6 @@
 extends EnviroChange
 
-var nodes_to_add = []
+var nodes_to_add = ['MeshInstance14']
 
 var objects_to_add = []
 var objects_to_remove = []

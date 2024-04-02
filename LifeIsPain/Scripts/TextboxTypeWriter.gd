@@ -2,14 +2,14 @@ extends Label
 
 export (float) var typewriter_speed = 1.0
 export (String) var valid_delimiters = ' .,-'
-const max_chars = 52 #42 #60 # determined manually at the moment
+const max_chars = 118 #52 # determined manually at the moment
 
 # for queuing and chunking messages into box-sized increments
 var messages = []
 var message_chunks = []
 
 var default_typewriter_duration = 0.8
-var default_typewriter_pause = 2.0 #1.4
+var default_typewriter_pause = 1.4 #2.0
 var typewriter_time = 0
 var pause_time = 0
 var audio_disabled = false
@@ -44,6 +44,9 @@ func _process(delta):
 				reset_typewriter()
 			else:
 				talk_indicator.visible = false
+			
+		if(len(message_chunks) <= 0 && len(messages) <= 0 && talk_indicator.visible):
+			talk_indicator.visible = false
 	
 	if(typewriter_time > 0 && !audio_disabled):
 		typewriter_time -= delta

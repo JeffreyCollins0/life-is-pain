@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Spatial",
+"class": "EnviroChange",
+"language": "GDScript",
+"path": "res://Scripts/EnviroChange.gd"
+}, {
 "base": "Node",
 "class": "ModCard",
 "language": "GDScript",
 "path": "res://Scripts/Modifier Cards/ModCard.gd"
 } ]
 _global_script_class_icons={
+"EnviroChange": "",
 "ModCard": ""
 }
 

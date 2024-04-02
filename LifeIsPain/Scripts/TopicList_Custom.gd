@@ -1,14 +1,7 @@
 extends Node2D
 
-#var topics = [ # filled dynamically
-	#'HATS', 'BOXES', 'WEATHER', 'SUNGLASSES'#, 
-	#'DUMMY1', 'DUMMY2', 'DUMMY3', 'DUMMY4', 'DUMMY5', 'DUMMY6', 'DUMMY7', # for testing only
-	#'GIFTS', 'PLUSHIES'
-#]
 var topic_uses = [
-	3, 3, 3, 3,
-	#3, 3, 3, 3, 3, 3, 3,
-	3, 3
+	3, 3, 3, 3, 3, 3
 ]
 var topics = [] # filled dynamically
 var topic_map = {}
@@ -83,10 +76,11 @@ func add_topic(topic, original_index):
 		topic_uses.append(3)
 		topic_map[topic] = original_index
 	
+		update_buttons()
 		update_entries()
+		update_selected()
 
 func select_topic(chip_id):
-	#if(get_parent().is_topic_usable[current_item + chip_id]):
 	var selected = topics[current_item + chip_id]
 	get_parent().select_topic(topic_map[selected])
 	selected_topic = current_item + chip_id

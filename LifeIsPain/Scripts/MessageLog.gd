@@ -8,17 +8,7 @@ func _ready():
 func log_message(message, type):
 	var new_chip = message_chip_prefab.instance()
 	new_chip.set_message(message, type)
-	#new_chip.get_node('Label').text = message
 	$ScrollContainer/VBoxContainer.add_child(new_chip)
-
-#func update_entries(messages):
-#	var length_diff = len(messages) - get_child_count()
-#	if(length_diff > 0):
-#		for i in range(length_diff):
-#
-#			pass
-#
-#	pass
 
 
 func _on_LogButton_pressed():
@@ -26,3 +16,8 @@ func _on_LogButton_pressed():
 
 func _on_CloseButton_pressed():
 	visible = false
+
+func _on_ConvoManager_convo_started():
+	for child in $ScrollContainer/VBoxContainer.get_children():
+		self.remove_child(child)
+		child.queue_free()

@@ -1,6 +1,6 @@
 extends Node2D
 
-export (float) var frame_delay = 0.2
+export (float) var frame_delay = 0.15 #0.2
 var fade_duration = 1.2
 var frame_time = frame_delay
 var pause_time = 0

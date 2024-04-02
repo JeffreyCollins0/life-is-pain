@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/LifeIsPain_Table.obj-84d285c5eb53d8bd6c5589d474cd5948.mesh"
+
+[deps]
+
+files=[ "res://.import/LifeIsPain_Table.obj-84d285c5eb53d8bd6c5589d474cd5948.mesh" ]
+
+source_file="res://Models/LifeIsPain_Table.obj"
+dest_files=[ "res://.import/LifeIsPain_Table.obj-84d285c5eb53d8bd6c5589d474cd5948.mesh", "res://.import/LifeIsPain_Table.obj-84d285c5eb53d8bd6c5589d474cd5948.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

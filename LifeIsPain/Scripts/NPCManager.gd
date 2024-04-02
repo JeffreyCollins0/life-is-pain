@@ -6,6 +6,7 @@ var working_moods = {}
 var working_tidbits = {}
 var working_eval = []
 var working_pronouns = {}
+var current_tidbits_used = []
 
 var mugshot
 var name_display
@@ -43,6 +44,12 @@ func set_npc(npc_name):
 	if(!working_tidbits.has(char_name)):
 		working_tidbits[char_name] = file_reader.read_tidbits(char_fname)
 	
+	# set tidbit flags
+	current_tidbits_used.clear()
+	var current_tidbits = working_tidbits[char_name]
+	for _i in range(len(current_tidbits)):
+		current_tidbits_used.append(false)
+	
 	# set debug mugshot
 	var mug = load('res://Sprites/'+char_name+'Mug.png')
 	if(mug != null):
@@ -60,14 +67,21 @@ func get_npc_name():
 	else:
 		return 'yourself'
 
-#func is_tidbit_avail():
-#	pass
-
 func get_tidbit():
-	if(working_tidbits.has(char_name) && (randi() % 100) < 64): # not every time, but enough of the time
+	if(working_tidbits.has(char_name) && (randi() % 100) < 75):
 		var tidbits = working_tidbits[char_name]
 		var tidbit_index = (randi() % len(tidbits)-1)
-		return tidbits[tidbit_index]
+		
+		var rerolls = 0
+		while(current_tidbits_used[tidbit_index] && rerolls < 5):
+			tidbit_index = (randi() % len(tidbits)-1)
+			rerolls += 1
+		
+		if(rerolls < 5):
+			current_tidbits_used[tidbit_index] = true
+			return tidbits[tidbit_index]
+		else:
+			return 'MissingNo.'
 	else:
 		return 'MissingNo.'
 

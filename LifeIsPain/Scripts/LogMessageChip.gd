@@ -7,7 +7,7 @@ export (Color) var TipColor
 var message_type = ''
 
 func set_message(message, type):
-	$Label.text = message
+	$VBoxContainer/Label.text = message
 	message_type = type
 	
 	# set background from type

@@ -4,7 +4,6 @@ var seen_already = false
 
 func _on_Area_body_entered(body):
 	if(body.is_in_group("Player") && !seen_already):
-		print('starting narration cycle...')
 		var narrator = get_tree().get_root().get_node('Spatial/UIManager/Narrator')
 		narrator.invoke_narration()
 		

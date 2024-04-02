@@ -31,7 +31,6 @@ func _ready():
 
 func _input(event):
 	if(event.is_action_pressed("converse") && !paused):
-		#print('got skipping heat '+str(skip_heat)+' vs '+str(default_text_pause / 2.0))
 		if(skip_heat > (default_text_pause / 2.0)):
 			skip_cutscene()
 		else:
@@ -119,8 +118,6 @@ func invoke_narration():
 		fade_time = (default_text_pause * 1.2)
 		mode = 'fade out'
 		paused = true
-		
-		print('pointer is now '+str(narration_pointer))
 
 		$NarrationText.percent_visible = 0
 		$NarrationTextShadow.percent_visible = 0
@@ -227,8 +224,6 @@ func skip_cutscene():
 	fade_time = (default_text_pause * 1.2)
 	mode = 'fade out'
 	paused = true
-	
-	print('pointer is now '+str(narration_pointer))
 	
 	text_time = 0
 	

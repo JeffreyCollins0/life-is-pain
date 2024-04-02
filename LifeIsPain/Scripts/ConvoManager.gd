@@ -7,7 +7,7 @@ var topics = [
 ]
 var is_topic_usable = [
 	true, true, true, true, false, false,
-	false, false, true, true, true
+	false, false, false, false, true
 ]
 var strategies = [] # filled dynamically by deck manager
 var responses = [
@@ -113,7 +113,6 @@ func determine_response(topic_index, strat_index):
 	# actual evaluation
 	var rating_band = 'MID'
 	var score = 0
-	#var mod = 0
 	# base modifier
 	var base_mod = base_eval[strat_index][topic_index]
 	# npc modifiers
@@ -121,7 +120,6 @@ func determine_response(topic_index, strat_index):
 	npc_mod += char_eval[1][topic_index]
 	score += ((base_mod * (1 - npc_eval_percent)) + (npc_mod * npc_eval_percent))
 	# add auxiliary modifiers here
-	#score += mod
 	score += aux_mod
 	
 	var final_score = (score / ((3.0 * npc_eval_percent) + abs(aux_mod)))
@@ -145,10 +143,8 @@ func determine_response(topic_index, strat_index):
 		base_mod * (1 - npc_eval_percent),
 		char_eval[0][strat_index] * npc_eval_percent,
 		char_eval[1][topic_index] * npc_eval_percent,
-		#mod,
 		aux_mod
 	]
-	#print('[==] contributing mods to this result: '+str(mods))
 	var callout = callout_adapted(mods, file_read, char_fpath, strategies[strat_index], topics[topic_index], rating_band, final_score)
 	if(callout != 'MissingNo.'):
 		char_response = callout
@@ -196,12 +192,9 @@ func get_effect_band(raw_score):
 	return "MissingNo."
 
 func last_joke_successful():
-	#print('[==] got last result '+str(prev_joke_result)+' and threshold '+str(effect_bands[0][0]))
 	return (prev_joke_result > effect_bands[0][0])
 
 func add_stress(amount):
-	print('Added '+str(amount)+' stress')
-	#control.add_stress(amount)
 	stress_debug += amount
 	stress_debug = min(max(stress_debug, 0), 100)
 	
@@ -218,7 +211,6 @@ func add_stress(amount):
 		end_convo() # wait a bit for this one
 
 func add_mood(amount):
-	#control.add_mood(amount)
 	mood_debug += amount
 	mood_debug = min(max(mood_debug, 0), 100)
 	
@@ -228,6 +220,10 @@ func add_mood(amount):
 	self.add_child(mood_text)
 	
 	moodcounter_debug.text = (str(mood_debug)+'%')
+	
+	if(amount > 0):
+		var unlocks = file_read.read_unlock(char_fpath, mood_debug)
+		process_unlocks(unlocks)
 	
 	if(mood_debug >= 100):
 		messagewindow_debug.add_message($NPCManager.get_npc_name() + "'s spirits have recovered!")
@@ -274,29 +270,24 @@ func callout_adapted(mods, file_read, char_fpath, strat, topic, rating_band, raw
 	var use_note = 'MissingNo.'
 	if(biggest_influence == mods[0]):
 		# base matrix was the biggest determinant
-		#print("base matrix was the biggest determinant")
 		callout_search_term = "BASE"
 		use_note = get_response_band_templated(raw_score, 'topic-card combo')
 	elif(biggest_influence == mods[1]):
 		# strategy was the biggest determinant
-		#print("strategy was the biggest determinant")
 		callout_search_term = strat
 		use_note = get_response_band_templated(raw_score, 'card')
 	elif(biggest_influence == mods[2]):
 		# topic was the biggest determinant
-		#print("topic was the biggest determinant")
 		callout_search_term = topic
 		use_note = get_response_band_templated(raw_score, 'topic')
 	#elif(biggest_influence == mods[3]):
 	#	# external modifier was the biggest determinant
-	#	#print("modifier was the biggest determinant")
 	#	callout_search_term = "MODIFIER"
 	#	use_note = get_response_band_templated(raw_score, 'modifier')
 	elif(biggest_influence == mods[3]):
 		# topic overuse was the biggest determinant
-		#print("overuse was the biggest determinant")
 		callout_search_term = "OVERUSE"
-		use_note = $NPCManager.get_npc_name()+' seems to be getting tired of that topic...' #"They\'re getting tired of that topic..."
+		use_note = $NPCManager.get_npc_name()+' seems to be getting tired of that topic...'
 	
 	if(use_note != 'MissingNo.'):
 		messagewindow_debug.add_message(use_note)
@@ -329,6 +320,7 @@ func process_unlocks(unlocks):
 		
 		if(unlock_successful):
 			var unlock_message = file_read.read_unlock_message(char_fpath, mood_debug)
+			print('Got unlock message ['+unlock_message+'] for mood '+str(mood_debug))
 			if(unlock_message != 'MissingNo.'):
 				textbox_debug.new_message(unlock_message, true)
 				message_log.log_message($NPCManager.get_npc_name()+": "+unlock_message, "NPC")
@@ -348,7 +340,6 @@ func get_mod(strat_index, topic_index):
 	return (cached_char_eval[0][strat_index] + cached_char_eval[1][topic_index] + base_eval[strat_index][topic_index])
 
 func start_convo(conversant):
-	#print('starting conversation with '+conversant+'...')
 	visible = true
 	var sub_nodes = get_children()
 	for node in sub_nodes:
@@ -358,13 +349,6 @@ func start_convo(conversant):
 	char_fpath = 'res://Responses/'+conversant.to_lower()+'_responses.txt'
 	cached_char_eval = $NPCManager.get_eval()
 	
-	var starter_resp = file_read.get_response(char_fpath, 'STARTER', 'GUD')
-	if(starter_resp == 'MissingNo.'):
-		textbox_debug.text = 'Pick a topic and card to get a response!'
-	else:
-		textbox_debug.new_message(starter_resp)
-		message_log.log_message($NPCManager.get_npc_name()+": "+starter_resp, "NPC")
-	
 	$TopicList_Custom.reset_overused()
 	
 	for _i in range(5):
@@ -372,6 +356,13 @@ func start_convo(conversant):
 	$Hand.reset_card_positions()
 	
 	emit_signal("convo_started")
+	
+	var starter_resp = file_read.get_response(char_fpath, 'STARTER', 'GUD')
+	if(starter_resp == 'MissingNo.'):
+		textbox_debug.text = 'Pick a topic and card to get a response!'
+	else:
+		textbox_debug.new_message(starter_resp)
+		message_log.log_message($NPCManager.get_npc_name()+": "+starter_resp, "NPC")
 
 func end_convo():
 	# delete all cards
