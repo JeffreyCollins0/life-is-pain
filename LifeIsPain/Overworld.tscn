@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://Scripts/OW_Fade.gd" type="Script" id=1]
 [ext_resource path="res://Models/LifeIsPain_Dumpster2.obj" type="ArrayMesh" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Models/LifeIsPain_StoreBackWall.obj" type="ArrayMesh" id=26]
 [ext_resource path="res://Models/LifeIsPain_ObsWall.obj" type="ArrayMesh" id=27]
 [ext_resource path="res://Models/LifeIsPain_StartWall.obj" type="ArrayMesh" id=28]
+[ext_resource path="res://Sprites/NoiseLarge.tres" type="SpriteFrames" id=29]
 [ext_resource path="res://Models/LifeIsPain_MainWall.obj" type="ArrayMesh" id=30]
 [ext_resource path="res://Sprites/OWFlorald.tres" type="SpriteFrames" id=31]
 [ext_resource path="res://Models/LifeIsPain_Tire.obj" type="ArrayMesh" id=32]
@@ -48,6 +49,12 @@
 [ext_resource path="res://Models/LifeIsPain_ChemPour.obj" type="ArrayMesh" id=47]
 [ext_resource path="res://Models/LifeIsPain_GardenWallFront.obj" type="ArrayMesh" id=48]
 [ext_resource path="res://Models/LifeIsPain_GardenWallBack.obj" type="ArrayMesh" id=49]
+[ext_resource path="res://Sprites/NoiseSmall.tres" type="SpriteFrames" id=50]
+[ext_resource path="res://Models/LifeIsPain_Plushie.obj" type="ArrayMesh" id=51]
+[ext_resource path="res://Plushie.tres" type="Material" id=52]
+[ext_resource path="res://Models/LifeIsPain_RecoverEffect.obj" type="ArrayMesh" id=53]
+[ext_resource path="res://RecoverEffect.tres" type="Material" id=54]
+[ext_resource path="res://Scripts/RecoverEffect.gd" type="Script" id=55]
 
 [sub_resource type="BoxShape" id=13]
 extents = Vector3( 0.0467851, 0.0463571, 0.0466765 )
@@ -105,8 +112,19 @@ radius = 0.0690668
 height = 0.237356
 radius = 0.182869
 
+[sub_resource type="Curve" id=29]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 1.69148e-07, 0.0, 0, 0 ]
+
 [sub_resource type="CubeMesh" id=7]
 size = Vector3( 0.1, 0.1, 0.12 )
+
+[sub_resource type="QuadMesh" id=26]
+
+[sub_resource type="Curve" id=27]
+_data = [ Vector2( 0, 1 ), 0.0, 1.7675, 0, 0, Vector2( 1, 0 ), -0.0244848, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=28]
+colors = PoolColorArray( 0.141998, 0.367188, 0.367188, 1, 0.144496, 0.914063, 0.0999756, 1 )
 
 [sub_resource type="BoxShape" id=8]
 extents = Vector3( 0.0363494, 0.0800592, 0.0330774 )
@@ -527,6 +545,19 @@ visible = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0 )
 shape = SubResource( 5 )
 
+[node name="RecoverEffect" type="MeshInstance" parent="Player"]
+transform = Transform( -0.216506, 0, 0.125, 0, 0.25, 0, -0.125, 0, -0.216506, 0, 0.00425757, 0 )
+visible = false
+mesh = ExtResource( 53 )
+material/0 = ExtResource( 54 )
+script = ExtResource( 55 )
+move_curve = SubResource( 29 )
+
+[node name="StartPos" type="Position3D" parent="Player"]
+
+[node name="EndPos" type="Position3D" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.187577, 0 )
+
 [node name="TestNPC" type="StaticBody" parent="." groups=["NPC"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448038, 0, -1.31247 )
 script = ExtResource( 6 )
@@ -540,6 +571,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 7 )
+frame = 2
 playing = true
 
 [node name="TestNPC2" type="StaticBody" parent="." groups=["NPC"]]
@@ -557,7 +589,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="TestNPC4" type="StaticBody" parent="." groups=["NPC"]]
@@ -574,7 +606,6 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 10 )
-frame = 3
 playing = true
 
 [node name="TestNPC5" type="StaticBody" parent="." groups=["NPC"]]
@@ -591,7 +622,7 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 12 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="TestNPC3" type="StaticBody" parent="." groups=["NPC"]]
@@ -610,7 +641,7 @@ visible = false
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="MeshInstance" type="MeshInstance" parent="TestNPC3"]
@@ -631,6 +662,7 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 31 )
+frame = 4
 playing = true
 
 [node name="TestNPC7" type="StaticBody" parent="." groups=["NPC"]]
@@ -647,14 +679,50 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 37 )
+frame = 1
 playing = true
+
+[node name="TestNPC8" type="StaticBody" parent="." groups=["NPC"]]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.730821, -1.19209e-07, 0.3998 )
+script = ExtResource( 6 )
+conversant_id = 7
+conversant_name = "Plushie"
+
+[node name="CollisionShape" type="CollisionShape" parent="TestNPC8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0 )
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="TestNPC8"]
+transform = Transform( -0.216506, 0, 0.125, 0, 0.25, 0, -0.125, 0, -0.216506, 0, 0.00425757, 0 )
+mesh = ExtResource( 51 )
+material/0 = ExtResource( 52 )
+
+[node name="CPUParticles" type="CPUParticles" parent="TestNPC8"]
+transform = Transform( 0.830467, -0.0366237, 0.555863, -0.0136383, 0.996201, 0.0860116, -0.556901, -0.0790108, 0.826812, 0, 0.04, 0 )
+visible = false
+cast_shadow = 0
+generate_lightmap = false
+emitting = false
+lifetime = 0.4
+one_shot = true
+mesh = SubResource( 26 )
+emission_shape = 2
+emission_box_extents = Vector3( 0.08, 0.08, 0.08 )
+flag_align_y = true
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.5
+initial_velocity_random = 0.25
+linear_accel_curve = SubResource( 27 )
+scale_amount = 0.02
+color_ramp = SubResource( 28 )
 
 [node name="EndingTrigger" type="Spatial" parent="."]
 script = ExtResource( 40 )
 
 [node name="Area4" type="Area" parent="EndingTrigger"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.713496, 0.159086, -1.99911 )
-monitoring = false
 script = ExtResource( 35 )
 
 [node name="CollisionShape" type="CollisionShape" parent="EndingTrigger/Area4"]
@@ -665,7 +733,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00891851, 0 )
 visible = false
 billboard = 2
 frames = ExtResource( 39 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="SchwarzEnviro" type="Spatial" parent="."]
@@ -704,6 +772,42 @@ mesh = ExtResource( 44 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 21 )
 
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="SchwarzEnviro"]
+transform = Transform( 0.439878, 0, -0.330162, 0, 0.55, 0, 0.330162, 0, 0.439878, 0.171241, 0.0965596, -0.214844 )
+frames = ExtResource( 29 )
+frame = 4
+playing = true
+
+[node name="AnimatedSprite3D4" type="AnimatedSprite3D" parent="SchwarzEnviro"]
+transform = Transform( 0.361781, 0.0663278, -0.448458, -0.0749633, 0.574613, 0.0245117, 0.447096, 0.0426725, 0.366994, 0.292677, 0.0831473, -0.077003 )
+frames = ExtResource( 50 )
+frame = 4
+playing = true
+
+[node name="AnimatedSprite3D5" type="AnimatedSprite3D" parent="SchwarzEnviro"]
+transform = Transform( 0.495338, 0, -0.23904, 0, 0.55, 0, 0.23904, 0, 0.495338, 0.167856, 0.240763, -0.216478 )
+frames = ExtResource( 50 )
+frame = 4
+playing = true
+
+[node name="AnimatedSprite3D6" type="AnimatedSprite3D" parent="SchwarzEnviro"]
+transform = Transform( 0.312574, -0.178398, -0.270133, 0.223059, 0.390826, -2.32193e-09, 0.234611, -0.133901, 0.359901, 0.0558476, 0.216839, -0.301455 )
+frames = ExtResource( 50 )
+frame = 4
+playing = true
+
+[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="SchwarzEnviro"]
+transform = Transform( 0.415737, 0.147599, -0.477365, -0.148397, 0.629447, 0.0653835, 0.477117, 0.0671649, 0.436289, 0.282319, 0.239551, -0.112968 )
+frames = ExtResource( 50 )
+frame = 4
+playing = true
+
+[node name="AnimatedSprite3D3" type="AnimatedSprite3D" parent="SchwarzEnviro"]
+transform = Transform( 0.577196, 0.0809827, -0.287727, -0.10388, 0.641036, -0.0279645, 0.280275, 0.0708153, 0.582178, -0.0217714, 0.0899762, -0.323684 )
+frames = ExtResource( 50 )
+frame = 4
+playing = true
+
 [node name="PlagueisEnviro" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61675, -1.19209e-07, -3.34975 )
 script = ExtResource( 11 )
@@ -716,7 +820,7 @@ transform = Transform( 0.888393, 0, -0.459084, 0, 1, 0, 0.459084, 0, 0.888393, 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07288e-06, 0.0471299, -0.000785112 )
 shape = SubResource( 25 )
 
-[node name="MeshInstance17" type="MeshInstance" parent="PlagueisEnviro"]
+[node name="Sludge" type="MeshInstance" parent="PlagueisEnviro"]
 transform = Transform( -0.177, 0, -2.67263e-08, 0, 0.177, 0, 2.67263e-08, 0, -0.177, 1.6113, 3.57628e-07, 3.04443 )
 mesh = ExtResource( 46 )
 skeleton = NodePath("../..")
@@ -755,6 +859,16 @@ material/0 = ExtResource( 19 )
 transform = Transform( 1, 0, 0, 0, 0.157744, 0.98748, 0, -0.98748, 0.157744, 0, 1.04668, 0 )
 light_energy = 0.8
 
+[connection signal="game_reset" from="UIManager" to="Environment/TutorialBlocker" method="_on_UIManager_game_reset"]
+[connection signal="game_reset" from="UIManager" to="Environment/Area" method="_on_UIManager_game_reset"]
+[connection signal="game_reset" from="UIManager" to="Environment/Area2" method="_on_UIManager_game_reset"]
+[connection signal="game_reset" from="UIManager" to="Environment/Area3" method="_on_UIManager_game_reset"]
+[connection signal="game_reset" from="UIManager" to="Player" method="_on_UIManager_game_reset"]
+[connection signal="game_reset" from="UIManager" to="EndingTrigger" method="_on_UIManager_game_reset"]
+[connection signal="game_reset" from="UIManager" to="SchwarzEnviro" method="_on_UIManager_game_reset"]
+[connection signal="game_reset" from="UIManager" to="PlagueisEnviro" method="_on_UIManager_game_reset"]
+[connection signal="game_reset" from="UIManager" to="LifterEnviro" method="_on_UIManager_game_reset"]
+[connection signal="game_reset" from="UIManager" to="FloraldEnviro" method="_on_UIManager_game_reset"]
 [connection signal="body_entered" from="Environment/Area" to="Environment/Area" method="_on_Area_body_entered"]
 [connection signal="pressed" from="Environment/Area/Panel/Button" to="Environment/Area/Panel" method="_on_Button_pressed"]
 [connection signal="body_entered" from="Environment/Area2" to="Environment/Area2" method="_on_Area_body_entered"]

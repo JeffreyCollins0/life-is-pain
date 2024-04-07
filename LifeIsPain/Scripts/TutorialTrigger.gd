@@ -15,3 +15,6 @@ func _on_Area_body_entered(body):
 		yield($Panel, "modal_ended")
 		
 		body.unlock_player_movement()
+
+func _on_UIManager_game_reset():
+	seen_already = false

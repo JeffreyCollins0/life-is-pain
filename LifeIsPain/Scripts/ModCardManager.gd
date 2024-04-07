@@ -68,3 +68,6 @@ func draw_card():
 	get_node('../Hand').deal_random_card()
 func draw_last_card():
 	get_node('../Hand').deal_last_used_card()
+
+func _on_Narrator_game_restart():
+	current_mods.clear()

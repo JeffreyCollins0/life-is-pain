@@ -18,10 +18,12 @@ signal moved_threshold_dist
 var saved_nearest = -1
 var saved_conversants = []
 var saved_position = Vector3.ZERO
+var start_pos = Vector3.ZERO
 
 func _ready():
 	basis_up = -$CameraMount.transform.basis.z
 	basis_right = $CameraMount.transform.basis.x
+	start_pos = self.transform
 
 func _process(delta):
 	if(!can_move):
@@ -154,3 +156,6 @@ func _on_TalkableArea_body_exited(body):
 			break
 	saved_conversants.pop_at(remove_index)
 	update_nearest_npc()
+
+func _on_UIManager_game_reset():
+	self.transform = start_pos

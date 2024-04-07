@@ -23,3 +23,7 @@ func get_net_modifier():
 	for mod in active_modifiers:
 		total += mod[1]
 	return total
+
+func reset():
+	active_modifiers.clear()
+	modifier_index = 0

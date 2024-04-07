@@ -6,6 +6,7 @@ const normal_max_chars = 76
 export (float) var text_speed = 0.8
 
 signal narration_paused
+signal game_restart
 
 var default_text_duration = 2.4
 var default_text_pause = 2.0
@@ -150,6 +151,9 @@ func invoke_narration():
 		
 		text_time = (float(next_line.length()) / normal_max_chars) * (default_text_duration / text_speed)
 		saved_text_duration = text_time
+	else:
+		# end game and restart
+		end_game()
 
 func get_anim_object(index):
 	var anim_object = null
@@ -164,6 +168,8 @@ func get_anim_object(index):
 		anim_object = $CutAnim4
 	if(anim_index == 5):
 		anim_object = $CutAnim5
+	if(anim_index == 6):
+		anim_object = $CutAnim6
 	
 	return anim_object
 
@@ -210,12 +216,14 @@ func skip_cutscene():
 	# move the pointer to the end of this section
 	var skipped_lines = 1
 	var line = ''
+	var eof_found = false
 	while(line != '[BREAK]'):
 		if(!file.eof_reached()):
 			line = file.get_line()
 			skipped_lines += 1
 		else:
 			file.close()
+			eof_found = true
 			break
 	
 	narration_pointer += skipped_lines
@@ -233,3 +241,20 @@ func skip_cutscene():
 	
 	if(anim_obj != null):
 		anim_obj.visible = false
+	
+	if(eof_found):
+		end_game()
+
+func end_game():
+	text_time = 0
+	pause_time = (default_text_pause * 1.2)
+	fade_direction = 1.0
+	fade_time = 0
+	
+	anim_index = -1
+	anim_obj = null
+
+	narration_pointer = 2
+	paused = false
+	
+	emit_signal("game_restart")

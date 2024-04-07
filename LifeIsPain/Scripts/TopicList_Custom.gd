@@ -13,7 +13,6 @@ var current_item = 0
 var selected_topic = 0
 
 func _ready():
-	
 	var control_topics = get_parent().topics
 	var control_usable = get_parent().is_topic_usable
 	for i in range(len(control_topics)):
@@ -112,3 +111,20 @@ func reset_overused():
 
 func get_selected_topic():
 	return topic_map[ topics[ selected_topic ] ]
+
+func reset_topics():
+	var control_topics = get_parent().topics
+	var control_usable = get_parent().is_topic_usable
+	for i in range(len(control_topics)):
+		if(control_usable[i]):
+			add_topic(control_topics[i], i)
+	
+	var entries = $TopicChipTray.get_children()
+	for i in range(len(entries)):
+		entries[i].init(i)
+	
+	update_buttons()
+	update_entries()
+	
+func _on_Narrator_game_restart():
+	reset_overused()

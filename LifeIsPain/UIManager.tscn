@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scripts/ConvoManager.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/HandDebug.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://Scripts/DemoCard.gd" type="Script" id=23]
 [ext_resource path="res://Scripts/UIManager.gd" type="Script" id=24]
 [ext_resource path="res://Scripts/NPCManager.gd" type="Script" id=25]
+[ext_resource path="res://Sprites/DownArrow.png" type="Texture" id=26]
 [ext_resource path="res://Scripts/MessageLog.gd" type="Script" id=27]
 [ext_resource path="res://DinoCrushSmallCondensed.tres" type="DynamicFont" id=28]
 [ext_resource path="res://Sprites/TalkIndicator.tres" type="SpriteFrames" id=29]
@@ -38,6 +39,10 @@
 [ext_resource path="res://IntroImages/IntroEyes.tres" type="SpriteFrames" id=37]
 [ext_resource path="res://IntroImages/IntroCut5.png" type="Texture" id=38]
 [ext_resource path="res://IntroImages/IntroCut4.png" type="Texture" id=39]
+[ext_resource path="res://Sprites/UpArrow.png" type="Texture" id=40]
+[ext_resource path="res://Sprites/UpArrowSmall.png" type="Texture" id=41]
+[ext_resource path="res://Sprites/DownArrowSmall.png" type="Texture" id=42]
+[ext_resource path="res://IntroImages/IntroCut6.png" type="Texture" id=43]
 
 [node name="UIManager" type="Node2D"]
 script = ExtResource( 24 )
@@ -115,23 +120,21 @@ position = Vector2( 0, 82 )
 [node name="CardChip6" parent="DeckManager/Control/DeckList/CardChipTray" instance=ExtResource( 22 )]
 position = Vector2( 0, 100 )
 
-[node name="ScrollUpButton" type="Button" parent="DeckManager/Control/DeckList"]
+[node name="ScrollUpButton" type="TextureButton" parent="DeckManager/Control/DeckList"]
 visible = false
 margin_left = 10.0
-margin_top = 19.0
+margin_top = 18.5
 margin_right = 76.0
-margin_bottom = 28.0
-custom_fonts/font = ExtResource( 11 )
-text = "^"
+margin_bottom = 28.5
+texture_normal = ExtResource( 40 )
 
-[node name="ScrollDownButton" type="Button" parent="DeckManager/Control/DeckList"]
+[node name="ScrollDownButton" type="TextureButton" parent="DeckManager/Control/DeckList"]
 visible = false
 margin_left = 10.0
-margin_top = 138.0
+margin_top = 137.5
 margin_right = 76.0
-margin_bottom = 148.0
-custom_fonts/font = ExtResource( 11 )
-text = "v"
+margin_bottom = 147.5
+texture_normal = ExtResource( 26 )
 
 [node name="LibList" type="Node2D" parent="DeckManager/Control"]
 position = Vector2( 57.5, 0 )
@@ -174,23 +177,21 @@ position = Vector2( 0, 82 )
 [node name="CardChip6" parent="DeckManager/Control/LibList/CardChipTray" instance=ExtResource( 22 )]
 position = Vector2( 0, 100 )
 
-[node name="ScrollUpButton" type="Button" parent="DeckManager/Control/LibList"]
+[node name="ScrollUpButton" type="TextureButton" parent="DeckManager/Control/LibList"]
 visible = false
 margin_left = 10.0
 margin_top = 19.0
 margin_right = 76.0
-margin_bottom = 28.0
-custom_fonts/font = ExtResource( 11 )
-text = "^"
+margin_bottom = 29.0
+texture_normal = ExtResource( 40 )
 
-[node name="ScrollDownButton" type="Button" parent="DeckManager/Control/LibList"]
+[node name="ScrollDownButton" type="TextureButton" parent="DeckManager/Control/LibList"]
 visible = false
 margin_left = 10.0
 margin_top = 138.0
 margin_right = 76.0
 margin_bottom = 148.0
-custom_fonts/font = ExtResource( 11 )
-text = "v"
+texture_normal = ExtResource( 26 )
 
 [node name="DemoCard" type="Node2D" parent="DeckManager/Control"]
 position = Vector2( 4, 6 )
@@ -343,7 +344,7 @@ position = Vector2( 0, 35 )
 [node name="TopicChip6" parent="ConvoManager/TopicList_Custom/TopicChipTray" instance=ExtResource( 18 )]
 position = Vector2( 0, 42 )
 
-[node name="ScrollUpButton" type="Button" parent="ConvoManager/TopicList_Custom"]
+[node name="A" type="Button" parent="ConvoManager/TopicList_Custom"]
 visible = false
 margin_left = 2.0
 margin_top = 13.0
@@ -352,7 +353,15 @@ margin_bottom = 25.0
 custom_fonts/font = ExtResource( 11 )
 text = "^"
 
-[node name="ScrollDownButton" type="Button" parent="ConvoManager/TopicList_Custom"]
+[node name="ScrollUpButton" type="TextureButton" parent="ConvoManager/TopicList_Custom"]
+visible = false
+margin_left = 4.0
+margin_top = 14.0
+margin_right = 52.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 41 )
+
+[node name="B" type="Button" parent="ConvoManager/TopicList_Custom"]
 visible = false
 margin_left = 2.0
 margin_top = 56.0
@@ -360,6 +369,14 @@ margin_right = 54.0
 margin_bottom = 68.0
 custom_fonts/font = ExtResource( 11 )
 text = "v"
+
+[node name="ScrollDownButton" type="TextureButton" parent="ConvoManager/TopicList_Custom"]
+visible = false
+margin_left = 4.0
+margin_top = 58.0
+margin_right = 52.0
+margin_bottom = 68.0
+texture_normal = ExtResource( 42 )
 
 [node name="ModCardManager" type="Node2D" parent="ConvoManager"]
 script = ExtResource( 3 )
@@ -513,13 +530,23 @@ script = ExtResource( 5 )
 
 [node name="DebugConvoButton" type="Button" parent="."]
 visible = false
-margin_left = 192.0
+margin_left = 163.0
 margin_top = 227.0
-margin_right = 252.0
+margin_right = 244.0
 margin_bottom = 247.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 7 )
 text = "E - Converse"
+
+[node name="RestoreButton" type="Button" parent="."]
+visible = false
+margin_left = 130.0
+margin_top = 227.0
+margin_right = 246.0
+margin_bottom = 247.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 7 )
+text = "E - Hug the Plushie"
 
 [node name="DebugCustButton" type="Button" parent="."]
 visible = false
@@ -582,6 +609,14 @@ script = ExtResource( 32 )
 
 [node name="Sprite" type="Sprite" parent="Narrator/CutAnim5"]
 texture = ExtResource( 38 )
+centered = false
+
+[node name="CutAnim6" type="Node2D" parent="Narrator"]
+visible = false
+script = ExtResource( 35 )
+
+[node name="Sprite" type="Sprite" parent="Narrator/CutAnim6"]
+texture = ExtResource( 43 )
 centered = false
 
 [node name="NarrationTextShadow" type="Label" parent="Narrator"]
@@ -649,15 +684,28 @@ autowrap = true
 [connection signal="convo_started" from="ConvoManager" to="DeckManager" method="_on_ConvoManager_convo_started"]
 [connection signal="convo_started" from="ConvoManager" to="ConvoManager/Control/Textbox/Label" method="_on_ConvoManager_convo_started"]
 [connection signal="convo_started" from="ConvoManager" to="ConvoManager/MessageLog" method="_on_ConvoManager_convo_started"]
+[connection signal="pressed" from="ConvoManager/TopicList_Custom/A" to="ConvoManager/TopicList_Custom" method="_on_ScrollUpButton_pressed"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollUpButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollUpButton_pressed"]
+[connection signal="pressed" from="ConvoManager/TopicList_Custom/B" to="ConvoManager/TopicList_Custom" method="_on_ScrollDownButton_pressed"]
 [connection signal="pressed" from="ConvoManager/TopicList_Custom/ScrollDownButton" to="ConvoManager/TopicList_Custom" method="_on_ScrollDownButton_pressed"]
 [connection signal="pressed" from="ConvoManager/LogButton" to="ConvoManager/MessageLog" method="_on_LogButton_pressed"]
 [connection signal="pressed" from="ConvoManager/BackButton" to="ConvoManager" method="_on_BackButton_pressed"]
 [connection signal="pressed" from="ConvoManager/MessageLog/CloseButton" to="ConvoManager/MessageLog" method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="DebugConvoButton" to="." method="_on_DebugConvoButton_pressed"]
+[connection signal="pressed" from="RestoreButton" to="." method="_on_RestoreButton_pressed"]
 [connection signal="pressed" from="DebugCustButton" to="." method="_on_DebugCustButton_pressed"]
+[connection signal="game_restart" from="Narrator" to="." method="_on_Narrator_game_restart"]
+[connection signal="game_restart" from="Narrator" to="ConvoManager/NPCManager" method="_on_Narrator_game_restart"]
+[connection signal="game_restart" from="Narrator" to="ConvoManager/ModCardManager" method="_on_Narrator_game_restart"]
+[connection signal="game_restart" from="Narrator" to="ConvoManager/MessageLog" method="_on_Narrator_game_restart"]
+[connection signal="game_restart" from="Narrator" to="Narrator/CutAnim1" method="_on_Narrator_game_restart"]
+[connection signal="game_restart" from="Narrator" to="Narrator/CutAnim2" method="_on_Narrator_game_restart"]
+[connection signal="game_restart" from="Narrator" to="Narrator/CutAnim3" method="_on_Narrator_game_restart"]
+[connection signal="game_restart" from="Narrator" to="Narrator/CutAnim4" method="_on_Narrator_game_restart"]
+[connection signal="game_restart" from="Narrator" to="Narrator/CutAnim5" method="_on_Narrator_game_restart"]
 [connection signal="scene_ended" from="Narrator/CutAnim1" to="Narrator" method="on_anim_end"]
 [connection signal="scene_ended" from="Narrator/CutAnim2" to="Narrator" method="on_anim_end"]
 [connection signal="scene_ended" from="Narrator/CutAnim3" to="Narrator" method="on_anim_end"]
 [connection signal="scene_ended" from="Narrator/CutAnim4" to="Narrator" method="on_anim_end"]
 [connection signal="scene_ended" from="Narrator/CutAnim5" to="Narrator" method="on_anim_end"]
+[connection signal="scene_ended" from="Narrator/CutAnim6" to="Narrator" method="on_anim_end"]

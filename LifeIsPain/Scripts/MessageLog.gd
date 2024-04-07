@@ -18,6 +18,12 @@ func _on_CloseButton_pressed():
 	visible = false
 
 func _on_ConvoManager_convo_started():
+	clear_messages()
+
+func _on_Narrator_game_restart():
+	clear_messages()
+
+func clear_messages():
 	for child in $ScrollContainer/VBoxContainer.get_children():
 		self.remove_child(child)
 		child.queue_free()

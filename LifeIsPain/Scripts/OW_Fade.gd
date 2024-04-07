@@ -8,7 +8,7 @@ func _ready():
 	if(player != null):
 		player.connect("moved_threshold_dist", self, "on_player_move")
 
-func on_player_move():
+func update_visibility():
 	var player_pos = player.global_translation
 	var camera_basis = -(player.get_node("CameraMount").transform.basis.z)
 	var basis_pos_diff = (player_pos - global_translation).dot(camera_basis)
@@ -17,3 +17,9 @@ func on_player_move():
 		visible = false
 	elif(basis_pos_diff < disappear_thres && !visible):
 		visible = true
+
+func on_player_move():
+	update_visibility()
+
+func _on_UIManager_game_reset():
+	update_visibility()

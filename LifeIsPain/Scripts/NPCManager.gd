@@ -17,11 +17,6 @@ func _ready():
 	name_display = get_node('../MoodCounter/Title')
 	file_reader = get_node('../../FileReader')
 
-#func _process(delta):
-#	pass
-
-# TODO: dynamic mugshots based on reactions to things?
-
 func set_npc(npc_name):
 	char_name = npc_name
 	var char_fname = 'res://Responses/'+char_name.to_lower()+'_responses.txt'
@@ -100,3 +95,11 @@ func _on_ConvoManager_convo_ended():
 	#file_reader.write_mood('res://Responses/'+char_name.to_lower()+'_responses.txt', working_mood)
 	get_parent().set_mood(0)
 	pass
+
+func _on_Narrator_game_restart():
+	# reset all cached data
+	working_moods.clear()
+	working_tidbits.clear()
+	working_eval.clear()
+	working_pronouns.clear()
+	current_tidbits_used.clear()

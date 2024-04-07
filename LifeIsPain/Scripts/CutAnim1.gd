@@ -45,3 +45,11 @@ func cut_process(delta):
 			if(fade_time <= 0):
 				fade_time = 0
 				pause_time = 0.01
+
+func _on_Narrator_game_restart():
+	modulate = Color(1, 1, 1, 1)
+	$AnimatedSprite.frame = 0
+	frame_time = frame_delay
+	pause_time = 0
+	fade_time = 0
+	mode = 'frame' # fly and fade

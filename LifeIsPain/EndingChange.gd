@@ -20,6 +20,12 @@ func _on_conversant_recover(conversant_name):
 		$Area4.monitoring = true
 		$Area4/AnimatedSprite3D.visible = true
 
+func _on_UIManager_game_reset():
+	# reset state to original
+	npcs_recovered = [false, false, false, false, false, false]
+	$Area4.monitoring = false
+	$Area4/AnimatedSprite3D.visible = false
+
 func index_conversant_name(name):
 	if(name == 'Shady'):
 		return 0

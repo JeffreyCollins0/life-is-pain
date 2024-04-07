@@ -86,7 +86,6 @@ func _ready():
 
 func select_topic(index):
 	if(!is_topic_usable[index]):
-		print('This topic is not usable.')
 		return
 	saved_topic = index
 	$Hand.update_cards(saved_topic)
@@ -123,7 +122,6 @@ func determine_response(topic_index, strat_index):
 	score += aux_mod
 	
 	var final_score = (score / ((3.0 * npc_eval_percent) + abs(aux_mod)))
-	print("Got final score "+str(final_score))
 	rating_band = get_effect_band(final_score)
 	
 	# tick down the modifiers post-evaluation
@@ -135,7 +133,6 @@ func determine_response(topic_index, strat_index):
 	# get initial response (override if a callout applies)
 	var char_response = file_read.get_response(char_fpath, topics[topic_index], rating_band)
 	if(char_response == 'MissingNo.'):
-		print("defaulting back to standard responses...")
 		char_response = file_read.get_response(default_fpath, topics[topic_index], rating_band)
 	
 	# callout the biggest influence on the final score (for player feedback)
@@ -320,14 +317,12 @@ func process_unlocks(unlocks):
 		
 		if(unlock_successful):
 			var unlock_message = file_read.read_unlock_message(char_fpath, mood_debug)
-			print('Got unlock message ['+unlock_message+'] for mood '+str(mood_debug))
 			if(unlock_message != 'MissingNo.'):
 				textbox_debug.new_message(unlock_message, true)
 				message_log.log_message($NPCManager.get_npc_name()+": "+unlock_message, "NPC")
 
 func unlock_topic(topic_index):
 	is_topic_usable[topic_index] = true
-	print('Unlocked topic '+topics[topic_index])
 	var unlock_toast = 'You can now use the topic \"'+topics[topic_index]+'\"!'
 	messagewindow_debug.add_message(unlock_toast)
 	message_log.log_message(unlock_toast, "Internal")
@@ -385,3 +380,27 @@ func end_convo():
 
 func _on_BackButton_pressed():
 	end_convo()
+
+func _on_Narrator_game_restart():
+	end_convo()
+	
+	# reset topics
+	topics = [
+	'HATS', 'BOXES', 'WEATHER', 'SUNGLASSES', 'GIFTS', 'PLUSHIES',
+	'SPACE', 'PLANTS', 'COMICS', 'FRIENDS', 'TIME'
+	]
+	is_topic_usable = [
+		true, true, true, true, false, false,
+		false, false, false, false, true
+	]
+	$TopicList_Custom.reset_topics()
+	
+	# reset stress
+	stress_debug = 0
+	stresscounter_debug.text = (str(stress_debug)+'%')
+	
+	# reset modifiers
+	$ModifierTally.reset()
+	
+	# reset deck
+	get_node('../DeckManager').reset_library()

@@ -29,3 +29,9 @@ func cut_process(delta):
 			if(fade_time <= 0):
 				fade_time = 0
 				pause_time = 0.01
+
+func _on_Narrator_game_restart():
+	modulate = Color(1, 1, 1, 1)
+	pause_time = (fade_duration * 2.5)
+	fade_time = 0
+	mode = 'show' # fly and fade

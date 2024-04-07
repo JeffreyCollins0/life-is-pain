@@ -215,3 +215,36 @@ func _on_BackButton_pressed():
 
 func _on_ConvoManager_convo_ended():
 	reset_card_uses()
+
+func reset_library():
+	avail_cards = 15
+	deck_size = 15
+	library.clear()
+	library_unlocked.clear()
+	is_card_usable.clear()
+	deck.clear()
+	deck[0].clear()
+	deck[1].clear()
+	cached_card_data.clear()
+	
+	saved_selection = [null, -1, -1]
+	
+	# reload card library
+	var packed_lib = file_reader.read_library(lib_fpath)
+	library = packed_lib[0]
+	is_card_usable = packed_lib[1]
+	convo_manager.strategies = packed_lib[2]
+	
+	# filter library list by unlocks
+	for i in range(len(library)):
+		if(is_card_usable[i]):
+			library_unlocked.append(library[i])
+	
+	# read deck from file
+	deck[0] = file_reader.read_deck(deck_fpath, deck_size, packed_lib[1])
+	reset_card_uses()
+	
+	# initialize deck lists
+	$Control/DeckList.init_deck(deck[0])
+	$Control/LibList.init_deck(library_unlocked)
+	$Control/DemoCard.set_card_id(deck[0][0])

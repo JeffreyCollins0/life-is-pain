@@ -87,8 +87,6 @@ func read_bio(filename):
 			bio_data[2] = pronouns[1]
 			bio_data[3] = pronouns[2]
 			
-			print("Got bio with name ["+bio_data[0]+"] and pronouns "+bio_data[1]+"/"+bio_data[2]+"/"+bio_data[3])
-			
 			file.close()
 			return bio_data
 
