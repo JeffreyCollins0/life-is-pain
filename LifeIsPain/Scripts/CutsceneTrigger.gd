@@ -1,5 +1,6 @@
 extends Area
 
+signal custcene_activated
 var seen_already = false
 
 func _on_Area_body_entered(body):
@@ -9,6 +10,7 @@ func _on_Area_body_entered(body):
 		
 		seen_already = true
 		body.lock_player_movement()
+		emit_signal("custcene_activated")
 
 func _on_UIManager_game_reset():
 	seen_already = false

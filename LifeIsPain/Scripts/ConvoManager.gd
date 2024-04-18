@@ -70,6 +70,8 @@ var response_player
 signal convo_ended
 signal convo_started
 signal conversant_recovered(name)
+signal player_stressed
+signal player_unstressed
 
 func _ready():
 	file_read = get_node('../FileReader');
@@ -83,6 +85,12 @@ func _ready():
 	neg_resp_track = load('res://Sounds/NegResp1.wav')
 	
 	response_player = $ResponseAudioPlayer
+	
+	# connect to music manager
+	connect("convo_started", get_node('../../MusicManager'), 'on_convo_start')
+	connect("convo_ended", get_node('../../MusicManager'), 'on_convo_end')
+	connect("player_stressed", get_node('../../MusicManager'), 'on_player_stressed')
+	connect("player_unstressed", get_node('../../MusicManager'), 'on_player_unstressed')
 
 func select_topic(index):
 	if(!is_topic_usable[index]):
@@ -152,8 +160,6 @@ func determine_response(topic_index, strat_index):
 	textbox_debug.new_message(char_response)
 	message_log.log_message($NPCManager.get_npc_name()+": "+char_response, "NPC")
 	
-	var pre_mod_mood = mood_debug
-	
 	# modify stress / mood
 	if(rating_band == 'GUD'):
 		add_mood(5)
@@ -173,11 +179,6 @@ func determine_response(topic_index, strat_index):
 		response_player.stream = neg_resp_track
 		response_player.playing = true
 	
-	# check for percentage unlocks
-	if(pre_mod_mood < mood_debug):
-		var unlocks = file_read.read_unlock(char_fpath, mood_debug)
-		process_unlocks(unlocks)
-	
 	prev_joke_result = final_score
 
 func get_effect_band(raw_score):
@@ -192,6 +193,8 @@ func last_joke_successful():
 	return (prev_joke_result > effect_bands[0][0])
 
 func add_stress(amount):
+	var prev_stress = stress_debug
+	
 	stress_debug += amount
 	stress_debug = min(max(stress_debug, 0), 100)
 	
@@ -202,12 +205,19 @@ func add_stress(amount):
 	
 	stresscounter_debug.text = (str(stress_debug)+'%')
 	
+	if(stress_debug >= 50 && prev_stress < 50):
+		emit_signal("player_stressed")
+	elif(stress_debug < 50 && prev_stress >= 50):
+		emit_signal("player_unstressed")
+	
 	if(stress_debug >= 100):
 		messagewindow_debug.add_message("You're too stressed and can't think...")
 		message_log.log_message("You're too stressed and can't think...", "Internal")
 		end_convo() # wait a bit for this one
 
 func add_mood(amount):
+	var pre_mod_mood = mood_debug
+	
 	mood_debug += amount
 	mood_debug = min(max(mood_debug, 0), 100)
 	
@@ -218,14 +228,15 @@ func add_mood(amount):
 	
 	moodcounter_debug.text = (str(mood_debug)+'%')
 	
-	if(amount > 0):
+	# check for percentage unlocks
+	if(pre_mod_mood < mood_debug):
 		var unlocks = file_read.read_unlock(char_fpath, mood_debug)
 		process_unlocks(unlocks)
 	
-	if(mood_debug >= 100):
-		messagewindow_debug.add_message($NPCManager.get_npc_name() + "'s spirits have recovered!")
-		message_log.log_message($NPCManager.get_npc_name() + "'s spirits have recovered!", "Internal")
-		emit_signal("conversant_recovered", $NPCManager.get_npc_name())
+		if(mood_debug >= 100):
+			messagewindow_debug.add_message($NPCManager.get_npc_name() + "'s spirits have recovered!")
+			message_log.log_message($NPCManager.get_npc_name() + "'s spirits have recovered!", "Internal")
+			emit_signal("conversant_recovered", $NPCManager.get_npc_name())
 
 func set_mood(value):
 	mood_debug = value

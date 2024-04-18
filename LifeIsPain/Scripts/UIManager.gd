@@ -23,11 +23,13 @@ func _input(event):
 func _on_DebugConvoButton_pressed():
 	$ConvoManager.start_convo(saved_conversant)
 	$DebugConvoButton.visible = false
+	$RestoreButton.visible = false
 	$DebugCustButton.visible = false
 
 func _on_DebugCustButton_pressed():
 	$DeckManager.start_cust()
 	$DebugConvoButton.visible = false
+	$RestoreButton.visible = false
 	$DebugCustButton.visible = false
 
 func _on_RestoreButton_pressed():

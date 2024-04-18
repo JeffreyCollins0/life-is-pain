@@ -25,7 +25,6 @@ func _on_conversant_recover(conversant_name):
 		for obj_rem in objects_to_remove:
 			obj_rem.transform.origin += Vector3.DOWN * 0.25
 			obj_rem.visible = false
-			print('moved object '+str(obj_rem)+' to position '+str(obj_rem.transform.origin))
 		
 		for obj_rem in objects_to_add:
 			obj_rem.transform.origin += Vector3.UP * 0.25
@@ -36,7 +35,6 @@ func _on_UIManager_game_reset():
 	for obj_rem in objects_to_remove:
 		obj_rem.transform.origin += Vector3.UP * 0.25
 		obj_rem.visible = true
-		print('moved object '+str(obj_rem)+' to position '+str(obj_rem.transform.origin))
 	
 	for obj_rem in objects_to_add:
 		obj_rem.transform.origin += Vector3.DOWN * 0.25

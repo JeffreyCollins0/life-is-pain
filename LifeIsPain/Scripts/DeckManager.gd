@@ -157,9 +157,9 @@ func swap_cards(list1, index1, list2, index2):
 			list1.replace_card(index1, saved_item, list1, index2)
 	else:
 		# swap between lists
-		if(list1 == $Control/DeckList):
+		if(list1 == $Control/DeckList && list1.count_in_deck(list2.working_deck[index2]) < 2):
 			list1.replace_card(index1, list2.working_deck[index2], list2, index2)
-		else:
+		elif(list2 == $Control/DeckList && list2.count_in_deck(list1.working_deck[index1]) < 2):
 			list2.replace_card(index2, list1.working_deck[index1], list1, index1)
 
 func _on_DebugSaveButton_pressed():
@@ -222,7 +222,6 @@ func reset_library():
 	library.clear()
 	library_unlocked.clear()
 	is_card_usable.clear()
-	deck.clear()
 	deck[0].clear()
 	deck[1].clear()
 	cached_card_data.clear()

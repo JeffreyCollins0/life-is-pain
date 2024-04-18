@@ -80,6 +80,13 @@ func select_card(chip_id):
 	control.select_card_to_swap(self, card_index, working_deck[card_index])
 	update_selected()
 
+func count_in_deck(card_index):
+	var count = 0
+	for card in working_deck:
+		if(card == card_index):
+			count += 1
+	return count
+
 func get_card_position(card_index):
 	var chip_index = card_index - current_item
 	if(chip_index < 0 || chip_index >= items_to_display):

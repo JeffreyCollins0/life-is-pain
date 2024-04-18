@@ -121,6 +121,11 @@ func reset_card_positions():
 	var cards = get_children()
 	if(len(cards) == 0):
 		return
+	
+	# calculate card "safe area"
+	var screen_width_raw = get_viewport().size.x
+	#var adjusted_width = 
+	
 	var section_width = (get_viewport().size.x / len(cards))
 	for i in range(len(cards)):
 		cards[i].targ_pos = Vector2( (i*section_width) + (section_width/2.0), 0 )

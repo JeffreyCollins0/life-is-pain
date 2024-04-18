@@ -25,5 +25,5 @@ func _on_Narrator_game_restart():
 
 func clear_messages():
 	for child in $ScrollContainer/VBoxContainer.get_children():
-		self.remove_child(child)
+		$ScrollContainer/VBoxContainer.remove_child(child)
 		child.queue_free()

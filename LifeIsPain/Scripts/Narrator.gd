@@ -29,6 +29,9 @@ var skip_heat = 0 # have the skip text gradually fade after appearing
 func _ready():
 	$NarrationText.text = ''
 	$NarrationTextShadow.text = ''
+	
+	connect("narration_paused", get_node('../../MusicManager'), 'on_cutscene_end')
+	connect("game_restart", get_node('../../MusicManager'), 'on_game_restart')
 
 func _input(event):
 	if(event.is_action_pressed("converse") && !paused):

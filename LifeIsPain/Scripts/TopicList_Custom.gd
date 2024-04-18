@@ -113,6 +113,10 @@ func get_selected_topic():
 	return topic_map[ topics[ selected_topic ] ]
 
 func reset_topics():
+	topics.clear()
+	topic_map.clear()
+	reset_overused()
+	
 	var control_topics = get_parent().topics
 	var control_usable = get_parent().is_topic_usable
 	for i in range(len(control_topics)):
@@ -125,6 +129,3 @@ func reset_topics():
 	
 	update_buttons()
 	update_entries()
-	
-func _on_Narrator_game_restart():
-	reset_overused()
