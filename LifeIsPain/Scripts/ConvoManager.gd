@@ -162,8 +162,8 @@ func determine_response(topic_index, strat_index):
 	
 	# modify stress / mood
 	if(rating_band == 'GUD'):
-		add_mood(5)
-		add_stress(-2)
+		add_mood(10)
+		add_stress(-4)
 		
 		# play sound
 		response_player.stream = pos_resp_track
@@ -173,7 +173,7 @@ func determine_response(topic_index, strat_index):
 		
 	elif(rating_band == 'BAD'):
 		add_mood(-5)
-		add_stress(8)
+		add_stress(12)
 		
 		# play sound
 		response_player.stream = neg_resp_track
@@ -199,7 +199,7 @@ func add_stress(amount):
 	stress_debug = min(max(stress_debug, 0), 100)
 	
 	var stress_text = increment_prefab.instance()
-	stress_text.position = $StressCounter.position + Vector2(0, 64.0) # orig. 32
+	stress_text.position = $StressCounter.position + Vector2(4, 13.0) # orig. 32 # 0, 64
 	stress_text.init(-amount)
 	self.add_child(stress_text)
 	
@@ -207,8 +207,10 @@ func add_stress(amount):
 	
 	if(stress_debug >= 50 && prev_stress < 50):
 		emit_signal("player_stressed")
+		stresscounter_debug.modulate = Color(0.96, 0.27, 0.27)
 	elif(stress_debug < 50 && prev_stress >= 50):
 		emit_signal("player_unstressed")
+		stresscounter_debug.modulate = Color.white
 	
 	if(stress_debug >= 100):
 		messagewindow_debug.add_message("You're too stressed and can't think...")
@@ -222,7 +224,8 @@ func add_mood(amount):
 	mood_debug = min(max(mood_debug, 0), 100)
 	
 	var mood_text = increment_prefab.instance()
-	mood_text.position = $MoodCounter.position + Vector2(0, 64.0)
+	var text_offset = rand_range(-12, 12)
+	mood_text.position = $MoodCounter.position + Vector2(0, (64.0 + text_offset))
 	mood_text.init(amount)
 	self.add_child(mood_text)
 	

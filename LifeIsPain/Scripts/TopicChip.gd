@@ -18,10 +18,12 @@ func init(chip_index):
 
 func set_display(topic_text, uses):
 	$Topic.text = topic_text
-	if(uses > 0):
-		$Uses.text = 'x' + str(uses)
+	if(uses > 1):
+		#$Uses.text = 'x' + str(uses)
+		$OveruseIcon.visible = false
 	else:
-		$Uses.text = 'cd' + str(1 - uses)
+		#$Uses.text = 'cd' + str(1 - uses)
+		$OveruseIcon.visible = true
 
 func set_is_selected(is_selected):
 	selected = is_selected

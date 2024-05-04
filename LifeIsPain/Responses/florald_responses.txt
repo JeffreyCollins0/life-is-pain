@@ -31,6 +31,13 @@ Come on, don't halfheart things like that.
 People don't understand how much a gift means to people. That is, unless you halfheart it.
 I got an amazing gift once. Changed my whole outlook on peopl- well, person. The rest are still terrible.
 
+[PLANTS/BAD/01]
+Yeah, I know I'm a plant, buddy. Whaddya want from me?
+[PLANTS/MID/01]
+Can you not state the obvious for five seconds?
+[PLANTS/GUD/02]
+Huh, someone who doesn't mock plants. Maybe there's hope for you lot after all.
+
 [SUNGLASSES/GUD/01]
 Sunglasses look so cool. Wish I had a pair, though it's not worth much when I don't have eyes.
 [FRIENDS/GUD/01]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://Scripts/OW_Fade.gd" type="Script" id=1]
 [ext_resource path="res://Models/LifeIsPain_Dumpster2.obj" type="ArrayMesh" id=2]
@@ -56,6 +56,9 @@
 [ext_resource path="res://RecoverEffect.tres" type="Material" id=54]
 [ext_resource path="res://Scripts/RecoverEffect.gd" type="Script" id=55]
 [ext_resource path="res://Scripts/MusicManager.gd" type="Script" id=56]
+[ext_resource path="res://Sounds/Overworld.wav" type="AudioStream" id=57]
+[ext_resource path="res://Sprites/wall.png" type="Texture" id=58]
+[ext_resource path="res://TutorialImages/base_tut_4.png" type="Texture" id=59]
 
 [sub_resource type="Curve" id=30]
 _data = [ Vector2( 0, 0.5 ), 0.0, 1.66203, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -150,6 +153,9 @@ intro_curve = SubResource( 30 )
 fade_curve = SubResource( 31 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource( 57 )
+volume_db = 0.6
+autoplay = true
 
 [node name="Environment" type="Spatial" parent="."]
 
@@ -259,7 +265,6 @@ transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16
 mesh = ExtResource( 23 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 19 )
-script = ExtResource( 1 )
 
 [node name="MeshInstance7" type="MeshInstance" parent="Environment"]
 transform = Transform( -0.16, 0, -1.39876e-08, 0, 0.16, 0, 1.39876e-08, 0, -0.16, -1.44524, 0, -3.56494 )
@@ -365,7 +370,7 @@ transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -
 monitoring = false
 script = ExtResource( 13 )
 tutorial_title = "base_tut"
-start_index = 1
+start_index = 0
 end_index = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Area"]
@@ -419,29 +424,41 @@ text = "Next"
 
 [node name="Area2" type="Area" parent="Environment"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.433245, 0.159086, 0.0193238 )
-monitoring = false
 script = ExtResource( 13 )
 tutorial_title = "base_tut"
 start_index = 4
-end_index = 5
+end_index = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Environment/Area2"]
 shape = SubResource( 10 )
 
 [node name="Panel" type="Panel" parent="Environment/Area2"]
 visible = false
-margin_left = 78.0
-margin_top = 18.0
-margin_right = 404.0
-margin_bottom = 306.0
+self_modulate = Color( 0.113725, 0.203922, 0.482353, 0.709804 )
+margin_right = 479.0
+margin_bottom = 320.0
 script = ExtResource( 17 )
 
+[node name="NinePatchRect" type="NinePatchRect" parent="Environment/Area2/Panel"]
+self_modulate = Color( 0.184314, 0.196078, 0.266667, 1 )
+margin_left = 73.0
+margin_top = 225.0
+margin_right = 398.0
+margin_bottom = 280.0
+texture = ExtResource( 58 )
+region_rect = Rect2( 0, 0, 15, 15 )
+patch_margin_left = 10
+patch_margin_top = 5
+patch_margin_right = 10
+patch_margin_bottom = 5
+
 [node name="TextureRect" type="TextureRect" parent="Environment/Area2/Panel"]
-margin_left = 9.0
-margin_top = 10.0
-margin_right = 1549.0
-margin_bottom = 607.0
+margin_left = 81.0
+margin_top = 24.0
+margin_right = 1621.0
+margin_bottom = 989.0
 rect_scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 59 )
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Environment/Area2/Panel"]
@@ -456,23 +473,23 @@ text = "Tutorial Title Goes Here"
 autowrap = true
 
 [node name="Label2" type="Label" parent="Environment/Area2/Panel"]
-margin_left = 8.0
-margin_top = 132.0
-margin_right = 163.0
-margin_bottom = 206.0
+margin_left = 80.0
+margin_top = 231.0
+margin_right = 235.0
+margin_bottom = 253.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 16 )
 text = "Tutorial Title Goes Here"
 autowrap = true
 
 [node name="Button" type="Button" parent="Environment/Area2/Panel"]
-margin_left = 332.0
-margin_top = 244.0
-margin_right = 368.0
-margin_bottom = 255.0
+margin_left = 404.0
+margin_top = 258.0
+margin_right = 440.0
+margin_bottom = 269.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 18 )
-text = "Next"
+text = "Close"
 
 [node name="Area3" type="Area" parent="Environment"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.50628, 0.159086, 0.0193238 )
@@ -493,7 +510,7 @@ script = ExtResource( 17 )
 margin_left = 9.0
 margin_top = 10.0
 margin_right = 1549.0
-margin_bottom = 607.0
+margin_bottom = 885.0
 rect_scale = Vector2( 0.2, 0.2 )
 stretch_mode = 6
 
@@ -510,9 +527,9 @@ autowrap = true
 
 [node name="Label2" type="Label" parent="Environment/Area3/Panel"]
 margin_left = 8.0
-margin_top = 132.0
+margin_top = 199.0
 margin_right = 163.0
-margin_bottom = 206.0
+margin_bottom = 240.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 16 )
 text = "Tutorial Title Goes Here"
@@ -586,6 +603,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 7 )
+frame = 1
 playing = true
 
 [node name="TestNPC2" type="StaticBody" parent="." groups=["NPC"]]
@@ -603,7 +621,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 2
 playing = true
 
 [node name="TestNPC4" type="StaticBody" parent="." groups=["NPC"]]
@@ -620,7 +637,7 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 10 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="TestNPC5" type="StaticBody" parent="." groups=["NPC"]]
@@ -637,7 +654,6 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 12 )
-frame = 2
 playing = true
 
 [node name="TestNPC3" type="StaticBody" parent="." groups=["NPC"]]
@@ -656,7 +672,6 @@ visible = false
 flip_h = true
 billboard = 2
 frames = ExtResource( 8 )
-frame = 2
 playing = true
 
 [node name="MeshInstance" type="MeshInstance" parent="TestNPC3"]
@@ -677,7 +692,7 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110684, 0 )
 billboard = 2
 frames = ExtResource( 31 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="TestNPC7" type="StaticBody" parent="." groups=["NPC"]]
@@ -748,7 +763,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00891851, 0 )
 visible = false
 billboard = 2
 frames = ExtResource( 39 )
-frame = 2
 playing = true
 
 [node name="SchwarzEnviro" type="Spatial" parent="."]
@@ -790,37 +804,31 @@ material/0 = ExtResource( 21 )
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="SchwarzEnviro"]
 transform = Transform( 0.439878, 0, -0.330162, 0, 0.55, 0, 0.330162, 0, 0.439878, 0.171241, 0.0965596, -0.214844 )
 frames = ExtResource( 29 )
-frame = 4
 playing = true
 
 [node name="AnimatedSprite3D4" type="AnimatedSprite3D" parent="SchwarzEnviro"]
 transform = Transform( 0.361781, 0.0663278, -0.448458, -0.0749633, 0.574613, 0.0245117, 0.447096, 0.0426725, 0.366994, 0.292677, 0.0831473, -0.077003 )
 frames = ExtResource( 50 )
-frame = 4
 playing = true
 
 [node name="AnimatedSprite3D5" type="AnimatedSprite3D" parent="SchwarzEnviro"]
 transform = Transform( 0.495338, 0, -0.23904, 0, 0.55, 0, 0.23904, 0, 0.495338, 0.167856, 0.240763, -0.216478 )
 frames = ExtResource( 50 )
-frame = 4
 playing = true
 
 [node name="AnimatedSprite3D6" type="AnimatedSprite3D" parent="SchwarzEnviro"]
 transform = Transform( 0.312574, -0.178398, -0.270133, 0.223059, 0.390826, -2.32193e-09, 0.234611, -0.133901, 0.359901, 0.0558476, 0.216839, -0.301455 )
 frames = ExtResource( 50 )
-frame = 4
 playing = true
 
 [node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="SchwarzEnviro"]
 transform = Transform( 0.415737, 0.147599, -0.477365, -0.148397, 0.629447, 0.0653835, 0.477117, 0.0671649, 0.436289, 0.282319, 0.239551, -0.112968 )
 frames = ExtResource( 50 )
-frame = 4
 playing = true
 
 [node name="AnimatedSprite3D3" type="AnimatedSprite3D" parent="SchwarzEnviro"]
 transform = Transform( 0.577196, 0.0809827, -0.287727, -0.10388, 0.641036, -0.0279645, 0.280275, 0.0708153, 0.582178, -0.0217714, 0.0899762, -0.323684 )
 frames = ExtResource( 50 )
-frame = 4
 playing = true
 
 [node name="PlagueisEnviro" type="Spatial" parent="."]
@@ -884,6 +892,7 @@ light_energy = 0.8
 [connection signal="game_reset" from="UIManager" to="PlagueisEnviro" method="_on_UIManager_game_reset"]
 [connection signal="game_reset" from="UIManager" to="LifterEnviro" method="_on_UIManager_game_reset"]
 [connection signal="game_reset" from="UIManager" to="FloraldEnviro" method="_on_UIManager_game_reset"]
+[connection signal="finished" from="MusicManager/AudioStreamPlayer" to="MusicManager" method="_on_AudioStreamPlayer_finished"]
 [connection signal="body_entered" from="Environment/Area" to="Environment/Area" method="_on_Area_body_entered"]
 [connection signal="pressed" from="Environment/Area/Panel/Button" to="Environment/Area/Panel" method="_on_Button_pressed"]
 [connection signal="body_entered" from="Environment/Area2" to="Environment/Area2" method="_on_Area_body_entered"]

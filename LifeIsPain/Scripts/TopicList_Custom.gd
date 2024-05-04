@@ -28,7 +28,6 @@ func _ready():
 
 func update_entries():
 	var entries = $TopicChipTray.get_children()
-	# redo this thing here
 	for i in range(len(entries)):
 		if(i < min(items_to_display, len(topics))):
 			if(!entries[i].visible):
@@ -116,6 +115,8 @@ func reset_topics():
 	topics.clear()
 	topic_map.clear()
 	reset_overused()
+	
+	current_item = 0
 	
 	var control_topics = get_parent().topics
 	var control_usable = get_parent().is_topic_usable

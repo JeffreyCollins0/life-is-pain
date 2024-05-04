@@ -11,10 +11,12 @@ func _on_Area_body_entered(body):
 		$Panel.visible = true
 		seen_already = true
 		body.lock_player_movement()
+		get_node('../../UIManager').lock_buttons()
 		
 		yield($Panel, "modal_ended")
 		
 		body.unlock_player_movement()
+		get_node('../../UIManager').unlock_buttons()
 
 func _on_UIManager_game_reset():
 	seen_already = false

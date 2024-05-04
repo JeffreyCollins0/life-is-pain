@@ -2,6 +2,7 @@ extends Node2D
 
 var setup_done = false
 var saved_conversant = 'MissingNo.'
+var buttons_enabled = true
 
 signal game_reset
 
@@ -21,12 +22,18 @@ func _input(event):
 			_on_RestoreButton_pressed()
 
 func _on_DebugConvoButton_pressed():
+	if(!buttons_enabled):
+		return
+	
 	$ConvoManager.start_convo(saved_conversant)
 	$DebugConvoButton.visible = false
 	$RestoreButton.visible = false
 	$DebugCustButton.visible = false
 
 func _on_DebugCustButton_pressed():
+	if(!buttons_enabled):
+		return
+	
 	$DeckManager.start_cust()
 	$DebugConvoButton.visible = false
 	$RestoreButton.visible = false
@@ -54,6 +61,11 @@ func _on_Player_convo_unavailable():
 	$RestoreButton.visible = false
 	saved_conversant = 'MissingNo.'
 
+func lock_buttons():
+	buttons_enabled = false
+
+func unlock_buttons():
+	buttons_enabled = true
 
 func _on_Narrator_game_restart():
 	emit_signal("game_reset")

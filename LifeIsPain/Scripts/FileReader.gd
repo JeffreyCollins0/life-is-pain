@@ -164,7 +164,6 @@ func read_unlock_old(filename, subject, rating_band):
 			
 			var endofsubject_index = 0
 			var section_subject = ''
-			var endofheader_index = 0
 			for i in range(1, line.length()):
 				if(line.substr(i,1) == '/'):
 					endofsubject_index = i+1

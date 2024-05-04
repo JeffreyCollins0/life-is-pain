@@ -1,14 +1,12 @@
 
 [base_tut_0]
-- Types of cards -
-Hello! This is a deckbuilder about telling jokes, and as such there are two types of cards.
-Blue strategy cards are the core of your joke, while green modifier cards are extra effects that either apply immediately or when the next strategy card is played.
+- Telling jokes -
+To tell a joke, simply enter a conversation with someone, select a topic from the list and select a strategy card from your hand.
+Make sure not to use the same topic too many times in a row, or it will decrease the joke's effectiveness.
 
 [base_tut_1]
-- Telling jokes -
-To tell a joke, simply enter a conversation with someone, select a topic from the list in the top left and select a strategy card from your hand at the bottom.
+- Joke rating -
 Certain characters like and dislike certain strategies or topics, and certain topic-strategy pairs are innately more or less effective.
-Make sure not to use the same topic too many times in a row, or it will decrease the joke's effectiveness.
 
 [base_tut_3]
 - Jokes, mood and stress -

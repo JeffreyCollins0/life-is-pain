@@ -7,11 +7,11 @@ export (Curve) var intro_curve
 export (Curve) var fade_curve
 
 var trans_time = 0
-var saved_volume = 1.0
+var saved_volume = 0.9
 var in_overworld = true
 var stressed = false
-var playing = false
-var track_index = -1
+var playing = true
+var track_index = 0
 
 var setup_ping_ignored = false
 
@@ -21,6 +21,7 @@ func _ready():
 	tracks.append(load('res://Sounds/Overworld.wav'))
 	tracks.append(load('res://Sounds/Talk.wav'))
 	tracks.append(load('res://Sounds/Talk_Stressed.wav'))
+	saved_volume = $AudioStreamPlayer.volume_db
 
 func _process(delta):
 	if(trans_time > 0):
@@ -52,6 +53,7 @@ func swap_track(index):
 	if(track_index == 0 || index == 0):
 		# fade in when swapping between conversing and the overworld
 		trans_time = trans_duration
+		saved_volume = $AudioStreamPlayer.volume_db
 		$AudioStreamPlayer.stream = tracks[index]
 	else:
 		# keep the track progress when swapping between stressed and non-stressed tracks
@@ -94,17 +96,23 @@ func on_player_unstressed():
 		swap_track(1)
 
 func on_cutscene_active():
-	track_index = -1
-	stop_playing()
+	pass
+	
+	#track_index = -1
+	#stop_playing()
 
 func on_cutscene_end():
 	swap_track(0)
 
 func on_game_restart():
 	trans_time = 0
-	saved_volume = 1.0
 	in_overworld = true
 	stressed = false
 	playing = false
 	track_index = -1
 	setup_ping_ignored = false
+
+func _on_AudioStreamPlayer_finished():
+	$AudioStreamPlayer.seek(0)
+	$AudioStreamPlayer.playing = true
+	$AudioStreamPlayer.stream_paused = false

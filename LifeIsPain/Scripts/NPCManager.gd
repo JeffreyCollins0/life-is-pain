@@ -90,11 +90,17 @@ func get_pronoun(pronoun_index):
 		return working_pronouns[char_name][pronoun_index]
 
 func _on_ConvoManager_convo_ended():
-	# get the current mood from convomanager and save to file before resetting to a dummy 0
-	working_moods[char_name] = get_parent().get_working_mood()
-	#file_reader.write_mood('res://Responses/'+char_name.to_lower()+'_responses.txt', working_mood)
+	var wk_mood_current = get_parent().get_working_mood()
+	
+	if(wk_mood_current < 100):
+		var min_mood = file_reader.read_mood('res://Responses/'+char_name.to_lower()+'_responses.txt')
+		if(min_mood == null):
+			min_mood = 0
+		working_moods[char_name] = max(round(wk_mood_current * 0.2), min_mood)
+	else:
+		working_moods[char_name] = wk_mood_current
+	
 	get_parent().set_mood(0)
-	pass
 
 func _on_Narrator_game_restart():
 	# reset all cached data
